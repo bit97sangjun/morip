@@ -30,21 +30,6 @@
 	</beans:bean>
 
 
-	<context:component-scan base-package="org.java97.web" />
-
-	<beans:bean id="checkInterceptor" class="org.java97.interceptor.SampleInterceptor"></beans:bean>
-	<beans:bean id="loginAfter" class="org.java97.interceptor.LoginInterceptor"></beans:bean>
-	<interceptors>
-	    <interceptor>
-	    	<mapping path="/sample"/>
-	    	<beans:ref bean="checkInterceptor"/>
-	    </interceptor>
-	    
-	    <interceptor>
-	    	<mapping path="/loginPost"/>
-	    	<beans:ref bean="loginAfter"/>
-	    </interceptor>
-	   	    
-	</interceptors>
+	<context:component-scan base-package="org.mini.web" />
 
 </beans:beans>

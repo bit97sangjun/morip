@@ -1,4 +1,4 @@
-package org.java97.dto;
+package org.mini.dto;
 
 public class Criteria {
 	
