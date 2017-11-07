@@ -1,4 +1,4 @@
-package org.mini.web;
+package org.mini.movie.web;
 
 public final class TestClass {
 

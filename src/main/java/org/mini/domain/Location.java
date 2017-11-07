@@ -1,9 +1,9 @@
-package org.mini.movie.domain;
+package org.mini.domain;
 
 import lombok.Data;
 
 @Data
-public class LocationDomain {
+public class Location {
 
 	private int lno ;
 	private int rno;

@@ -1,9 +1,9 @@
-package org.mini.movie.domain;
+package org.mini.domain;
 
 import lombok.Data;
 
 @Data
-public class CommentimgDomain {
+public class Commentimg {
 
 	private int cimgno;
 	private String cimg;

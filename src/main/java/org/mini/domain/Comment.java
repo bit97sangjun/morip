@@ -1,11 +1,11 @@
-package org.mini.movie.domain;
+package org.mini.domain;
 
 import java.util.Date;
 
 import lombok.Data;
 
 @Data
-public class CommentDomain {
+public class Comment {
 
 	private int cno ;
 	private double score ;

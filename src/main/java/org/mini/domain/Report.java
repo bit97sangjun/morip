@@ -1,11 +1,11 @@
-package org.mini.movie.domain;
+package org.mini.domain;
 
 import java.util.Date;
 
 import lombok.Data;
 
 @Data
-public class ReportDomain {
+public class Report {
 
 	private int rno;
 	private String rtitle;

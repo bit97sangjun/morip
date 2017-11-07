@@ -1,9 +1,9 @@
-package org.mini.movie.domain;
+package org.mini.domain;
 
 import lombok.Data;
 
 @Data
-public class MemberDomain {
+public class Member {
 
 	private int id;
 	private String pw;

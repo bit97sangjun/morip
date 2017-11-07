@@ -1,9 +1,9 @@
-package org.mini.movie.domain;
+package org.mini.domain;
 
 import lombok.Data;
 
 @Data
-public class ReportimgDomain {
+public class Reportimg {
 
 	private int rimgno ;
 	private String rpath ;
