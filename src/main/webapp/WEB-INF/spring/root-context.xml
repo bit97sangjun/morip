@@ -16,9 +16,9 @@
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
 		<property name="url"
-			value="jdbc:log4jdbc:mysql://192.168.0.109:3306/five_db?useSSL=false"></property>
-		<property name="username" value="five"></property>
-		<property name="password" value="five"></property>
+			value="jdbc:log4jdbc:mysql://192.168.0.26:3306/morip_db?useSSL=false"></property>
+		<property name="username" value="movie"></property>
+		<property name="password" value="trip"></property>
 	</bean>
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -33,13 +33,14 @@
 
 	<tx:annotation-driven />
 
-	<mybatis-spring:scan base-package="org.java97.mappers" />
+	<mybatis-spring:scan base-package="org.mini.movie.mappers" />
+	<mybatis-spring:scan base-package="org.mini.location.mappers" />
 
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 
 	<context:annotation-config></context:annotation-config>
-	<context:component-scan base-package="org.java97.service"></context:component-scan>
-	<context:component-scan base-package="org.java97.aop"></context:component-scan>
+	<context:component-scan base-package="org.mini.location.service"></context:component-scan>
+	<context:component-scan base-package="org.mini.movie.service"></context:component-scan>
 
 
 </beans>
