@@ -33,6 +33,7 @@
 
 	<tx:annotation-driven />
 
+	<mybatis-spring:scan base-package="org.mini.mappers" />
 	<mybatis-spring:scan base-package="org.mini.movie.mappers" />
 	<mybatis-spring:scan base-package="org.mini.location.mappers" />
 

@@ -1,5 +1,10 @@
 package org.mini.domain;
 
-public class Zone {
+import lombok.Data;
 
+@Data
+public class Zone {
+	
+	private int zcode;
+	private String zname;
 }

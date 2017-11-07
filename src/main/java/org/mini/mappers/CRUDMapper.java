@@ -1,4 +1,4 @@
-package org.mini.movie.mappers;
+package org.mini.mappers;
 
 public interface CRUDMapper<E,K> {
 
