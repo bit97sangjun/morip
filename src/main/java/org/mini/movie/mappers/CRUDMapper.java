@@ -1,4 +1,4 @@
-package org.mini.mappers;
+package org.mini.movie.mappers;
 
 public interface CRUDMapper<E,K> {
 
@@ -6,4 +6,5 @@ public interface CRUDMapper<E,K> {
 	public E read(K key);
 	public void update(E vo);
 	public void delete(K key);
+	
 }
