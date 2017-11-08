@@ -239,10 +239,6 @@
 		});
 	</script>
 
-
-
-
-
 	<!-- Portfolio Isotope Settings -->
 	<script type="text/javascript">
 		$(window)

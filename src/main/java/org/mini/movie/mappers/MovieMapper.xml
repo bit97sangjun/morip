@@ -7,7 +7,7 @@
 
 
 
-<insert id="create">
+<!-- <insert id="create">
 insert into tbl_board 
   (title,content, writer)
 values 
@@ -16,7 +16,7 @@ values
 
 <select id="read" resultType="Board">
 select * from tbl_board where bno = #{bno}
-</select>
+</select> -->
 
 </mapper>
   

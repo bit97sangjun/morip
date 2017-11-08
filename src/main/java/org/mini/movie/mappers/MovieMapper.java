@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.mini.domain.Comment;
 import org.mini.dto.Criteria;
-import org.mini.mappers.CRUDMapper;
 
 public interface MovieMapper extends CRUDMapper<Comment, Integer> {
 
