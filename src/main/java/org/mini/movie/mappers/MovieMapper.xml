@@ -5,19 +5,6 @@
 
 <mapper namespace="org.mini.movie.mappers.MovieMapper">
 
-
-
-<!-- <insert id="create">
-insert into tbl_board 
-  (title,content, writer)
-values 
-  (#{title}, #{content}, #{writer})
-</insert>
-
-<select id="read" resultType="Board">
-select * from tbl_board where bno = #{bno}
-</select> -->
-
 <select id="readreview">
 	
 	select c.cno ,c.ccontent, c.cupdate ,ci.cimg

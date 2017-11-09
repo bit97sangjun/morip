@@ -1,3 +1,4 @@
+
 package org.mini.dto;
 
 public class Criteria {
@@ -6,7 +7,7 @@ public class Criteria {
 	private int size;
 	
 	public Criteria() {
-		this(1, 10);
+		this(1, 2);
 	}
 
 	public Criteria(int page, int size) {
