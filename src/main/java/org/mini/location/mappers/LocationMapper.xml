@@ -2,11 +2,12 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-<mappers>
+<mapper namespace="org.mini.location.mappers.LocationMapper">
 	<select id="read">
-		select (lname, addr, mcode, zcode)  from tb_location where zcode = #{zcode}
+		select mimg, mtitle from tb_movie where mcode = (
+		select mcode from tb_location where pno = #{pno})
 	</select>
+</mapper>
+
 	
 	
-</mappers>
