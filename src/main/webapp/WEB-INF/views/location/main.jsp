@@ -461,11 +461,12 @@
 
 		// 주소-좌표 변환 객체를 생성합니다
 		var geocoder = new daum.maps.services.Geocoder();
-
+		
 		var positions = [ /* 마커의 위치*/], selectedMarker = null; // 클릭한 마커를 담을 변수
 		
+		var i = -1;
 		<c:forEach items="${pList}" var="place">
-		
+		i++;
 			// 주소로 좌표를 검색합니다
 			geocoder.addressSearch("${place.addr}", function(result, status) {
 	
@@ -476,31 +477,45 @@
 					positions.push(coords);
 					
 			        // 결과값으로 받은 위치를 마커로 표시합니다
-			        var marker = new daum.maps.Marker({
-			            map: map,
-			            position: coords,
-			            pno: "${place.pno}"
-			        });
+// 			        var marker = new daum.maps.Marker({
+// 			            map: map,
+// 			            position: coords,
+// // 			            image: normalImage,
+// 			            pno: "${place.pno}"
+// 			        });
+			        
+					var gapX = (MARKER_WIDTH + SPRITE_GAP), // 스프라이트 이미지에서 마커로 사용할 이미지 X좌표 간격 값
+					originY = (MARKER_HEIGHT + SPRITE_GAP) * i, // 스프라이트 이미지에서 기본, 클릭 마커로 사용할 Y좌표 값
+					overOriginY = (OVER_MARKER_HEIGHT + SPRITE_GAP) * i, // 스프라이트 이미지에서 오버 마커로 사용할 Y좌표 값
+					normalOrigin = new daum.maps.Point(0, originY), // 스프라이트 이미지에서 기본 마커로 사용할 영역의 좌상단 좌표
+					clickOrigin = new daum.maps.Point(gapX, originY), // 스프라이트 이미지에서 마우스오버 마커로 사용할 영역의 좌상단 좌표
+					overOrigin = new daum.maps.Point(gapX * 2, overOriginY); // 스프라이트 이미지에서 클릭 마커로 사용할 영역의 좌상단 좌표
+			        
+					addMarker(coords, normalOrigin, overOrigin, clickOrigin, "${place.pno}");
+			        
 				}
 			});
 			
+			console.log("${place.pno}");
+
 		</c:forEach>
-
+		
 		// 지도 위에 마커를 표시합니다
-		for (var i = 0, len = positions.length; i < len; i++) {
-			var gapX = (MARKER_WIDTH + SPRITE_GAP), // 스프라이트 이미지에서 마커로 사용할 이미지 X좌표 간격 값
-			originY = (MARKER_HEIGHT + SPRITE_GAP) * i, // 스프라이트 이미지에서 기본, 클릭 마커로 사용할 Y좌표 값
-			overOriginY = (OVER_MARKER_HEIGHT + SPRITE_GAP) * i, // 스프라이트 이미지에서 오버 마커로 사용할 Y좌표 값
-			normalOrigin = new daum.maps.Point(0, originY), // 스프라이트 이미지에서 기본 마커로 사용할 영역의 좌상단 좌표
-			clickOrigin = new daum.maps.Point(gapX, originY), // 스프라이트 이미지에서 마우스오버 마커로 사용할 영역의 좌상단 좌표
-			overOrigin = new daum.maps.Point(gapX * 2, overOriginY); // 스프라이트 이미지에서 클릭 마커로 사용할 영역의 좌상단 좌표
+// 		for (var i = 0, len = ${pList.size()}; i < len; i++) {
+// 			console.dir(typeof(positions[i]));
+// 			var gapX = (MARKER_WIDTH + SPRITE_GAP), // 스프라이트 이미지에서 마커로 사용할 이미지 X좌표 간격 값
+// 			originY = (MARKER_HEIGHT + SPRITE_GAP) * i, // 스프라이트 이미지에서 기본, 클릭 마커로 사용할 Y좌표 값
+// 			overOriginY = (OVER_MARKER_HEIGHT + SPRITE_GAP) * i, // 스프라이트 이미지에서 오버 마커로 사용할 Y좌표 값
+// 			normalOrigin = new daum.maps.Point(0, originY), // 스프라이트 이미지에서 기본 마커로 사용할 영역의 좌상단 좌표
+// 			clickOrigin = new daum.maps.Point(gapX, originY), // 스프라이트 이미지에서 마우스오버 마커로 사용할 영역의 좌상단 좌표
+// 			overOrigin = new daum.maps.Point(gapX * 2, overOriginY); // 스프라이트 이미지에서 클릭 마커로 사용할 영역의 좌상단 좌표
 
-			// 마커를 생성하고 지도위에 표시합니다
-			addMarker(positions[i], normalOrigin, overOrigin, clickOrigin);
-		}
+// 			// 마커를 생성하고 지도위에 표시합니다
+// 			addMarker(positions[i], normalOrigin, overOrigin, clickOrigin);
+// 		}
 
 		// 마커를 생성하고 지도 위에 표시하고, 마커에 mouseover, mouseout, click 이벤트를 등록하는 함수입니다
-		function addMarker(position, normalOrigin, overOrigin, clickOrigin) {
+		function addMarker(position, normalOrigin, overOrigin, clickOrigin, pno) {
 
 			// 기본 마커이미지, 오버 마커이미지, 클릭 마커이미지를 생성합니다
 			var normalImage = createMarkerImage(markerSize, markerOffset,
@@ -520,7 +535,6 @@
 
 			// 마커에 mouseover 이벤트를 등록합니다
 			daum.maps.event.addListener(marker, 'mouseover', function() {
-					console.log(marker.pno + " : 마우스 오버됨");
 				
 				// 클릭된 마커가 없고, mouseover된 마커가 클릭된 마커가 아니면
 				// 마커의 이미지를 오버 이미지로 변경합니다
@@ -541,7 +555,7 @@
 
 			// 마커에 click 이벤트를 등록합니다
 			daum.maps.event.addListener(marker, 'click', function() {
-					console.log(marker.pno + " : 마커 클릭");
+					console.log(pno + " : 마커 클릭");
 
 				// 클릭된 마커가 없고, click 마커가 클릭된 마커가 아니면
 				// 마커의 이미지를 클릭 이미지로 변경합니다
