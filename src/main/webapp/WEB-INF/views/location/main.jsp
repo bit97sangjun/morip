@@ -464,21 +464,22 @@
 
 		var positions = [ /* 마커의 위치*/], selectedMarker = null; // 클릭한 마커를 담을 변수
 		
-		<c:forEach items="${pList}" var="addr">
+		<c:forEach items="${pList}" var="place">
 		
 			// 주소로 좌표를 검색합니다
-			geocoder.addressSearch("${addr}", function(result, status) {
+			geocoder.addressSearch("${place.addr}", function(result, status) {
 	
 				// 정상적으로 검색이 완료됐으면 
 				if (status === daum.maps.services.Status.OK) {
 	
-					var coords = new daum.maps.LatLng(result[0].y, result[0].x)
+					var coords = new daum.maps.LatLng(result[0].y, result[0].x);
 					positions.push(coords);
 					
 			        // 결과값으로 받은 위치를 마커로 표시합니다
 			        var marker = new daum.maps.Marker({
 			            map: map,
-			            position: coords
+			            position: coords,
+			            pno: "${place.pno}"
 			        });
 				}
 			});
@@ -519,7 +520,8 @@
 
 			// 마커에 mouseover 이벤트를 등록합니다
 			daum.maps.event.addListener(marker, 'mouseover', function() {
-
+					console.log(marker.pno + " : 마우스 오버됨");
+				
 				// 클릭된 마커가 없고, mouseover된 마커가 클릭된 마커가 아니면
 				// 마커의 이미지를 오버 이미지로 변경합니다
 				if (!selectedMarker || selectedMarker !== marker) {
@@ -539,6 +541,7 @@
 
 			// 마커에 click 이벤트를 등록합니다
 			daum.maps.event.addListener(marker, 'click', function() {
+					console.log(marker.pno + " : 마커 클릭");
 
 				// 클릭된 마커가 없고, click 마커가 클릭된 마커가 아니면
 				// 마커의 이미지를 클릭 이미지로 변경합니다

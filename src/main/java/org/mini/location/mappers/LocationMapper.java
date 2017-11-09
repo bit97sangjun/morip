@@ -14,7 +14,7 @@ public interface LocationMapper {
 	@Select("select pname from tb_place where pno = #{pno}")
 	public String getMarkerName(int pno);
 	
-	@Select("select addr from tb_place where zcode = #{zcode}")
-	public List<String> getMarker(int zcode);
+	@Select("select addr, pno from tb_place where zcode = #{zcode}")
+	public List<Place> getMarker(int zcode);
 	
 }

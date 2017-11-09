@@ -10,5 +10,5 @@ public interface LocationService {
 	
 	public String getPlaceName(int pno);
 	
-	public List<String> getPlace(int zcode);
+	public List<Place> getPlace(int zcode);
 }

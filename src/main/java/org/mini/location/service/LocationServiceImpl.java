@@ -26,7 +26,7 @@ public class LocationServiceImpl implements LocationService {
 	}
 
 	@Override
-	public List<String> getPlace(int zcode) {
+	public List<Place> getPlace(int zcode) {
 		return mapper.getMarker(zcode);
 	}
 
