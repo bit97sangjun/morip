@@ -18,5 +18,36 @@ values
 select * from tbl_board where bno = #{bno}
 </select> -->
 
+<select id="readreview">
+	
+	select c.cno ,c.ccontent, c.cupdate ,ci.cimg
+	from report r , comment c , comment ci
+	where r.rno = #{c.rno} and c.cno = #{ci.cno}
+	
+</select>
+
+<select id="list">
+
+	select r.rno , r.rtitle , r.rcontent , r.rregdate ,ri.rimg
+	from member m , report r , reportimg ri
+	where m.id = #{r.id} and r.rno = #{ri.rno}
+	
+</select>
+
+<select id="movieread">
+	select mimg ,mtitle
+	from movie
+	where mtitle like "%#{keword}%"
+</select>
+
+
+<insert id="report">
+	insert into report(title , content) value(#{title},#{content})
+</insert>
+
+
+<insert id="place">
+	insert into report(pname , addr) value(#{pname},#{addr})
+</insert>
 </mapper>
   

@@ -88,23 +88,18 @@ margin-right: 20px;
 <body>
 
        <div id="contact">
-       
 	    	<div class="container">
 	    		<p>
 	    		 <h2>글등록 페이지</h2>
 	    		</p>
-	    		
 				<span class='green_window'>
 					<input type='text' class='input_text' />
 				</span>
 				<button type='submit' class='sch_smit'>검색</button>
 	    		<div class="movieImg"></div>
 			</div>
-    		
 			<br><br>
-			
 			<iframe width="100%;" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="pointer-events: none; margin-top: 30px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2483.281992959266!2d-0.1302576842043993!3d51.5080423184772!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487604ce3941eb1f%3A0x1a5342fdf089c627!2sTrafalgar+Square!5e0!3m2!1sen!2suk!4v1462913556349"></iframe>
-			
     		<div class="col-md-6">
     			<div class="contact-form">
 					<form action="#" method="post">
