@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 
@@ -30,9 +30,9 @@
 <body>
 
     <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+   <!--  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
+            Brand and toggle get grouped for better mobile display
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
@@ -42,7 +42,7 @@
                 </button>
                 <a class="navbar-brand" href="#">Free <span>Designz</span></a>
             </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
+            Collect the nav links, forms, and other content for toggling
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
@@ -62,10 +62,10 @@
                     </li>
                 </ul>
             </div>
-            <!-- /.navbar-collapse -->
+            /.navbar-collapse
         </div>
-        <!-- /.container -->
-    </nav>
+        /.container
+    </nav> -->
     
     <style>
     
@@ -166,23 +166,26 @@
 			margin-top: 25px;
 		}
 
+
     
     </style>
 
+	<c:import url="../includes/header.jsp"></c:import>
+
     <!-- Full Page Image Background Carousel Header -->
-    <header id="mainCarousel" class="carousel slide">
-        <!-- Indicators -->
+    <!-- <header id="mainCarousel" class="carousel slide">
+        Indicators
         <ol class="carousel-indicators">
             <li data-target="#mainCarousel" data-slide-to="0" class="active"></li>
             <li data-target="#mainCarousel" data-slide-to="1"></li>
             <li data-target="#mainCarousel" data-slide-to="2"></li>
         </ol>
 
-        <!-- Wrapper for Slides -->
+        Wrapper for Slides
         <div class="carousel-inner">
             <div class="item active">
             <div class="slider_overlay"></div>
-                <!-- Set the first background image using inline CSS below. -->
+                Set the first background image using inline CSS below.
                 <div class="fill" style="background-image:url('/resources/images/slide1.jpg');">
                     <div class="hero">
                         <hgroup>
@@ -196,7 +199,7 @@
             <div class="item">
 
             <div class="slider_overlay"></div>
-                <!-- Set the second background image using inline CSS below. -->
+                Set the second background image using inline CSS below.
                 <div class="fill" style="background-image:url('/resources/images/slide2.jpg');">
                     <div class="hero">
                         <hgroup>
@@ -208,7 +211,7 @@
             </div>
             <div class="item">    
             <div class="slider_overlay"></div>
-                <!-- Set the third background image using inline CSS below. -->
+                Set the third background image using inline CSS below.
                 <div class="fill" style="background-image:url('/resources/images/slide3.jpg');">
                     <div class="hero">
                         <hgroup>
@@ -220,13 +223,13 @@
             </div>
         </div>
 
-        <!-- Controls -->
+        Controls
         <a class="left carousel-control" href="#mainCarousel" data-slide="prev">
             <span class="icon-prev"></span>
         </a>
         <a class="right carousel-control" href="#mainCarousel" data-slide="next">
             <span class="icon-next"></span>
-        </a>
+        </a> -->
 
     </header>
     <!-- 
@@ -336,13 +339,84 @@
      -->
     
     <div id="blog">
-    	<div class="container">
+    	<div class="container" style="border: 1px solid black">
     		<h2>Latest <span>Blog</span> Posts</h2>
     		<hr>
-    		<div class="carousel slide" id="myCarousel">
-        		<div class="carousel-inner">
-           			<div class="item active">
-            		 	<ul class="thumbnails">
+    		<a href="/movie/insert">글쓰기</a>
+    		<div>
+    			<ul class="thumbnails">
+                        	<li class="col-sm-4">
+    							<div class="fff">
+									<div class="thumbnail">
+										<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+									</div>
+									<div class="caption">
+										<h4>이용택</h4>
+										<p>Vim ad novum solet, sit id cetero latine pertinax. Pri soleat vocent suscipiantur id, cu qui postea civibus assentior, te natum scripta fastidii mei. Et sea meliore fuisset assueverit.</p>
+										<a class="btn btn-mini" href="#">Read More <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+									</div>
+                           	 	</div>
+                        	</li>
+                        	<li class="col-sm-4">
+								<div class="fff">
+									<div class="thumbnail">
+										<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+									</div>
+									<div class="caption">
+										<h4>박상준</h4>
+										<p>Vim ad novum solet, sit id cetero latine pertinax. Pri soleat vocent suscipiantur id, cu qui postea civibus assentior, te natum scripta fastidii mei. Et sea meliore fuisset assueverit.</p>
+										<a class="btn btn-mini" href="#">Read More <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+									</div>
+                            	</div>
+                        	</li>
+                        	<li class="col-sm-4">
+								<div class="fff">
+									<div class="thumbnail">
+										<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+									</div>
+									<div class="caption">
+										<h4>권순호</h4>
+										<p>Vim ad novum solet, sit id cetero latine pertinax. Pri soleat vocent suscipiantur id, cu qui postea civibus assentior, te natum scripta fastidii mei. Et sea meliore fuisset assueverit.</p>
+										<a class="btn btn-mini" href="#">Read More <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+									</div>
+                            	</div>
+                        	</li>
+                        	<li class="col-sm-4">
+    							<div class="fff">
+									<div class="thumbnail">
+										<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+									</div>
+									<div class="caption">
+										<h4>이용택</h4>
+										<p>Vim ad novum solet, sit id cetero latine pertinax. Pri soleat vocent suscipiantur id, cu qui postea civibus assentior, te natum scripta fastidii mei. Et sea meliore fuisset assueverit.</p>
+										<a class="btn btn-mini" href="#">Read More <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+									</div>
+                           	 	</div>
+                        	</li>
+                        	<li class="col-sm-4">
+								<div class="fff">
+									<div class="thumbnail">
+										<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+									</div>
+									<div class="caption">
+										<h4>박상준</h4>
+										<p>Vim ad novum solet, sit id cetero latine pertinax. Pri soleat vocent suscipiantur id, cu qui postea civibus assentior, te natum scripta fastidii mei. Et sea meliore fuisset assueverit.</p>
+										<a class="btn btn-mini" href="#">Read More <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+									</div>
+                            	</div>
+                        	</li>
+                        	<li class="col-sm-4">
+								<div class="fff">
+									<div class="thumbnail">
+										<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+									</div>
+									<div class="caption">
+										<h4>권순호</h4>
+										<p>Vim ad novum solet, sit id cetero latine pertinax. Pri soleat vocent suscipiantur id, cu qui postea civibus assentior, te natum scripta fastidii mei. Et sea meliore fuisset assueverit.</p>
+										<a class="btn btn-mini" href="#">Read More <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+									</div>
+                            	</div>
+                        	</li>
                         	<li class="col-sm-4">
     							<div class="fff">
 									<div class="thumbnail">
@@ -380,59 +454,17 @@
                             	</div>
                         	</li>
                     	</ul>
-             		</div><!-- /Slide1 --> 
-            		<div class="item">
-                    	<ul class="thumbnails">
-                       		<li class="col-sm-4">
-								<div class="fff">
-									<div class="thumbnail">
-										<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-									</div>
-									<div class="caption">
-										<h4>Sed dico menandri</h4>
-										<p>Vim ad novum solet, sit id cetero latine pertinax. Pri soleat vocent suscipiantur id, cu qui postea civibus assentior, te natum scripta fastidii mei. Et sea meliore fuisset assueverit.</p>
-										<a class="btn btn-mini" href="#">Read More <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
-									</div>
-                            	</div>
-                        	</li>
-                        	<li class="col-sm-4">
-								<div class="fff">
-									<div class="thumbnail">
-										<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-									</div>
-									<div class="caption">
-										<h4>Sed dico menandri</h4>
-										<p>Vim ad novum solet, sit id cetero latine pertinax. Pri soleat vocent suscipiantur id, cu qui postea civibus assentior, te natum scripta fastidii mei. Et sea meliore fuisset assueverit.</p>
-										<a class="btn btn-mini" href="#">Read More <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
-									</div>
-                            	</div>
-                        	</li>
-                        	<li class="col-sm-4">
-								<div class="fff">
-									<div class="thumbnail">
-										<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-									</div>
-									<div class="caption">
-										<h4>Sed dico menandri</h4>
-										<p>Vim ad novum solet, sit id cetero latine pertinax. Pri soleat vocent suscipiantur id, cu qui postea civibus assentior, te natum scripta fastidii mei. Et sea meliore fuisset assueverit.</p>
-										<a class="btn btn-mini" href="#">Read More <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
-									</div>
-                            	</div>
-                        	</li>
-                    	</ul>
-            		</div><!-- /Slide2 --> 
-        		</div>
-        
-       
+    		</div>
+
 	   		<nav>
 				<ul class="control-box pager">
-					<li><a data-slide="prev" href="#myCarousel" class=""><i class="fa fa-chevron-left" aria-hidden="true"></i></a></li>
-					<li><a data-slide="next" href="#myCarousel" class=""><i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
+					<!-- <li><a data-slide="prev" href="#myCarousel" class=""><i class="fa fa-chevron-left" aria-hidden="true"></i></a></li>
+					<li><a data-slide="next" href="#myCarousel" class=""><i class="fa fa-chevron-right" aria-hidden="true"></i></a></li> -->
 				</ul>
 			</nav>
 	   		<!-- /.control-box -->   
                               
-   	 		</div><!-- /#myCarousel -->
+   	 		<!-- </div>/#myCarousel -->
     	</div>
     </div>
     
@@ -556,7 +588,6 @@
     		scrollImg: true,
   		});
 	});
-    
     </script>
 
 	
