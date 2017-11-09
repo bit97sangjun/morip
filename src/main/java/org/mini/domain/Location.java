@@ -5,10 +5,8 @@ import lombok.Data;
 @Data
 public class Location {
 
-	private int lno ;
-	private int rno;
-	private String lname;
-	private String addr;
+	private int lno;
+	private int pno;
 	private int mcode;
-	private int zcode ;
+	
 }
