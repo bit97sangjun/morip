@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.mini.domain.Location;
 import org.mini.domain.Movie;
 import org.mini.domain.Place;
 
@@ -19,5 +20,8 @@ public interface LocationMapper {
 	
 	@Select("select addr, pno from tb_place where zcode = #{zcode}")
 	public List<Place> getMarker(int zcode);
+	
+	@Select("select pno, mcode from tb_location")
+	public List<Location> getLocation();
 	
 }

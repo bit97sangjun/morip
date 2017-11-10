@@ -2,6 +2,7 @@ package org.mini.location.service;
 
 import java.util.List;
 
+import org.mini.domain.Location;
 import org.mini.domain.Movie;
 import org.mini.domain.Place;
 import org.mini.location.mappers.LocationMapper;
@@ -28,6 +29,11 @@ public class LocationServiceImpl implements LocationService {
 	@Override
 	public List<Place> getPlace(int zcode) {
 		return mapper.getMarker(zcode);
+	}
+
+	@Override
+	public List<Location> getLocation() {
+		return mapper.getLocation();
 	}
 
 }

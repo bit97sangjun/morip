@@ -5,7 +5,7 @@
 <mapper namespace="org.mini.location.mappers.LocationMapper">
 
 	<select id='getPoster' resultType="Movie">
-		select mimg, mtitle
+		select mcode, mimg, mtitle
 		  from tb_movie
 		 where mcode in ( select mcode
 						    from tb_location

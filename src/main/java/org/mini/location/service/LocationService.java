@@ -2,6 +2,7 @@ package org.mini.location.service;
 
 import java.util.List;
 
+import org.mini.domain.Location;
 import org.mini.domain.Movie;
 import org.mini.domain.Place;
 
@@ -11,4 +12,6 @@ public interface LocationService {
 	public String getPlaceName(int pno);
 	
 	public List<Place> getPlace(int zcode);
+	
+	public List<Location> getLocation();
 }
