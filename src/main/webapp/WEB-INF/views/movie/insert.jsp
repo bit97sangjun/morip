@@ -13,8 +13,8 @@
 
     <title>Homepage</title>
 
-	<link href="css/style.css" rel="stylesheet">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="/resources/css/style.css" rel="stylesheet">
+    <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
     <link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
     
@@ -99,29 +99,30 @@ margin-right: 20px;
 	    		<div class="movieImg"></div>
 			</div>
 			<br><br>
-			<iframe width="100%;" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="pointer-events: none; margin-top: 30px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2483.281992959266!2d-0.1302576842043993!3d51.5080423184772!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487604ce3941eb1f%3A0x1a5342fdf089c627!2sTrafalgar+Square!5e0!3m2!1sen!2suk!4v1462913556349"></iframe>
+			<iframe width="40%;" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="pointer-events: none; margin-top: 30px; margin-right:10px;"> </iframe>
+			<iframe width="50%;" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="pointer-events: none; margin-top: 30px; margin-left:100px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2483.281992959266!2d-0.1302576842043993!3d51.5080423184772!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487604ce3941eb1f%3A0x1a5342fdf089c627!2sTrafalgar+Square!5e0!3m2!1sen!2suk!4v1462913556349"></iframe>
     		<div class="col-md-6">
     			<div class="contact-form">
 					<form action="#" method="post">
 						<input type="text" id="title" name="title"  placeholder="title" >
 						<textarea id="content" name="content" placeholder="content" rows="5" ></textarea>
 						<br>
-						<button name="submit" id="submit" type="submit">Send Message</button>
+						<button name="submit" id="submit" >Send Message</button>
 					</form>
 				</div>  
 			</div>	
-			<div class="col-md-6 AreaList"></div>
+			<input type="file" id="file">
     	</div>	
 
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+    <script src="/resources/js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/resources/js/bootstrap.min.js"></script>
     
-    <script src="js/jquery.isotope.js"></script>
+    <script src="/resources/js/jquery.isotope.js"></script>
     
-    <script src="js/jquery.scrollUp.min.js"></script>
+    <script src="/resources/js/jquery.scrollUp.min.js"></script>
     
     
 	<script type="text/javascript">
