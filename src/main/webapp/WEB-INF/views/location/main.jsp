@@ -304,8 +304,19 @@
 			</div>
 		</div>
 
+		<%-- 영화리스트 나오는 부분 시작 --%>
+
 		<div class="portfolioContainer">
-			<div class=" Portfolio-box appdevelopment">
+			
+			<c:forEach items="${mList}" var="mlist">
+				<div class="Portfolio-box webdesign">
+					<a href="#"><img src="<c:url value="/resources/images/movieimg/${mlist.mimg}" />" alt=""></a>
+				</div>
+			</c:forEach>
+		
+		
+		
+<%-- 			<div class=" Portfolio-box appdevelopment">
 				<a href="#"><img
 					src="<c:url value="/resources/images/placeholder2.png" />" alt=""></a>
 			</div>
@@ -328,8 +339,10 @@
 			<div class=" Portfolio-box graphicdesign">
 				<a href="#"><img
 					src="<c:url value="/resources/images/placeholder2.png" />" alt=""></a>
-			</div>
+			</div> --%>
 		</div>
+		
+		<%-- 영화리스트 나오는 부분 끝 --%>
 
 	</div>
 

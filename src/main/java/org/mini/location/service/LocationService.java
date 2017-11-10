@@ -6,7 +6,7 @@ import org.mini.domain.Movie;
 import org.mini.domain.Place;
 
 public interface LocationService {
-	public List<Movie> getMovies(int pno);
+	public List<Movie> getMovies(int pno, int zcode);
 	
 	public String getPlaceName(int pno);
 	

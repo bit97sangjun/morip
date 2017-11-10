@@ -27,7 +27,7 @@ public class LocationController {
 		int zcode = 1;
 		int pno = 2;
 		
-		model.addAttribute("mList", service.getMovies(pno));
+		model.addAttribute("mList", service.getMovies(pno, zcode));
 		model.addAttribute("pName", service.getPlaceName(pno));
 		model.addAttribute("pList", service.getPlace(zcode));
 		

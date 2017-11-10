@@ -15,9 +15,9 @@ public class LocationServiceImpl implements LocationService {
 	private LocationMapper mapper;
 	
 	@Override
-	public List<Movie> getMovies(int pno) {
+	public List<Movie> getMovies(int pno, int zcode) {
 		
-		return mapper.getPoster(pno);
+		return mapper.getPoster(pno, zcode);
 	}
 
 	@Override
