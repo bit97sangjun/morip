@@ -295,11 +295,6 @@
 			<div class="portfolioFilter">
 				<ul class="Portfolio-nav wow fadeIn delay-02s">
 					<li><a href="#" data-filter="*" class="current">All</a></li>
-					<li><a href="#" data-filter=".webdesign">Web design</a></li>
-					<li><a href="#" data-filter=".appdevelopment">App
-							Development</a></li>
-					<li><a href="#" data-filter=".graphicdesign">Graphic
-							Design</a></li>
 				</ul>
 			</div>
 		</div>
@@ -560,6 +555,19 @@
 
 			// 마커에 click 이벤트를 등록합니다
 			daum.maps.event.addListener(marker, 'click', function() {
+
+				$('.portfolioFilter .current').removeClass('current');
+
+				$(this).addClass('current');
+				
+				var selector = "."+pno;
+
+				$('.portfolioContainer').isotope({
+
+					filter : selector,
+				});
+				return false;
+
 				console.log(pno + " : 마커 클릭");
 
 				// 클릭된 마커가 없고, click 마커가 클릭된 마커가 아니면
