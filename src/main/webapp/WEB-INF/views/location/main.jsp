@@ -154,48 +154,12 @@
 			</div>
 			<!-- 여기부터 svg  -->
 			<div id="france-map">
-				<div class="blocks-txts">
-					<div class="block-txt">
-						<div class="block-txt-title centered">큰지도임임임</div>
-					</div>
-				</div>
-				<div class="col-30" id="lefttext">
-					<div class="blocks-txts">
-						<div class="block-txt left txt-region-1">
-							<div class="block-txt-title">서울</div>
-						</div>
-						<div class="block-txt left txt-region-2">
-							<div class="block-txt-title">대구</div>
-						</div>
-						<div class="block-txt left txt-region-3">
-							<div class="block-txt-title">인천</div>
-						</div>
-						<div class="block-txt left txt-region-4">
-							<div class="block-txt-title">광주</div>
-						</div>
-						<div class="block-txt left txt-region-5">
-							<div class="block-txt-title">대전</div>
-						</div>
-						<div class="block-txt left txt-region-6">
-							<div class="block-txt-title">울산</div>
-						</div>
-						<div class="block-txt left txt-region-7">
-							<div class="block-txt-title">경기도</div>
-						</div>
-						<div class="block-txt left txt-region-8">
-							<div class="block-txt-title">강원도</div>
-						</div>
-						<div class="block-txt left txt-region-9">
-							<div class="block-txt-title">충청북도</div>
-						</div>
-
-					</div>
-				</div>
+				
 				<div class="col-40" id="mapbox">
 					<div id="map_france">
 						<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
 							xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-							viewbox="-200 500 800 300"
+							viewbox="-200 150 800 650"
 							style="enable-background: new 0 0 1500 1500;"
 							xml:space="preserve">
         <path id="region_1" data-class="txt-region-1" title="Seoul"
@@ -255,34 +219,7 @@
             </svg>
 					</div>
 				</div>
-				<div class="col-30" id="righttext">
-					<div class="blocks-txts">
-						<div class="block-txt txt-region-10">
-							<div class="block-txt-title">충청남도</div>
-						</div>
-						<div class="block-txt txt-region-11">
-							<div class="block-txt-title">전라북도</div>
-						</div>
-						<div class="block-txt txt-region-12">
-							<div class="block-txt-title">전라남도</div>
-						</div>
-						<div class="block-txt txt-region-13">
-							<div class="block-txt-title">경상북도</div>
-						</div>
-						<div class="block-txt txt-region-14">
-							<div class="block-txt-title">경상남도</div>
-						</div>
-						<div class="block-txt txt-region-15">
-							<div class="block-txt-title">제주도</div>
-						</div>
-						<div class="block-txt txt-region-16">
-							<div class="block-txt-title">세종시</div>
-						</div>
-						<div class="block-txt txt-region-17">
-							<div class="block-txt-title">부산</div>
-						</div>
-					</div>
-				</div>
+				
 			</div>
 			<!-- svg 끝  -->
 		</div>
