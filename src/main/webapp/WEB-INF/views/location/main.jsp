@@ -530,8 +530,6 @@
 					data : {
 						"pno" : pno
 					}
-				}).done(function(data) {
-
 				});
 
 			});
@@ -566,6 +564,24 @@
 				scrollImg : true,
 			});
 		});
+	</script>
+	
+	<script>
+	
+		$("path[id^=region]").on("click", function () {
+			var str = $(this)[0].id;
+			var prefix = "region_";
+			var zcode = parseInt(str.substring(prefix.length));
+			
+			$.ajax({
+				url : "/location/main",
+				type : "GET",
+				data : {
+					"zcode" : zcode
+				}
+			});
+		});
+		
 	</script>
 
 </body>

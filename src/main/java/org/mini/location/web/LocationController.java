@@ -25,7 +25,7 @@ public class LocationController {
 	@GetMapping("/main")
 	public void main(Model model, @RequestParam(value="zcode", defaultValue="1") int zcode, @RequestParam(value="pno", defaultValue="0") int pno) {
 		
-		System.out.println(pno);
+		System.out.println(zcode);
 		
 		model.addAttribute("mList", service.getMovies(pno, zcode));
 		model.addAttribute("pName", service.getPlaceName(pno));
