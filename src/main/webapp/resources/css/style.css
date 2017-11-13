@@ -118,6 +118,10 @@ body {
 	border: 1px solid #0781E6;
 }
 
+.menubar {
+	text-align: center;
+}
+
 /******** Media Queries ********/
 @media screen and (max-width: 1071px) {
 	#mainCarousel .hero h1 {
@@ -502,58 +506,70 @@ img {
 	height: 100%;
 }
 
-/******** Subscribe Section ********/
-#subscribe {
+/******** login Section ********/
+#login {
 	padding-top: 40px;
 	padding-bottom: 40px;
 }
 
-#subscribe h2 {
+#login h2 {
 	font-size: 28px;
 	text-transform: uppercase;
 	font-family: 'Noto Sans', sans-serif;
 	letter-spacing: 1px;
 	font-weight: 600;
 	color: #000;
-	border-bottom: 8px solid #42a5f6;
+	/* border-bottom: 8px solid #42a5f6; */
 	display: inline-block;
 	margin-bottom: 30px;
 	padding-bottom: 15px;
-	padding-right: 75px;
 	line-height: 40px;
 }
 
-#subscribe p {
+#login .text h2 {
+	font-size: 28px;
+	text-transform: uppercase;
+	font-family: 'Noto Sans', sans-serif;
+	letter-spacing: 1px;
+	font-weight: 600;
+	text-align: center;
+	width: 100%;
+}
+
+#login p {
 	font-family: 'PT Sans', sans-serif;
 	font-size: 17px;
 	color: #000;
 }
 
-#subscribe .input-group {
+#login .input-group {
 	width: 100%;
 	margin-top: 30px;
+	text-align: center;
 }
 
-#subscribe input.btn.btn-lg, input.btn.btn-lg:focus {
+#login input.btn.btn-lg, input.btn.btn-lg:focus {
 	outline: none;
 	width: 60%;
-	height: 60px;
-	border-top-right-radius: 0;
-	border-bottom-right-radius: 0;
+	height: 100%;
 	border: 1px solid #42a5f6;
 	text-align: left;
 	font-size: 16px;
 	cursor: auto;
 }
 
-#subscribe button.btn {
-	width: 40%;
-	height: 60px;
-	border-top-left-radius: 0;
-	border-bottom-left-radius: 0;
+#login button.btn {
+	width: 60%;
+	height: 40px;
 	background: #42a5f6;
 	outline: none;
 	text-transform: uppercase;
+	text-align: center;
+	
+}
+
+.dup {
+	width: 30% !important;
 }
 
 /******** Footer ********/

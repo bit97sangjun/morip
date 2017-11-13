@@ -150,11 +150,32 @@
 	<div id="login">
 		<div class="container">
 			<div class="text">
-				<h2>홈화면</h2>
+				<h2>회원가입</h2>
 			</div>
 			<div class="col-md-8 col-md-offset-2">
-				<a>영화 속 장소</a><br/>
-				<a href="location/main">지역 속 영화</a>
+				<form action="#">
+					<div class="input-group">
+					<p>
+						<input class="btn btn-lg dup" name="id" id="id" type="text"
+							placeholder="아이디를 입력해주세요" required>
+							<button class="btn btn-info btn-lg dup" type="button">중복체크</button>
+							<p>
+						<input class="btn btn-lg" name="pw" id="pw" type="password"
+							placeholder="비밀번호를 입력해주세요" required>
+							<p>
+						<input class="btn btn-lg" name="pwcheck" id="pwcheck" type="password"
+							placeholder="비밀번호를 다시 입력해주세요" required>
+							<p>
+						<input class="btn btn-lg dup" name="nick" id="nick" type="text"
+							placeholder="닉네임을 입력해주세요" required>
+							<button class="btn btn-info btn-lg dup" type="button">중복체크</button>
+							<p>
+						<input class="btn btn-lg" name="email" id="email" type="email"
+							placeholder="이메일을 입력해주세요" required>
+							<p>
+						<button class="btn btn-info btn-lg" type="button">가입</button>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>

@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <!-- Navigation -->
 <nav class="navbar navbar-default navbar-fixed-top shrink" role="navigation">
-	<div class="container">
+	<div class="container menubar">
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -57,4 +57,7 @@
 					}
 				});
 			});
+	$('#loginBtn').click(function() {
+		location.href = '/login';
+	});
 </script>
