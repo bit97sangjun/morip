@@ -349,12 +349,65 @@
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=43ebc80896d6b92c30a7a86d976b01f3&libraries=services"></script>
 	<script>
-		var mapContainer = $(".detailMap").get(0), // 지도를 표시할 div 
-		mapOption = {
-			center : new daum.maps.LatLng(37.566678, 126.978429), // 지도의 중심좌표
-			level : 3
-		// 지도의 확대 레벨
-		};
+		var mapContainer = $(".detailMap").get(0); // 지도를 표시할 div
+		
+		var zcode = "${zone.zcode}";
+		console.log(typeof(zcode));
+		// 지도 중심좌표 설정
+		switch(parseInt(zcode)){
+		case 1:
+			mapOption = {center : new daum.maps.LatLng(37.566678, 126.978429), level : 8};
+			break;
+		case 2:
+			mapOption = {center : new daum.maps.LatLng(35.858497, 128.575152), level : 8};
+			break;
+		case 3:
+			mapOption = {center : new daum.maps.LatLng(37.503598, 126.699318), level : 9};
+			break;
+		case 4:
+			mapOption = {center : new daum.maps.LatLng(35.157718, 126.834789), level : 8};
+			break;
+		case 5:
+			mapOption = {center : new daum.maps.LatLng(36.344471, 127.389166), level : 8};
+			break;
+		case 6:
+			mapOption = {center : new daum.maps.LatLng(35.564175, 129.233240), level : 8};
+			break;
+		case 7:
+			mapOption = {center : new daum.maps.LatLng(37.598872, 127.206039), level : 11};
+			break;
+		case 8:
+			mapOption = {center : new daum.maps.LatLng(37.715426, 128.305328), level : 12};
+			break;
+		case 9:
+			mapOption = {center : new daum.maps.LatLng(36.799013, 127.703117), level : 10};
+			break;
+		case 10:
+			mapOption = {center : new daum.maps.LatLng(36.540449, 126.903582), level : 10};
+			break;
+		case 11:
+			mapOption = {center : new daum.maps.LatLng(35.721825, 127.155128), level : 10};
+			break;
+		case 12:
+			mapOption = {center : new daum.maps.LatLng(34.965392, 126.978556), level : 10};
+			break;
+		case 13:
+			mapOption = {center : new daum.maps.LatLng(36.393744, 128.742898), level : 10};
+			break;
+		case 14:
+			mapOption = {center : new daum.maps.LatLng(35.375971, 128.275106), level : 10};
+			break;
+		case 15:
+			mapOption = {center : new daum.maps.LatLng(33.380035, 126.545023), level : 9};
+			break;
+		case 16:
+			mapOption = {center : new daum.maps.LatLng(36.563889, 127.262083), level : 8};
+			break;
+		case 17:
+			mapOption = {center : new daum.maps.LatLng(35.216140, 129.114000), level : 8};
+			break;
+		}
+
 
 		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 		var map = new daum.maps.Map(mapContainer, mapOption);
