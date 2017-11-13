@@ -4,7 +4,6 @@
 <html>
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -64,15 +63,14 @@
     color : black;
 }
 
-.movieImg{
-border: 1px solid black;
+.movieImg ,.movieList{
 width: 250px;
 height: 100px;
 float: left;
 margin-right: 20px;
+margin-top:20px;
 }
 .container{
-	
 	float :left;
 }
 
@@ -83,48 +81,64 @@ margin-right: 20px;
 	margin-top: 25px;
 }
 
+
 </style>
 
-<body>
 
+<body>
        <div id="contact">
-	    	<div class="container">
+	    	<div class="container" >
 	    		<p>
 	    		 <h2>글등록 페이지</h2>
 	    		</p>
-				<span class='green_window'>
-					<input type='text' class='input_text' />
-				</span>
-				<button type='submit' class='sch_smit'>검색</button>
-	    		<div class="movieImg"></div>
+
+	    		
+	    		<!--영화 검색  에 대한 이미지.-->
+	    		<form id ="movieselect"  method="post">
+					<span class='green_window'>
+						<input type='text' name="keyword" class='input_text' id='input_keyword'/>
+					</span>
+						<span id="response"></span>
+						<button type ="button" class='sch_smit' id="keywordBtn">검색</button>
+					</form>
+					
+		    		<div class="movieList"></div>
+		    		<div class="movieImg"></div>
+		    		
+		    		
+	    	
 			</div>
+			
 			<br><br>
-			<iframe width="40%;" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="pointer-events: none; margin-top: 30px; margin-right:10px;"> </iframe>
-			<iframe width="50%;" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="pointer-events: none; margin-top: 30px; margin-left:100px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2483.281992959266!2d-0.1302576842043993!3d51.5080423184772!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487604ce3941eb1f%3A0x1a5342fdf089c627!2sTrafalgar+Square!5e0!3m2!1sen!2suk!4v1462913556349"></iframe>
+				
+				<!-- 지도 .  -->
+				<iframe width="40%;" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="pointer-events: none; margin-top: 30px; margin-right:10px;"> </iframe>
+				<iframe width="50%;" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="pointer-events: none; margin-top: 30px; margin-left:100px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2483.281992959266!2d-0.1302576842043993!3d51.5080423184772!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487604ce3941eb1f%3A0x1a5342fdf089c627!2sTrafalgar+Square!5e0!3m2!1sen!2suk!4v1462913556349"></iframe>
     		<div class="col-md-6">
     			<div class="contact-form">
-					<form action="#" method="post">
-						<input type="text" id="title" name="title"  placeholder="title" >
-						<textarea id="content" name="content" placeholder="content" rows="5" ></textarea>
+    			
+    				<!-- 글제목 , 글내용   -->
+					<form action="/movie/register" method="post">
+						<input type="text" id="rtitle" name="rtitle"  placeholder="rtitle" >
+						<textarea id="rcontent" name="rcontent" placeholder="rcontent" rows="5" ></textarea>
+					
 						<br>
-						<button name="submit" id="submit" >Send Message</button>
+						<button name="submit" id="submit" >등록</button>
 					</form>
 				</div>  
 			</div>	
+			
+			<!-- 파일 업로드  -->
 			<input type="file" id="file">
+			
     	</div>	
 
     <!-- jQuery -->
     <script src="/resources/js/jquery.js"></script>
-
     <!-- Bootstrap Core JavaScript -->
     <script src="/resources/js/bootstrap.min.js"></script>
-    
     <script src="/resources/js/jquery.isotope.js"></script>
-    
     <script src="/resources/js/jquery.scrollUp.min.js"></script>
-    
-    
 	<script type="text/javascript">
 	
 	$('a[href^="#"]').on('click', function(event) {
@@ -138,7 +152,6 @@ margin-right: 20px;
 	});
 
 	</script>
-    
     
     <!-- Navbar Change on Scroll -->
 	<script type="text/javascript">
@@ -159,29 +172,25 @@ margin-right: 20px;
 	});
 
 	</script>    
-
-
 	<!-- Portfolio Isotope Settings -->
 	<script type="text/javascript">
 
 	$(window).load(function(){
   
-  
- 	 var $container = $('.portfolioContainer'),
+ 	/*  var $container = $('.portfolioContainer'),
      	$body = $('body'),
      	colW = 375,
       	columns = null;
 
-  
   	$container.isotope({
     // disable window resizing
     	resizable: true,
    	 	masonry: {
         columnWidth: colW
     	}
-  	});
+  	}); */
   
-  	$(window).smartresize(function(){
+  	/* $(window).smartresize(function(){
     // check if columns has changed
     	var currentColumns = Math.floor( ( $body.width() -30 ) / colW );
     	if ( currentColumns !== columns ) {
@@ -191,7 +200,7 @@ margin-right: 20px;
       	$container.width( columns * colW )
         	.isotope('reLayout');
     	}
-    
+     */
   	}).smartresize(); // trigger resize to set container width
   	$('.portfolioFilter a').click(function(){
         	$('.portfolioFilter .current').removeClass('current');
@@ -204,15 +213,10 @@ margin-right: 20px;
          });
         	 return false;
    	 	});
-  
-	});
-
+/* 	}); */
 	</script>
-	
-	
 	<!-- Scroll To Top Settings -->
     <script type="text/javascript">
-    
     $(function () {
   		$.scrollUp({
     		scrollName: 'scrollUp', // Element ID
@@ -226,9 +230,35 @@ margin-right: 20px;
   		});
 	});
     
+    
+    
+    
+   	$("#keywordBtn").on("click" ,function(){
+   		$.ajax({ 
+   			type:'POST' ,
+   			url:'/movie/movieread',
+   			data: {"keyword":$("#input_keyword").val()},
+   			dataType :'json' , 
+   			success: function(data) {
+   				for(var i = 0; i < data.length; i++){
+   					$(".movieList").append("<span>"+data[i].mtitle+"</span><br>"); 
+   					$(".movieImg").append("<span>"+data[i].mimg+"</span><br>"); 
+   				}
+  			},
+  			error: function(status){
+  				console.log(status);
+  			}
+ 		});	
+  	});	
+   	
+   	
+    $(".movieList").on("click" , function(){
+    	alert("들킴");
+    });
+    
+    
+
+    
     </script>
-
-	
 </body>
-
 </html>

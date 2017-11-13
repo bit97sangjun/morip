@@ -2,6 +2,7 @@ package org.mini.movie.service;
 
 import java.util.List;
 
+import org.mini.domain.Movie;
 import org.mini.domain.Report;
 import org.mini.dto.Criteria;
 
@@ -14,4 +15,5 @@ public interface MovieService {
 	
 	public List<Report> getList(Criteria cri);
 	public int getCount(Criteria cri);
+	public List<Movie> getMovieread(String keyword);
 }

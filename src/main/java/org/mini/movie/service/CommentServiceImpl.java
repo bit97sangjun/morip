@@ -42,4 +42,11 @@ public class CommentServiceImpl implements CommentService {
 		return mapper.getList(cri);
 	}
 
+	@Override
+	public void moveread(String keyword) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
+

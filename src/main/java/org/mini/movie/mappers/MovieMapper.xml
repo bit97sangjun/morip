@@ -21,20 +21,9 @@
 	
 </select>
 
-<select id="movieread">
-	select mimg ,mtitle
-	from movie
-	where mtitle like "%#{keword}%"
-</select>
-
-
-<insert id="report">
-	insert into report(title , content) value(#{title},#{content})
-</insert>
-
-
 <insert id="place">
 	insert into report(pname , addr) value(#{pname},#{addr})
 </insert>
+
 </mapper>
   

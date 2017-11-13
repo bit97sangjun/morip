@@ -30,7 +30,10 @@
 </delete>
 
 <insert id="create">
-	insert into comment(ctitle ,cimg) value(#{ctitle} , #{cimg})
+	insert into tb_comment(ctitle ,cimg) value(#{ctitle} , #{cimg})
 </insert>
+
+
+
 
 </mapper>

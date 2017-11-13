@@ -12,5 +12,6 @@ public interface CommentService {
 	public void modify(Comment vo);
 	public void remove(Integer cno);
 	public List<Comment> getList(Criteria cri);
+	public void moveread(String keyword);
 	
 }
