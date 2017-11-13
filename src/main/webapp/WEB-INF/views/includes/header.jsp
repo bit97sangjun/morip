@@ -1,5 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top shrink" role="navigation">
 	<div class="container">
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
@@ -15,17 +17,16 @@
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li><a href="#mainCarousel">Home</a></li>
-				<li><a href="#about">About</a></li>
-				<li><a href="#portfolio">Portfolio</a></li>
-				<li><a href="#blog">Blog</a></li>
-				<li><a href="#contact">Contact Us</a></li>
+				<button id="loginBtn" class="btn btn-hero btn-lg" role="button">로그인</button>
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->
 	</div>
 	<!-- /.container -->
 </nav>
+<div style="height: 111px">
+
+</div>
 <!-- Navbar Change on Scroll -->
 <!-- jQuery -->
 <script src="/resources/js/jquery.js"></script>
@@ -44,11 +45,11 @@
 					var shrinkHeader = 100;
 					$(window).scroll(function() {
 						var scroll = getCurrentScroll();
-						if (scroll >= shrinkHeader) {
+						/* if (scroll >= shrinkHeader) {
 							$('.navbar-default').addClass('shrink');
 						} else {
 							$('.navbar-default').removeClass('shrink');
-						}
+						} */
 					});
 					function getCurrentScroll() {
 						return window.pageYOffset
