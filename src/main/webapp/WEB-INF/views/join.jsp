@@ -255,8 +255,10 @@
 				data : {"id": $(this).val()},
 				type : "POST"
 			}).done(function(result) {
-				console.log("아이디 : " + "${idcheck}");
+				
 			});
+			console.log("아이디 : " + "${idcheck}");
+			console.dir("${model}");
 		});
 		
 		$("#nick").on("keyup", function() {
@@ -266,9 +268,10 @@
 				data : {"nick": $(this).val()},
 				type : "POST"
 			}).done(function(result) {
-				console.log("닉네임 : " + "${nickcheck}");
+				
 				
 			});
+			console.log("닉네임 : " + "${model.nickcheck}");
 		});
 		
 		
