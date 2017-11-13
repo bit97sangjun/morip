@@ -5,6 +5,7 @@ import java.util.List;
 import org.mini.domain.Location;
 import org.mini.domain.Movie;
 import org.mini.domain.Place;
+import org.mini.domain.Zone;
 import org.mini.location.mappers.LocationMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,11 @@ public class LocationServiceImpl implements LocationService {
 	@Override
 	public List<Location> getLocation() {
 		return mapper.getLocation();
+	}
+
+	@Override
+	public Zone getZone(int zcode) {
+		return mapper.getZone(zcode);
 	}
 
 }

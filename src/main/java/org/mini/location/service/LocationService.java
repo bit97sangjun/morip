@@ -5,6 +5,7 @@ import java.util.List;
 import org.mini.domain.Location;
 import org.mini.domain.Movie;
 import org.mini.domain.Place;
+import org.mini.domain.Zone;
 
 public interface LocationService {
 	public List<Movie> getMovies(int pno, int zcode);
@@ -14,4 +15,6 @@ public interface LocationService {
 	public List<Place> getPlace(int zcode);
 	
 	public List<Location> getLocation();
+	
+	public Zone getZone(int zcode);
 }

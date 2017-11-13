@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import org.mini.domain.Location;
 import org.mini.domain.Movie;
 import org.mini.domain.Place;
+import org.mini.domain.Zone;
 
 public interface LocationMapper {
 	
@@ -23,5 +24,8 @@ public interface LocationMapper {
 	
 	@Select("select pno, mcode from tb_location")
 	public List<Location> getLocation();
+	
+	@Select("select zcode, zname from tb_zone where zcode = #{zcode}")
+	public Zone getZone(int zcode);
 	
 }

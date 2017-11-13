@@ -32,7 +32,7 @@ public class LocationController {
 		model.addAttribute("pName", service.getPlaceName(pno));
 		model.addAttribute("pList", service.getPlace(zcode));
 		model.addAttribute("lList", service.getLocation());
-		model.addAttribute("zcode", zcode);
+		model.addAttribute("zone", service.getZone(zcode));
 		
 	}
 	

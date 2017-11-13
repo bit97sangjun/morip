@@ -145,16 +145,17 @@
 	min-height: 700px;
 	min-width: 100%;
 }
+
 </style>
 
 	<div id="about">
 		<div class="container">
 			<div class="text">
-				<h2 id="zName">큰지도</h2>
+				<h2>${zone.zname}</h2>
 			</div>
 			<!-- 여기부터 svg  -->
 			<div id="france-map">
-				
+
 				<div class="col-40" id="mapbox">
 					<div id="map_france">
 						<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -219,7 +220,7 @@
             </svg>
 					</div>
 				</div>
-				
+
 			</div>
 			<!-- svg 끝  -->
 		</div>
@@ -293,46 +294,56 @@
 
 	<!-- Portfolio Isotope Settings -->
 	<script type="text/javascript">
-		$(window).load( function() {
-			
-			var $container = $('.portfolioContainer'), $body = $('body'), colW = 375, columns = null;
+		$("#region_${zone.zcode}").css("fill","#005bba");
+		
+// 		var zcode = '#region_' + '${param.zcode}';
 
-			$container.isotope({
-				// disable window resizing
-				resizable : true,
-				masonry : {
-					columnWidth : colW
-				}
-			});
+		$(window)
+				.load(
+						function() {
 
-			$(window).smartresize( function() {
-				// check if columns has changed
-				var currentColumns = Math.floor(($body
-						.width() - 30)
-						/ colW);
-				if (currentColumns !== columns) {
-					// set new column count
-					columns = currentColumns;
-					// apply width to container manually, then trigger relayout
-					$container.width(columns * colW)
-							.isotope('reLayout');
-				}}).smartresize(); // trigger resize to set container width
-				
-			$('.portfolioFilter a').click(function() {
-				$('.portfolioFilter .current').removeClass('current');
+							var $container = $('.portfolioContainer'), $body = $('body'), colW = 375, columns = null;
 
-				$(this).addClass('current');
+							$container.isotope({
+								// disable window resizing
+								resizable : true,
+								masonry : {
+									columnWidth : colW
+								}
+							});
 
-				var selector = $(this).attr(
-						'data-filter');
-				$container.isotope({
-					filter : selector,
-				});
-				
-				return false;
-			});
-				
-		});
+							$(window).smartresize(
+									function() {
+										// check if columns has changed
+										var currentColumns = Math.floor(($body
+												.width() - 30)
+												/ colW);
+										if (currentColumns !== columns) {
+											// set new column count
+											columns = currentColumns;
+											// apply width to container manually, then trigger relayout
+											$container.width(columns * colW)
+													.isotope('reLayout');
+										}
+									}).smartresize(); // trigger resize to set container width
+
+							$('.portfolioFilter a').click(
+									function() {
+										$('.portfolioFilter .current')
+												.removeClass('current');
+
+										$(this).addClass('current');
+
+										var selector = $(this).attr(
+												'data-filter');
+										$container.isotope({
+											filter : selector,
+										});
+
+										return false;
+									});
+
+						});
 	</script>
 	<!-- Detail Map -->
 	<script type="text/javascript"
@@ -350,17 +361,6 @@
 	</script>
 
 	<script>
-	
-	
-	
-	var imageSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다    
-    imageSize = new daum.maps.Size(64, 69), // 마커이미지의 크기입니다
-    imageOprion = {offset: new daum.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-
-	// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-	var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOprion);
-    
-    
 		var MARKER_WIDTH = 33, // 기본, 클릭 마커의 너비
 		MARKER_HEIGHT = 36, // 기본, 클릭 마커의 높이
 		OFFSET_X = 12, // 기본, 클릭 마커의 기준 X좌표
@@ -391,40 +391,45 @@
 		<c:forEach items="${pList}" var="place">
 		i++;
 		// 주소로 좌표를 검색합니다
-		geocoder.addressSearch("${place.addr}", function(result, status) {
+		geocoder
+				.addressSearch(
+						"${place.addr}",
+						function(result, status) {
 
-			// 정상적으로 검색이 완료됐으면 
-			if (status === daum.maps.services.Status.OK) {
+							// 정상적으로 검색이 완료됐으면 
+							if (status === daum.maps.services.Status.OK) {
 
-				var coords = new daum.maps.LatLng(result[0].y, result[0].x);
-				positions.push(coords);
+								var coords = new daum.maps.LatLng(result[0].y,
+										result[0].x);
+								positions.push(coords);
 
-				
-				var normalImage = createMarkerImage(markerSize, markerOffset,
-						normalOrigin), overImage = createMarkerImage(
-						overMarkerSize, overMarkerOffset, overOrigin), clickImage = createMarkerImage(
-						markerSize, markerOffset, clickOrigin);
-				
-				// 결과값으로 받은 위치를 마커로 표시합니다
-				var marker = new daum.maps.Marker({
-					map : map,
-					position : coords,
-					image: markerImage,
-					pno : "${place.pno}"
-				});
+								var normalImage = createMarkerImage(markerSize,
+										markerOffset, normalOrigin), overImage = createMarkerImage(
+										overMarkerSize, overMarkerOffset,
+										overOrigin), clickImage = createMarkerImage(
+										markerSize, markerOffset, clickOrigin);
 
-				var gapX = (MARKER_WIDTH + SPRITE_GAP), // 스프라이트 이미지에서 마커로 사용할 이미지 X좌표 간격 값
-				originY = (MARKER_HEIGHT + SPRITE_GAP) * i, // 스프라이트 이미지에서 기본, 클릭 마커로 사용할 Y좌표 값
-				overOriginY = (OVER_MARKER_HEIGHT + SPRITE_GAP) * i, // 스프라이트 이미지에서 오버 마커로 사용할 Y좌표 값
-				normalOrigin = new daum.maps.Point(0, originY), // 스프라이트 이미지에서 기본 마커로 사용할 영역의 좌상단 좌표
-				clickOrigin = new daum.maps.Point(gapX, originY), // 스프라이트 이미지에서 마우스오버 마커로 사용할 영역의 좌상단 좌표
-				overOrigin = new daum.maps.Point(gapX * 2, overOriginY); // 스프라이트 이미지에서 클릭 마커로 사용할 영역의 좌상단 좌표
+								// 결과값으로 받은 위치를 마커로 표시합니다
+								var marker = new daum.maps.Marker({
+									map : map,
+									position : coords,
+									pno : "${place.pno}"
+								});
 
-				addMarker(coords, normalOrigin, overOrigin, clickOrigin,
-						"${place.pno}");
-			}
+								var gapX = (MARKER_WIDTH + SPRITE_GAP), // 스프라이트 이미지에서 마커로 사용할 이미지 X좌표 간격 값
+								originY = (MARKER_HEIGHT + SPRITE_GAP) * i, // 스프라이트 이미지에서 기본, 클릭 마커로 사용할 Y좌표 값
+								overOriginY = (OVER_MARKER_HEIGHT + SPRITE_GAP)
+										* i, // 스프라이트 이미지에서 오버 마커로 사용할 Y좌표 값
+								normalOrigin = new daum.maps.Point(0, originY), // 스프라이트 이미지에서 기본 마커로 사용할 영역의 좌상단 좌표
+								clickOrigin = new daum.maps.Point(gapX, originY), // 스프라이트 이미지에서 마우스오버 마커로 사용할 영역의 좌상단 좌표
+								overOrigin = new daum.maps.Point(gapX * 2,
+										overOriginY); // 스프라이트 이미지에서 클릭 마커로 사용할 영역의 좌상단 좌표
 
-		});
+								addMarker(coords, normalOrigin, overOrigin,
+										clickOrigin, "${place.pno}");
+							}
+
+						});
 
 		var posters = $(".Portfolio-box");
 
@@ -461,14 +466,13 @@
 		// 마커를 생성하고 지도 위에 표시하고, 마커에 mouseover, mouseout, click 이벤트를 등록하는 함수입니다
 		function addMarker(position, normalOrigin, overOrigin, clickOrigin, pno) {
 
-// 			var imageSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다    
-// 		    imageSize = new daum.maps.Size(64, 69), // 마커이미지의 크기입니다
-// 		    imageOprion = {offset: new daum.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+			// 			var imageSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다    
+			// 		    imageSize = new daum.maps.Size(64, 69), // 마커이미지의 크기입니다
+			// 		    imageOprion = {offset: new daum.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 
-// 			// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-// 			var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOprion);
-			
-			
+			// 			// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+			// 			var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOprion);
+
 			// 기본 마커이미지, 오버 마커이미지, 클릭 마커이미지를 생성합니다
 			var normalImage = createMarkerImage(markerSize, markerOffset,
 					normalOrigin), overImage = createMarkerImage(
@@ -479,7 +483,7 @@
 			var marker = new daum.maps.Marker({
 				map : map,
 				position : position,
-				image : markerImage
+				image : normalImage
 			});
 
 			// 마커 객체에 마커아이디와 마커의 기본 이미지를 추가합니다
@@ -496,7 +500,7 @@
 
 			// 마커에 mouseout 이벤트를 등록합니다
 			daum.maps.event.addListener(marker, 'mouseout', function() {
-				
+
 				// 클릭된 마커가 없고, mouseout된 마커가 클릭된 마커가 아니면
 				// 마커의 이미지를 기본 이미지로 변경합니다
 				if (!selectedMarker || selectedMarker !== marker) {
@@ -506,12 +510,12 @@
 
 			// 마커에 click 이벤트를 등록합니다
 			daum.maps.event.addListener(marker, 'click', function() {
-			
+
 				$('.portfolioFilter .current').removeClass('current');
 
 				$(this).addClass('current');
-				
-				var selector = "."+pno;
+
+				var selector = "." + pno;
 
 				$('.portfolioContainer').isotope({
 
@@ -577,38 +581,35 @@
 			});
 		});
 	</script>
-	
+
 	<script>
-	
-		$("path[id^=region]").on("click", function () {
+		$("path[id^=region]").on("click", function() {
 			var str = $(this)[0].id;
 			var prefix = "region_";
 			var zcode = parseInt(str.substring(prefix.length));
-			
-// 			$.ajax({
-// 				url : "/location/main",
-// 				type : "GET",
-// 				data : {
-// 					"zcode" : zcode
-// 				}
-// 			});
 
-			location.href='/location/main?zcode='+ zcode;
+			// 			$.ajax({
+			// 				url : "/location/main",
+			// 				type : "GET",
+			// 				data : {
+			// 					"zcode" : zcode
+			// 				}
+			// 			});
+
+			location.href = '/location/main?zcode=' + zcode;
 		});
-		
-		
-// 		$("marker").addListener("mouseover",function() {
-// 			console.log("1");
-// 		});
-// 		daum.maps.event.addListener(marker, 'mouseover', function() {
 
-// 			// 클릭된 마커가 없고, mouseover된 마커가 클릭된 마커가 아니면
-// 			// 마커의 이미지를 오버 이미지로 변경합니다
-// // 			if (!selectedMarker || selectedMarker !== marker) {
-// // 				marker.setImage(overImage);
-// // 			}
-// 		});
-		
+		// 		$("marker").addListener("mouseover",function() {
+		// 			console.log("1");
+		// 		});
+		// 		daum.maps.event.addListener(marker, 'mouseover', function() {
+
+		// 			// 클릭된 마커가 없고, mouseover된 마커가 클릭된 마커가 아니면
+		// 			// 마커의 이미지를 오버 이미지로 변경합니다
+		// // 			if (!selectedMarker || selectedMarker !== marker) {
+		// // 				marker.setImage(overImage);
+		// // 			}
+		// 		});
 	</script>
 
 </body>
