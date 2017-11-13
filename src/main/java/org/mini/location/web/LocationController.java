@@ -26,11 +26,13 @@ public class LocationController {
 	public void main(Model model, @RequestParam(value="zcode", defaultValue="1") int zcode, @RequestParam(value="pno", defaultValue="0") int pno) {
 		
 		System.out.println(zcode);
+		System.out.println(service.getMovies(pno, zcode));
 		
 		model.addAttribute("mList", service.getMovies(pno, zcode));
 		model.addAttribute("pName", service.getPlaceName(pno));
 		model.addAttribute("pList", service.getPlace(zcode));
 		model.addAttribute("lList", service.getLocation());
+		model.addAttribute("zcode", zcode);
 		
 	}
 	
