@@ -11,13 +11,13 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button> 
-			<a class="navbar-brand" href="#">Movie <span>Trip</span></a>
+			<a class="navbar-brand" href="/home">Movie <span>Trip</span></a>
 		</div>
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<button id="loginBtn" class="btn btn-hero btn-lg" role="button">로그인</button>
+			<ul class="nav navbar-nav" id="buttonBox">
+				<button id="loginBtn" class="btn btn-hero btn-lg menubtn" role="button">로그인</button>
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->
@@ -60,4 +60,31 @@
 	$('#loginBtn').click(function() {
 		location.href = '/login';
 	});
+	
+	console.log("${login}");
+	
+	
+	if("${login}" != "") {
+		console.log("로그인한경우");
+		$("#buttonBox").html('<button id="logoutBtn" class="btn btn-hero btn-lg menubtn" role="button">로그아웃</button>')
+	}
+	
+	$('#buttonBox').on("click", "button", function() {
+		
+		switch($(this)[0].id) {
+		case "loginBtn": 
+			console.log("로그인눌림");
+			location.href = '/login';
+			break;
+		case "logoutBtn": 
+			console.log("로그아웃눌림");
+			location.href = '/logout';
+			$("#buttonBox").html('<button id="loginBtn" class="btn btn-hero btn-lg" role="button">로그인</button>');
+			break;
+		 
+		}
+		
+	});
+	
+	
 </script>

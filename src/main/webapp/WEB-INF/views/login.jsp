@@ -162,7 +162,7 @@
 							<input class="btn btn-lg" name="pw" id="loginPw" type="password"
 								placeholder="비밀번호를 입력해주세요" required>
 						<p>
-							<input type="checkbox" required> 로그인 유지
+							<input type="checkbox" name="remember" id="remember" required> 로그인 유지
 						<p>
 							<button class="btn btn-info btn-lg" type="button" id="joinBtn">로그인</button>
 						<p>
@@ -249,11 +249,12 @@
 		$("#joinBtn").click(function() {
 
 			$.ajax({
-				url : "/login",
+				url : "/ismember",
 				type : "post",
 				data : {
 					"id" : $("#loginId").val(),
-					"pw" : $("#loginPw").val()
+					"pw" : $("#loginPw").val(),
+					"remember" : $("#remember").val()
 				}
 			}).done(function(result) {
 				
@@ -267,6 +268,10 @@
 						  imageAlt: 'Custom image',
 						  animation: false
 						})
+						
+						$loginForm.attr("action","/loginProcess").submit();
+						
+						
 						return;
 				}
 				 swal({

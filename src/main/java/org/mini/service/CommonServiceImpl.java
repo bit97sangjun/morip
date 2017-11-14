@@ -41,9 +41,11 @@ public class CommonServiceImpl implements CommonService {
 		System.out.println("pw" + pw);
 		System.out.println("디비" + mapper.loginTest(id));
 		
-		if(mapper.loginTest(id).equals(pw)) {
-			System.out.println("들어옴");
-			return true;
+		if(mapper.loginTest(id) != null) {
+			if(mapper.loginTest(id).equals(pw)) {
+				System.out.println("들어옴");
+				return true;
+			}
 		}
 		
 		return false;

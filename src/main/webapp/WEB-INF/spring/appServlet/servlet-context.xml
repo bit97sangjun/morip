@@ -30,11 +30,16 @@
 	</beans:bean>
 
 
-	<beans:bean id="login" class="org.mini.interceptor.LoginInterceptor"></beans:bean>
+	<beans:bean id="requirelogin" class="org.mini.interceptor.MemberOnlyInterceptor"></beans:bean>
+	<beans:bean id="login" class="org.mini.interceptor.RememberSetInterceptor"></beans:bean>
 
 	<interceptors>
 		<interceptor>
-			<mapping path="/login" />
+			<mapping path="/loginonly" />
+			<beans:ref bean="requirelogin" />
+		</interceptor>
+		<interceptor>
+			<mapping path="/loginProcess" />
 			<beans:ref bean="login" />
 		</interceptor>
 	</interceptors>
