@@ -153,20 +153,22 @@
 				<h2>회원가입</h2>
 			</div>
 			<div class="col-md-8 col-md-offset-2">
-				<form action="#" id="joinForm">
+				<form id="joinForm" method="post">
 					<div class="input-group">
 					<p>
 						<input class="btn btn-lg" name="id" id="id" type="text"
-							placeholder="아이디를 입력해주세요" required>
+							placeholder="아이디를 입력해주세요" required></p>
+							<div id="idCheck"></div>
 							<p>
 						<input class="btn btn-lg" name="pw" id="pw" type="password"
 							placeholder="비밀번호를 입력해주세요" required>
 							<p>
-						<input class="btn btn-lg" name="pwcheck" id="pwcheck" type="password"
+						<!-- <input class="btn btn-lg" name="pwcheck" id="pwcheck" type="password"
 							placeholder="비밀번호를 다시 입력해주세요" required>
-							<p>
+							<p> -->
 						<input class="btn btn-lg" name="nick" id="nick" type="text"
 							placeholder="닉네임을 입력해주세요" required>
+							<div id="nickCheck"></div>
 							<p>
 						<input class="btn btn-lg" name="email" id="email" type="email"
 							placeholder="이메일을 입력해주세요" required>
@@ -241,37 +243,61 @@
 	
 	<!-- Join -->
 	<script>
+		
 		var $joinForm = $("#joinForm");
 	
 		$("#joinBtn").click(function() {
 			
+			$joinForm.submit();
 			
 		});
 		
+		var msg = "";
+		var value = "";
+		
 		$("#id").on("keyup", function() {
+			value = $(this).val();
 			console.log("id 키업");
 			$.ajax({
 				url : "/dup",
-				data : {"id": $(this).val()},
-				type : "POST"
+				data : {"id": value, "type":1},
+				type : "POST",
 			}).done(function(result) {
+				if(result) {
+					$("#idCheck").html("사용할 수 없는 아이디 입니다.");
+					return;
+				}
+				
+				$("#idCheck").html("사용 가능한 아이디 입니다.");
+				
+				if(value == "") {
+					$("#idCheck").html("");
+				}
 				
 			});
-			console.log("아이디 : " + "${idcheck}");
-			console.dir("${model}");
+			
 		});
 		
 		$("#nick").on("keyup", function() {
+			value = $(this).val();
 			console.log("nick 키업");
 			$.ajax({
 				url : "/dup",
-				data : {"nick": $(this).val()},
+				data : {"nick": value, "type":2},
 				type : "POST"
 			}).done(function(result) {
+				if(result) {
+					$("#nickCheck").html("사용할 수 없는 닉네임 입니다.");
+					return;
+				}
 				
+				$("#nickCheck").html("사용 가능한 닉네임 입니다.");
+				
+				if(value == "") {
+					$("#nickCheck").html("");
+				}
 				
 			});
-			console.log("닉네임 : " + "${model.nickcheck}");
 		});
 		
 		

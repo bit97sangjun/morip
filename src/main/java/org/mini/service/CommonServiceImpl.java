@@ -1,5 +1,6 @@
 package org.mini.service;
 
+import org.mini.domain.Member;
 import org.mini.mappers.CommonMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,25 @@ public class CommonServiceImpl implements CommonService {
 		 Boolean result = mapper.nickcheck(nick) == 0 ? false : true;
 		
 		return result;
+	}
+
+	@Override
+	public void join(Member member) {
+		member.setIsadmin(1);
+		mapper.join(member);
+	}
+
+	@Override
+	public Boolean loginTest(String id, String pw) {
+		System.out.println("pw" + pw);
+		System.out.println("디비" + mapper.loginTest(id));
+		
+		if(mapper.loginTest(id).equals(pw)) {
+			System.out.println("들어옴");
+			return true;
+		}
+		
+		return false;
 	}
 
 }

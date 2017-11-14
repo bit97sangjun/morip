@@ -153,18 +153,20 @@
 				<h2>로그인</h2>
 			</div>
 			<div class="col-md-8 col-md-offset-2">
-				<form action="#">
+				<form method="post" id="loginForm">
 					<div class="input-group">
-					<p>
-						<input class="btn btn-lg" name="id" id="id" type="text"
-							placeholder="아이디를 입력해주세요" required>
-							<p>
-						<input class="btn btn-lg" name="pw" id="pw" type="password"
-							placeholder="비밀번호를 입력해주세요" required>
-							<p>
-						<button class="btn btn-info btn-lg" type="button">로그인</button>
-							<p>
-						아직 회원이 아니신가요? <a id="joinLink">회원가입</a>
+						<p>
+							<input class="btn btn-lg" name="id" id="loginId" type="text"
+								placeholder="아이디를 입력해주세요" required>
+						<p>
+							<input class="btn btn-lg" name="pw" id="loginPw" type="password"
+								placeholder="비밀번호를 입력해주세요" required>
+						<p>
+							<input type="checkbox" required> 로그인 유지
+						<p>
+							<button class="btn btn-info btn-lg" type="button" id="joinBtn">로그인</button>
+						<p>
+							아직 회원이 아니신가요? <a id="joinLink">회원가입</a>
 					</div>
 				</form>
 			</div>
@@ -183,6 +185,12 @@
 	<script src="<c:url value="/resources/js/jquery.isotope.js" />"></script>
 
 	<script src="<c:url value="/resources/js/jquery.scrollUp.min.js" />"></script>
+
+	<!-- alert -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.5/sweetalert2.all.min.js"></script>
+	<!-- Include a polyfill for ES6 Promises (optional) for IE11 and Android browser -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
 
 	<script type="text/javascript">
 		$('a[href^="#"]').on('click', function(event) {
@@ -211,7 +219,8 @@
 					// apply width to container manually, then trigger relayout
 				}
 			}).smartresize(); // trigger resize to set container width
-
+			
+			
 		});
 	</script>
 
@@ -229,11 +238,48 @@
 				scrollImg : true,
 			});
 		});
-		
+
 		$('#joinLink').click(function() {
 			location.href = '/join';
 		});
 		
+		
+		var $loginForm = $("#loginForm");
+
+		$("#joinBtn").click(function() {
+
+			$.ajax({
+				url : "/login",
+				type : "post",
+				data : {
+					"id" : $("#loginId").val(),
+					"pw" : $("#loginPw").val()
+				}
+			}).done(function(result) {
+				
+				if(result) {
+					swal({
+						  title: '로그인 성공~',
+						  /* text: 'Modal with a custom image.', */
+						  imageUrl: 'https://static.giantbomb.com/uploads/original/8/84561/2378923-goku_arrives_at_last_take_down_the_ginyu_force_cart_c.jpg',
+						  imageWidth: 160,
+						  imageHeight: 90,
+						  imageAlt: 'Custom image',
+						  animation: false
+						})
+						return;
+				}
+				 swal({
+					  title: '로그인 실패..!',
+					  imageUrl: 'https://static.giantbomb.com/uploads/original/8/84561/2378923-goku_arrives_at_last_take_down_the_ginyu_force_cart_c.jpg',
+					  imageWidth: 160,
+					  imageHeight: 90,
+					  imageAlt: 'Custom image',
+					  animation: false
+					})
+			});
+
+		});
 	</script>
 
 </body>

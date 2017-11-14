@@ -30,6 +30,16 @@
 	</beans:bean>
 
 
+	<beans:bean id="login" class="org.mini.interceptor.LoginInterceptor"></beans:bean>
+
+	<interceptors>
+		<interceptor>
+			<mapping path="/login" />
+			<beans:ref bean="login" />
+		</interceptor>
+	</interceptors>
+
+
 	<context:component-scan base-package="org.mini.web" />
 	<context:component-scan base-package="org.mini.movie.web" />
 	<context:component-scan base-package="org.mini.location.web" />
