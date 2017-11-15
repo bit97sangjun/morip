@@ -75,11 +75,15 @@ body {
 	padding: 0;
 }
 
-#profilebox {
-	width: 100px;
-	height: 100px;
+#profileBox {
+	width: 100%;
+	min-height: 200px;
 	border: 1px solid gray;
 	margin: 0px auto;
+}
+
+#profilePreview {
+	border-radius: 50%;	
 }
 
 #loginBtn {

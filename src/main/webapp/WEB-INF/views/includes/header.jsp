@@ -27,7 +27,7 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav" id="buttonBox">
+			<ul class="nav navbar-nav" id="buttonBox" ng-app="app" ng-controller="Ctrl">
 				<button id="loginBtn" class="btn btn-hero btn-lg menubtn"
 					role="button">로그인</button>
 			</ul>
@@ -46,6 +46,10 @@
 <script src="/resources/js/jquery.isotope.js"></script>
 
 <script src="/resources/js/jquery.scrollUp.min.js"></script>
+<!-- angular -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+
+<script src="https://rawgit.com/CrackerakiUA/ui-cropper/master/compile/unminified/ui-cropper.js"></script>
 
 <script type="text/javascript">
 	$(document).ready(
@@ -71,8 +75,11 @@
 				$('[data-toggle="popover"]').popover({ 
 				    html : true,
 				    content: function() {
-				      return '<div id="profilebox"></div><form id="profileForm" method="post"><input type="file"/></form>'
-				      +'<button id="logoutBtn" class="btn btn-hero btn-lg menubtn" role="button">로그아웃</button>';
+				      return '<div id="profileBox"><img id="profilePreview" ng-src="{{myCroppedImage}}"></img></div><form id="profileForm" enctype="multipart/form-data" method="post">'
+				      + '<div ng-hide="myCroppedImage"><input id="profileFile" type="file" accept="image/png, image/jpeg, image/gif" /></div>'
+				      + '<ui-cropper image="myImage" area-type="circle" chargement="Loading" result-image="myCroppedImage" canvas-scalemode="true"></ui-cropper>'
+				      + '<button>수정</button></form>'
+				      + '<button id="logoutBtn" class="btn btn-hero btn-lg menubtn" role="button">로그아웃</button>';
 				    }
 				  });
 
@@ -87,8 +94,7 @@
 		console.log("로그인한경우");
 		$("#buttonBox")
 				.html(
-						'<img title="프로필" data-placement="bottom" data-toggle="popover" id="mypage" src="/resources/images/profileimg.png" style="width:40px; height:40px"/>')
-		//$("#buttonBox").html('<button id="logoutBtn" class="btn btn-hero btn-lg menubtn" role="button">로그아웃</button>')
+						'<img title="프로필" data-placement="bottom" data-toggle="popover" id="mypage" src="/resources/images/profileimg/profileimg.png" style="width:40px; height:40px"/>')
 	}
 
 	$('#buttonBox').on("click", "*", function() {
@@ -101,8 +107,6 @@
 		case "mypage":
 			console.log("프로필눌림");
 			$('[data-toggle="popover"]').popover();
-			//location.href = '/logout';
-			//$("#buttonBox").html('<button id="loginBtn" class="btn btn-hero btn-lg" role="button">로그인</button>');
 			break;
 		case "logoutBtn": 
 			console.log("로그아웃눌림");
@@ -111,6 +115,52 @@
 			break;
 
 		}
-
+		
 	});
+	
+	angular.module('app', ['uiCropper'])
+	  .controller('Ctrl', function($scope) {
+	    $scope.myImage='';
+	    $scope.myCroppedImage='';
+
+	    var handleFileSelect=function(evt) {
+	    	console.log("그냥뭐");
+	    	console.dir(evt);
+	      var file=evt.files[0];
+	      var reader = new FileReader();
+	      reader.onload = function (evt) {
+	        $scope.$apply(function($scope){
+	          $scope.myImage=evt.target.result;
+	        });
+	      };
+	      reader.readAsDataURL(file);
+	    };
+// 	      angular.element(document.querySelector('#profileFile')).on('change',handleFileSelect);
+		$("#buttonBox").on("change", "#profileFile", function () {
+			console.log("change");
+			handleFileSelect();
+		});
+	  });
+	
+	
+	$("#buttonBox").on("change", "#profileFile", function () {
+// 		readURL($(this)[0]);
+		console.log("change");
+	});
+	
+	var profileForm = $("#profileForm");
+	
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#profilePreview')
+                    .attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
 </script>
