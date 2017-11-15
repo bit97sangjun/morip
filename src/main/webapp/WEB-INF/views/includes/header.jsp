@@ -126,7 +126,7 @@
 	    var handleFileSelect=function(evt) {
 	    	console.log("그냥뭐");
 	    	console.dir(evt);
-	      var file=evt.files[0];
+	      var file=evt.currentTarget.files[0];
 	      var reader = new FileReader();
 	      reader.onload = function (evt) {
 	        $scope.$apply(function($scope){
@@ -135,11 +135,7 @@
 	      };
 	      reader.readAsDataURL(file);
 	    };
-// 	      angular.element(document.querySelector('#profileFile')).on('change',handleFileSelect);
-		$("#buttonBox").on("change", "#profileFile", function () {
-			console.log("change");
-			handleFileSelect();
-		});
+	      angular.element(document.querySelector('#buttonBox')).on('change', "#profileFile", handleFileSelect);
 	  });
 	
 	
