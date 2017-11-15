@@ -8,7 +8,7 @@
 <select id="readreview">
 	
 	select c.cno ,c.ccontent, c.cupdate ,ci.cimg
-	from report r , comment c , comment ci
+	from tb_report r , tb_comment c , tb_commentimg ci
 	where r.rno = #{c.rno} and c.cno = #{ci.cno}
 	
 </select>
@@ -16,13 +16,13 @@
 <select id="list">
 
 	select r.rno , r.rtitle , r.rcontent , r.rregdate ,ri.rimg
-	from member m , report r , reportimg ri
+	from tb_member m , tb_report r , tb_reportimg ri
 	where m.id = #{r.id} and r.rno = #{ri.rno}
 	
 </select>
 
 <insert id="place">
-	insert into report(pname , addr) value(#{pname},#{addr})
+	insert into tb_report(pname , addr) value(#{pname},#{addr})
 </insert>
 
 </mapper>
