@@ -71,7 +71,7 @@
 				$('[data-toggle="popover"]').popover({ 
 				    html : true,
 				    content: function() {
-				      return '<div>사진미리보기</div><input type="file"/>'
+				      return '<div id="profilebox"></div><form id="profileForm" method="post"><input type="file"/></form>'
 				      +'<button id="logoutBtn" class="btn btn-hero btn-lg menubtn" role="button">로그아웃</button>';
 				    }
 				  });

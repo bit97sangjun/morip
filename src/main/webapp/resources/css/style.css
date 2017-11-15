@@ -75,6 +75,13 @@ body {
 	padding: 0;
 }
 
+#profilebox {
+	width: 100px;
+	height: 100px;
+	border: 1px solid gray;
+	margin: 0px auto;
+}
+
 #loginBtn {
 	background: #42a5f6;
 	font-size: 20px;
@@ -89,6 +96,7 @@ body {
 	padding: 10px 20px;
 	outline: none;
 	color: white;
+	margin: 0px auto;
 }
 
 #mainCarousel .carousel-indicators {
