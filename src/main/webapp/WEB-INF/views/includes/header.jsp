@@ -3,12 +3,9 @@
 
 <!-- Popover -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <!-- Navigation -->
 <nav class="navbar navbar-default navbar-fixed-top shrink"
@@ -75,20 +72,25 @@
 				$('[data-toggle="popover"]').popover({ 
 				    html : true,
 				    content: function() {
-				      return '<div id="profileBox"><img id="profilePreview" ng-src="{{myCroppedImage}}"></img></div><form id="profileForm" enctype="multipart/form-data" method="post">'
+				    	return '<div ng-app="app" ng-controller="Ctrl">'
+				        +'<div><input type="file" id="fileInput" /></div>'
+				        + '<div><img ng-src="{{myCroppedImage}}" /></div>'
+				        + '<ui-cropper image="myImage" area-type="circle" chargement="Loading" result-image="myCroppedImage" canvas-scalemode="true"></ui-cropper>'
+				    +'</div>';
+				      /* return '<div id="profileBox"><img id="profilePreview" ng-src="{{myCroppedImage}}"></img></div><form id="profileForm" enctype="multipart/form-data" method="post">'
 				      + '<div ng-hide="myCroppedImage"><input id="profileFile" type="file" accept="image/png, image/jpeg, image/gif" /></div>'
 				      + '<ui-cropper image="myImage" area-type="circle" chargement="Loading" result-image="myCroppedImage" canvas-scalemode="true"></ui-cropper>'
 				      + '<button>수정</button></form>'
-				      + '<button id="logoutBtn" class="btn btn-hero btn-lg menubtn" role="button">로그아웃</button>';
+				      + '<button id="logoutBtn" class="btn btn-hero btn-lg menubtn" role="button">로그아웃</button>'; */
 				    }
 				  });
 
 			});
+	
 	$('#loginBtn').click(function() {
 		location.href = '/login';
 	});
 
-	console.log("${login}");
 
 	if ("${login}" != "") {
 		console.log("로그인한경우");
@@ -97,6 +99,8 @@
 						'<img title="프로필" data-placement="bottom" data-toggle="popover" id="mypage" src="/resources/images/profileimg/profileimg.png" style="width:40px; height:40px"/>')
 	}
 
+	
+	
 	$('#buttonBox').on("click", "*", function() {
 		
 		switch ($(this)[0].id) {
@@ -107,6 +111,10 @@
 		case "mypage":
 			console.log("프로필눌림");
 			$('[data-toggle="popover"]').popover();
+			
+			
+			
+			
 			break;
 		case "logoutBtn": 
 			console.log("로그아웃눌림");
@@ -119,25 +127,22 @@
 	});
 	
 	angular.module('app', ['uiCropper'])
-	  .controller('Ctrl', function($scope) {
-	    	console.dir($scope);
-	    $scope.myImage='';
-	    $scope.myCroppedImage='';
+    .controller('Ctrl', function($scope) {
+        $scope.myImage='';
+        $scope.myCroppedImage='';
 
-	    var handleFileSelect=function(evt) {
-	    	console.log("그냥뭐");
-	      var file=evt.currentTarget.files[0];
-	      var reader = new FileReader();
-	      reader.onload = function (evt) {
-	        $scope.$apply(function($scope){
-	    	console.dir($scope);
-	          $scope.myImage=evt.target.result;
-	        });
-	      };
-	      reader.readAsDataURL(file);
-	    };
-	      angular.element(document.querySelector('#buttonBox')).on('change', "#profileFile", handleFileSelect);
-	  });
+        var handleFileSelect=function(evt) {
+            var file=evt.currentTarget.files[0];
+            var reader = new FileReader();
+            reader.onload = function (evt) {
+                $scope.$apply(function($scope){
+                    $scope.myImage=evt.target.result;
+                });
+            };
+            reader.readAsDataURL(file);
+        };
+        angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
+    });
 	
 	
 	$("#buttonBox").on("change", "#profileFile", function () {
