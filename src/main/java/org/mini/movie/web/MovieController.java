@@ -56,15 +56,7 @@ public class MovieController {
 	//@PostMapping("/movieread")
 	@RequestMapping(value="/movieread")
 	public @ResponseBody List<Movie> movieread(String keyword) {
-	
-		//ModelAndView mav = new ModelAndView();
-		log.info("keyword" +keyword);
-		log.info("" + service.getMovieread(keyword));
-		//model.addAttribute("readData", service.getMovieread(keyword));
-		//mav.(service.getMovieread(keyword));
-		//mav.setViewName("jsonView");
-		
-		//return  "redirect:/movie/insert?keyword=keyword";
+
 		return service.getMovieread(keyword);
 	}
 }
