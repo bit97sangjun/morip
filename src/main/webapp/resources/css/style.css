@@ -75,11 +75,20 @@ body {
 	padding: 0;
 }
 
-.menubtn {
+#loginBtn {
 	background: #42a5f6;
 	font-size: 20px;
 	padding: 10px 20px;
 	outline: none;
+	color: white;
+}
+
+#logoutBtn {
+	background: #ff4842;
+	font-size: 20px;
+	padding: 10px 20px;
+	outline: none;
+	color: white;
 }
 
 #mainCarousel .carousel-indicators {
