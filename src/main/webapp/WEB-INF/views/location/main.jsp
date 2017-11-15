@@ -466,7 +466,8 @@
 								var marker = new daum.maps.Marker({
 									map : map,
 									position : coords,
-									pno : "${place.pno}"
+									pno : "${place.pno}",
+									image : normalImage
 								});
 
 								var gapX = (MARKER_WIDTH + SPRITE_GAP), // 스프라이트 이미지에서 마커로 사용할 이미지 X좌표 간격 값
@@ -498,7 +499,6 @@
 			}
 
 			</c:forEach>
-
 		}
 
 		</c:forEach>
@@ -519,18 +519,18 @@
 		// 마커를 생성하고 지도 위에 표시하고, 마커에 mouseover, mouseout, click 이벤트를 등록하는 함수입니다
 		function addMarker(position, normalOrigin, overOrigin, clickOrigin, pno) {
 
-			// 			var imageSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다    
-			// 		    imageSize = new daum.maps.Size(64, 69), // 마커이미지의 크기입니다
-			// 		    imageOprion = {offset: new daum.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-
-			// 			// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-			// 			var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOprion);
-
 			// 기본 마커이미지, 오버 마커이미지, 클릭 마커이미지를 생성합니다
 			var normalImage = createMarkerImage(markerSize, markerOffset,
 					normalOrigin), overImage = createMarkerImage(
 					overMarkerSize, overMarkerOffset, overOrigin), clickImage = createMarkerImage(
 					markerSize, markerOffset, clickOrigin);
+			
+			var imageSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다    
+		    imageSize = new daum.maps.Size(44, 45), // 마커이미지의 크기입니다
+		    imageOprion = {offset: new daum.maps.Point(20, 45)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+	
+			// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+			var clickImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOprion);
 
 			// 마커를 생성하고 이미지는 기본 마커 이미지를 사용합니다
 			var marker = new daum.maps.Marker({
@@ -574,12 +574,11 @@
 
 					filter : selector,
 				});
-				return false;
-
+				
+				
 				// 클릭된 마커가 없고, click 마커가 클릭된 마커가 아니면
 				// 마커의 이미지를 클릭 이미지로 변경합니다
 				if (!selectedMarker || selectedMarker !== marker) {
-
 					// 클릭된 마커 객체가 null이 아니면
 					// 클릭된 마커의 이미지를 기본 이미지로 변경하고
 					!!selectedMarker
