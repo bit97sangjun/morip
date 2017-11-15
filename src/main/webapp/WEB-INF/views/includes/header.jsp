@@ -120,16 +120,17 @@
 	
 	angular.module('app', ['uiCropper'])
 	  .controller('Ctrl', function($scope) {
+	    	console.dir($scope);
 	    $scope.myImage='';
 	    $scope.myCroppedImage='';
 
 	    var handleFileSelect=function(evt) {
 	    	console.log("그냥뭐");
-	    	console.dir(evt);
 	      var file=evt.currentTarget.files[0];
 	      var reader = new FileReader();
 	      reader.onload = function (evt) {
 	        $scope.$apply(function($scope){
+	    	console.dir($scope);
 	          $scope.myImage=evt.target.result;
 	        });
 	      };
