@@ -76,13 +76,15 @@ body {
 }
 
 #profileBox {
-	width: 100%;
-	min-height: 200px;
+	width: 150px;
+	min-height: 150px;
 	border: 1px solid gray;
 	margin: 0px auto;
 }
 
 #profilePreview {
+	width: 150px;
+	height: 150px;
 	border-radius: 50%;	
 }
 

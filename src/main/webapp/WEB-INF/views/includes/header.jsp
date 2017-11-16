@@ -43,10 +43,6 @@
 <script src="/resources/js/jquery.isotope.js"></script>
 
 <script src="/resources/js/jquery.scrollUp.min.js"></script>
-<!-- angular -->
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-
-<script src="https://rawgit.com/CrackerakiUA/ui-cropper/master/compile/unminified/ui-cropper.js"></script>
 
 <script type="text/javascript">
 	$(document).ready(
@@ -72,16 +68,15 @@
 				$('[data-toggle="popover"]').popover({ 
 				    html : true,
 				    content: function() {
-				    	return '<div ng-app="app" ng-controller="Ctrl">'
-				        +'<div><input type="file" id="fileInput" /></div>'
-				        + '<div><img ng-src="{{myCroppedImage}}" /></div>'
-				        + '<ui-cropper image="myImage" area-type="circle" chargement="Loading" result-image="myCroppedImage" canvas-scalemode="true"></ui-cropper>'
-				    +'</div>';
-				      /* return '<div id="profileBox"><img id="profilePreview" ng-src="{{myCroppedImage}}"></img></div><form id="profileForm" enctype="multipart/form-data" method="post">'
-				      + '<div ng-hide="myCroppedImage"><input id="profileFile" type="file" accept="image/png, image/jpeg, image/gif" /></div>'
-				      + '<ui-cropper image="myImage" area-type="circle" chargement="Loading" result-image="myCroppedImage" canvas-scalemode="true"></ui-cropper>'
-				      + '<button>수정</button></form>'
-				      + '<button id="logoutBtn" class="btn btn-hero btn-lg menubtn" role="button">로그아웃</button>'; */
+				      return '<div id="profileBox">'
+				      +'<img id="profilePreview"/>'
+				      +'</div>'
+				      +'<form id="profileForm" enctype="multipart/form-data" method="post">'
+				      + '<div><input id="profileFile" type="file" accept="image/*" /></div>'
+				      + '<button id="resetBtn" type="button">기본 이미지로 변경</button>'
+				      + '<button id="updateBtn" type="button">프로필 이미지로 설정</button>'
+				      +'</form>'
+				      + '<button id="logoutBtn" class="btn btn-hero btn-lg menubtn" role="button">로그아웃</button>';
 				    }
 				  });
 
@@ -94,12 +89,9 @@
 
 	if ("${login}" != "") {
 		console.log("로그인한경우");
-		$("#buttonBox")
-				.html(
-						'<img title="프로필" data-placement="bottom" data-toggle="popover" id="mypage" src="/resources/images/profileimg/profileimg.png" style="width:40px; height:40px"/>')
+		$("#buttonBox").html('<img title="프로필" data-placement="bottom" data-toggle="popover" id="mypage" src="/resources/images/profileimg/profileimg.png" style="width:40px; height:40px"/>');
 	}
 
-	
 	
 	$('#buttonBox').on("click", "*", function() {
 		
@@ -111,42 +103,26 @@
 		case "mypage":
 			console.log("프로필눌림");
 			$('[data-toggle="popover"]').popover();
-			
-			
-			
-			
 			break;
 		case "logoutBtn": 
 			console.log("로그아웃눌림");
 			location.href = '/logout';
 			$("#buttonBox").html('<button id="loginBtn" class="btn btn-hero btn-lg" role="button">로그인</button>');
 			break;
-
+		case "resetBtn":
+			console.log("리셋눌림");
+			$("#profilePreview").attr('src','/resources/images/profileimg/profileimg.png');
+			break;
+		case "updateBtn":
+			console.log("수정눌림");
+			break;
 		}
 		
 	});
 	
-	angular.module('app', ['uiCropper'])
-    .controller('Ctrl', function($scope) {
-        $scope.myImage='';
-        $scope.myCroppedImage='';
-
-        var handleFileSelect=function(evt) {
-            var file=evt.currentTarget.files[0];
-            var reader = new FileReader();
-            reader.onload = function (evt) {
-                $scope.$apply(function($scope){
-                    $scope.myImage=evt.target.result;
-                });
-            };
-            reader.readAsDataURL(file);
-        };
-        angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
-    });
-	
 	
 	$("#buttonBox").on("change", "#profileFile", function () {
-// 		readURL($(this)[0]);
+ 		readURL($(this)[0]);
 		console.log("change");
 	});
 	
@@ -157,8 +133,7 @@
             var reader = new FileReader();
 
             reader.onload = function (e) {
-                $('#profilePreview')
-                    .attr('src', e.target.result);
+                $('#profilePreview').attr('src', e.target.result);
             };
 
             reader.readAsDataURL(input.files[0]);
