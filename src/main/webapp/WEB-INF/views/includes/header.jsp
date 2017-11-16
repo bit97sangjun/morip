@@ -33,7 +33,7 @@
 	</div>
 	<!-- /.container -->
 </nav>
-<div style="height: 111px"></div>
+<div style="height: 84px"></div>
 <!-- Navbar Change on Scroll -->
 <!-- jQuery -->
 <script src="/resources/js/jquery.js"></script>
