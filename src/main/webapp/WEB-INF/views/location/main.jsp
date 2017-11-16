@@ -146,13 +146,76 @@
 	min-width: 100%;
 }
 
-</style>
+.zoneName {
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  display: block;
+  max-width: 225px;
+  margin-left: 47%;
+}
 
+.button {
+  float: left;
+  position: relative;
+  bottom: -65px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-10deg);
+  color: #e55643;
+  text-transform: uppercase;
+  opacity: 0;
+  visibility: hidden;
+  cursor: pointer;
+}
+
+.button span {
+  transform: skew(-10deg);
+  display: block;
+  float: left;
+  text-shadow: #bfbfc1 1px 1px, #bfbfc1 2px 2px, #bfbfc1 3px 3px, #bfbfc1 4px 4px;
+}
+
+h1 {
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 42px;
+  margin: 0;
+  line-height: 47px;
+  letter-spacing: 2px;
+}
+
+.title {
+  transform: translateX(-50%) rotate(-10deg);
+  display: block;
+  float: left;
+  left: 50%;
+  position: relative;
+}
+.title span {
+  transform: skew(-10deg);
+  display: block;
+  float: left;
+  text-shadow: #533d4a 1px 1px, #533d4a 2px 2px, #533d4a 3px 3px, #533d4a 4px 4px, #533d4a 5px 5px, #533d4a 6px 6px;
+  min-width: 10px;
+  min-height: 10px;
+  position: relative;
+}
+
+.title:nth-child(1) {
+  color: #ffd587;
+}
+
+</style>
 	<div id="about">
 		<div class="container">
-			<div class="text">
-				<h2>${zone.zname}</h2>
-			</div>
+			<section class="zoneName">
+			  <h1>
+			    <span class="title">${zone.zname}</span>
+			  </h1>
+			  
+			  <div class="button">restart</div>
+			</section>
+			
 			<!-- 여기부터 svg  -->
 			<div id="france-map">
 
@@ -279,6 +342,11 @@
 
 	<!-- Large Map -->
 	<script src="<c:url value="/resources/js/largemap.js" />"></script>
+	
+	<!--  -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lettering.js/0.7.0/jquery.lettering.min.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
 
 	<script type="text/javascript">
 		$('a[href^="#"]').on('click', function(event) {
@@ -659,7 +727,36 @@
 			location.href = '/movie/list?search=' + $(this).attr("data-mtitle");
 		});
 	</script>
+	
+	<script>
+		$(document).ready(function() {
+			$(".title").lettering();
+			$(".button").lettering();
+		});
 
+		$(document).ready(function() {
+			animation();
+		}, 1000);
+
+		$('.button').click(function() {
+			animation();
+		});
+
+		function animation() {
+			var title1 = new TimelineMax();
+
+			title1.staggerFromTo(".title span", 0.5, {
+				ease : Back.easeOut.config(1.7),
+				opacity : 0,
+				bottom : -80
+			}, {
+				ease : Back.easeOut.config(1.7),
+				opacity : 1,
+				bottom : 0
+			}, 0.05);
+
+		}
+	</script>
 </body>
 
 </html>

@@ -112,7 +112,7 @@
     @media screen and (max-width: 1280px) {
         #france-map svg {
             height: 100%;
-            margin-top: 50px;
+            margin-top: 10px;
         }
     }
     #france-map svg path {
