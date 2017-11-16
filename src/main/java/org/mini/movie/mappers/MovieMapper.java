@@ -22,7 +22,7 @@ public interface MovieMapper extends CRUDMapper<Report, Integer> {
 	public List<Report> getAllData();
 	
 
-	@Insert("insert into tb_report (rno, rimg) values ( #{tno}, #{fimeName})")
+	@Insert("insert into tb_reportimg (rno, rimg) values ( #{rno}, #{fimeName})")
 	public void addAttach(@Param("rno") Long rno, 
 			@Param("fileName") String fileName);
 

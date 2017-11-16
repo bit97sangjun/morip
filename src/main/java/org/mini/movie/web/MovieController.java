@@ -48,6 +48,11 @@ public class MovieController {
 	}
 	
 	@PostMapping("/insert")
+	public void registerForm() {
+		
+	}
+	
+	@PostMapping("/insert")
 	public String registerPost(Report report, Criteria cri, RedirectAttributes rttr) {
 
 		log.info("" + report);

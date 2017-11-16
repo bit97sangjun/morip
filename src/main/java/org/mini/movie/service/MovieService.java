@@ -9,15 +9,23 @@ import org.mini.dto.Criteria;
 
 public interface MovieService {
 
+
+
 	public void register(Report report);
+	
+	
 	public Report get(int rno);
+	
 	public void modify(Report report);
+	
 	public void remove(int rno);
 	
 	public List<ReportList> getList(Criteria cri, String search);
+	
 	public int getCount(Criteria cri, String search);
+	
 	public List<Movie> getMovieread(String keyword);
 	
-	//test ---------------------------------
-	public List<Report> getAllData();	
+
+	void register(Report report, String[] files, Long rno, String fileName);
 }
