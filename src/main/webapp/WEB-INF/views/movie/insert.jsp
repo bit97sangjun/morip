@@ -650,6 +650,8 @@ white-space:nowrap;
 
             infowindow.setContent(content);
             infowindow.open(map, marker);
+            console.log(content);
+            console.log(title);
         }
         
         // 검색결과 목록의 자식 Element를 제거하는 함수입니다
