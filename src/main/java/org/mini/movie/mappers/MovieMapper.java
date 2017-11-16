@@ -7,15 +7,19 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.mini.domain.Movie;
 import org.mini.domain.Report;
+import org.mini.domain.ReportList;
 import org.mini.dto.Criteria;
 
 public interface MovieMapper extends CRUDMapper<Report, Integer> {
 
-	@Select("select * from tb_report order by rno desc limit #{skip}, #{size}")
-	public List<Report> getList(Criteria cri);
+	//@Select("select * from tb_report order by rno desc limit #{skip}, #{size}")
+	public List<ReportList> getList(@Param("cri")Criteria cri, @Param("searchkeyword")String searchKeyword);
 	
-	@Select("select count(rno) from tb_report ")
-	public int getTotal(Criteria cri);
+	//@Select("select count(rno) from tb_report")
+	public int getTotal(@Param("cri")Criteria cri, @Param("searchkeyword")String searchKeyword);
+
+	@Select("select * from tb_report")
+	public List<Report> getAllData();
 	
 
 	@Insert("insert into tb_report (rno, rimg) values ( #{tno}, #{fimeName})")

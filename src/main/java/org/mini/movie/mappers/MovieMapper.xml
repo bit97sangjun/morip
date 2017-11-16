@@ -25,5 +25,38 @@
 	insert into tb_report(pname , addr) value(#{pname},#{addr})
 </insert>
 
+<select id="getList" resultType="reportlist">
+	
+	<choose>
+		<when test="searchkeyword != ''">
+			select rimg, r.*
+				from
+				(select rno, rtitle, rcontent  
+						from 
+		  						(select mcode from tb_movie where mtitle like "%'#{searchkeyword}'%" ) movie left outer join tb_report report on movie.mcode = report.mcode
+				) r inner join tb_reportimg img on r.rno = img.rno group by img.rno
+		</when>
+		<otherwise>
+			select r.* , ri.rimg
+				from tb_report r , tb_reportimg ri
+			where r.rno = ri.rno
+			group by ri.rno
+		</otherwise>
+	</choose> 
+	order by r.rno desc limit #{cri.skip}, #{cri.size}	
+</select>
+
+<select id="getTotal" resultType="int">
+	select count(rno)
+	<choose>
+		<when test="searchkeyword != ''">
+			(select mcode from tb_movie where mtitle like CONCAT('%', #{searchkeyword}, '%') ) movie left outer join tb_report report on movie.mcode = report.mcode;
+		</when>
+		<otherwise>
+			from tb_report;
+		</otherwise>
+	</choose>
+</select>
+
 </mapper>
   

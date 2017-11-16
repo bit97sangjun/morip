@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -29,10 +30,15 @@ public class MovieController {
 	@Autowired
 	private CommentService cservice;
 	
-	@GetMapping("/list")
-	public void list(Criteria cri, Model model) {
-		model.addAttribute("list", service.getList(cri));
-		model.addAttribute("total", service.getCount(cri));
+	//@GetMapping("/list")
+	@RequestMapping(value="/list", produces = "application/text; charset=utf8")
+	public void list(Criteria cri, Model model, @RequestParam(value="search", defaultValue="")String search) {
+		log.info("keyword : " + search);
+		log.info("list : " + service.getList(cri, search));
+		log.info("count : " + service.getCount(cri, search));
+		model.addAttribute("list", service.getList(cri, search));
+		model.addAttribute("total", service.getCount(cri, search));
+		model.addAttribute("skeyword", search);
 	}
 	
 	@GetMapping("/insert")
@@ -58,5 +64,12 @@ public class MovieController {
 	public @ResponseBody List<Movie> movieread(String keyword) {
 
 		return service.getMovieread(keyword);
+	}
+	
+	@RequestMapping(value="/test")
+	public 	@ResponseBody List<Report> test() {
+		//model.addAttribute("testdata", );
+		
+		return service.getAllData();
 	}
 }
