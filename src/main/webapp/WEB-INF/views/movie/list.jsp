@@ -139,7 +139,7 @@
     		</div>
     		<div class="col-sm-6" align="right">
     			<form id=searchForm method="get" action='/movie/list'>
-    				<input type="text" name="search" <c:if test="${!empty skeyword}">val="${skeyword}"</c:if>>
+    				<input type="text" name="search" <c:if test="${!empty skeyword}">value="${skeyword}"</c:if>>
     				
     				<button id="sBtn">검색</button>
     			</form>
@@ -187,20 +187,17 @@
                               
    	 		<!-- </div>/#myCarousel -->
     	</div>
-    	<button id="testBtn">test</button>
+    	<!-- <button id="testBtn">test</button> -->
     </div>
     
     
-	<div class="footer">
-  		<div class="container">
-   			<p class="text-muted">All Rights Reserved <a href="http://freedesignz.com">Free Designz</a></p>
-  		</div>
-	</div>
+	<c:import url="../includes/footer.jsp"></c:import>
 
 	<form id="actionForm" method="get" action='/movie/list'>
     	<input type="hidden" name="page" value="${criteria.page}">
     	<input type="hidden" name="rno">
     	<input type="hidden" name="size" value="${criteria.size}">
+    	<input type="hidden" name="search">
     </form>
 
     <!-- jQuery -->
@@ -301,6 +298,7 @@
     		//$(this).attr("class").val($(this).attr("class") + " disabled");
     		
     		actionForm.find("input[name='page']").val(pageNum);
+    		actionForm.find("input[name='search']").val(searchForm.find("input[name='search']").val());
     		actionForm.submit();
     		
     	});
