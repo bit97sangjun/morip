@@ -28,7 +28,7 @@
 </head>
 
 <body>
-    
+    <c:import url="../includes/header.jsp"></c:import>
     <style>
     
     	.navbar-default {
@@ -128,18 +128,22 @@
 			margin-top: 25px;
 		}
 
-
-    
     </style>
-
-	<c:import url="../includes/header.jsp"></c:import>
-
     
     <div id="blog">
     	<div class="container" style="border: 1px solid black">
     		<h2>Latest <span>Blog</span> Posts</h2>
     		<hr>
-    		<a href="/movie/insert">글쓰기</a>
+    		<div class="col-sm-6">
+    			<a href="/movie/insert">글쓰기</a>
+    		</div>
+    		<div class="col-sm-6" align="right">
+    			<form id=searchForm method="get" action='/movie/list'>
+    				<input type="text" name="search" <c:if test="${!empty skeyword}">val="${skeyword}"</c:if>>
+    				
+    				<button id="sBtn">검색</button>
+    			</form>
+    		</div>
     		<div>
     			<ul class="thumbnails">
 					<c:forEach items="${list}" var="report">
@@ -150,12 +154,12 @@
 								</div>
 								<div class="caption">
 									<h4>
-										<c:out value="${report.id}"></c:out>
+										<c:out value="${report.rtitle}"></c:out>
 									</h4>
 									<p>
 										<c:out value="${report.rcontent}"></c:out>
 									</p>
-									<a class="btn btn-mini" id="detail" href="#">Read More <i
+									<a class="btn btn-mini" href="#">Read More <i
 										class="fa fa-angle-double-right" aria-hidden="true"></i></a>
 								</div>
 							</div>
@@ -183,6 +187,7 @@
                               
    	 		<!-- </div>/#myCarousel -->
     	</div>
+    	<button id="testBtn">test</button>
     </div>
     
     
@@ -266,10 +271,11 @@
     	
     	var actionForm = $("#actionForm");
 		var result = '${result}';
-    	var pageResult = makePage({page:${criteria.page}, total:${total}, size:${criteria.size}});
-    	console.log("page : " + ${criteria.page});
+    	var pageResult = makePage({page:${criteria.page}, total:${total}, size:${criteria.size}, blocksize:${criteria.blockSize}});
+    	var searchForm = $("#searchForm");
+    	/* console.log("page : " + ${criteria.page});
     	console.log("total : " + ${total});
-    	console.log("size : " + ${criteria.size});
+    	console.log("size : " + ${criteria.size}); */
     	$(".target").on("click", function(event) {
     		
     		event.preventDefault();
@@ -290,11 +296,19 @@
     		
     		var pageNum = $(this).attr("href");
     		
+    		//alert($(this).attr("class") + " disabled");
     		//alert("PAGE: " + pageNum);
+    		//$(this).attr("class").val($(this).attr("class") + " disabled");
     		
     		actionForm.find("input[name='page']").val(pageNum);
     		actionForm.submit();
     		
+    	});
+    	
+    	$("#sBtn").on("click", function(event) {
+    		event.prevebtDefault();
+    		
+    		searchForm.submit();
     	});
     	
     	var str = "";
@@ -306,6 +320,7 @@
     	for(var i = pageResult.first; i <= pageResult.last; i++) {
     		str += "<li class='page-item " + (pageResult.page == i ? "active" : "") + "' ><a class='page-link' href=" + i + ">" + i + "</a></li>";
     	}
+    	console.log($(".page-item:active > a"));
     	
     	if(pageResult.next) {
     		str += "<li class='page-item'><a class='page-link' href=" + (parseInt(pageResult.last) + 1) + ">Next</a></li>";
@@ -313,11 +328,37 @@
     	
     	$(".mypage").html(str);
     	
-    	console.log(pageResult);
+    	//console.log(pageResult);
     	
     	if(result === 'success') {
     		alert("등록성공!!!");
     	}
+    });
+    
+    $("#testBtn").on("click", function() {
+    	$.ajax({
+    		url: "/movie/test",
+    		type:"post",
+    		dataType: "json",
+    		success: function (data) {
+    			if(data){
+    				for(var i = 0; i < data.length; i++){
+    					//console.log(data[i].rtitle);
+        				 $(".pager")
+        				.append("<span id='" + data[i].rtitle + "'>" + data[i].rtitle + "</span><br>")
+        				.on("click", "#" + data[i].rtitle, function() {
+        						var $this = $(this);
+        						//alert($("#" + data[i].rtitle) + "클릭됨");
+        						//alert($this);
+        						console.log($this.html());
+        				});
+        			}
+    			}
+    			
+    		}
+    	});
+    	
+    	//console.log(${testdata});
     });
     </script>
 </body>

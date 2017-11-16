@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.mini.domain.Movie;
 import org.mini.domain.Report;
+import org.mini.domain.ReportList;
 import org.mini.dto.Criteria;
 import org.mini.movie.mappers.MovieMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,21 +44,29 @@ public class MoiveServiceImpl implements MovieService {
 	}
 	
 	@Override
-	public List<Report> getList(Criteria cri) {
+	public List<ReportList> getList(Criteria cri, String str) {
 		// TODO Auto-generated method stub
-		return mapper.getList(cri);
+		log.info("service str : " + str);
+		return mapper.getList(cri, str);
 	}
 
 	@Override
-	public int getCount(Criteria cri) {
+	public int getCount(Criteria cri, String str) {
 		// TODO Auto-generated method stub
-		return mapper.getTotal(cri);
+		return mapper.getTotal(cri, str);
 	}
 
 	@Override
 	public List<Movie> getMovieread(String keyword) {
 		log.info("keyword" +keyword);
 		return mapper.getMovieread(keyword);
+	}
+
+	//test ----------------------------------
+	@Override
+	public List<Report> getAllData() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

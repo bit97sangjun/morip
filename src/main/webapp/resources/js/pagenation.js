@@ -20,10 +20,10 @@
 }*/
 function makePage(param){
 
-    var last = Math.ceil(param.page/4.0) * 4;
-    var first = last - 3;
+    var last = Math.ceil(param.page / (param.blocksize * 1.0)) * param.blocksize;
+    var first = last - (param.blocksize - 1);
     var prev = false, next = true;
-    console.log("first : " + first);
+    //console.log("first : " + first);
     if(param.total <= last * param.size  ){
         last = Math.ceil(param.total/ (param.size * 1.0));
         next = false;
