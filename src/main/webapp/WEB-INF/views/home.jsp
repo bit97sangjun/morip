@@ -807,7 +807,7 @@ section.p8 a:hover .line {
 		      </a>
 		    </section>
 			<section class="p3">
-				<a href="#" data-cont="Location" style="text-decoration:none">Location</a>
+				<a href="/location/main" data-cont="Location" style="text-decoration:none">Location</a>
 			</section>
 <!-- 			<section class="apresenteichan"> -->
 <!-- 				<a href="location/main" data-bf="Moive" data-af="with less">  -->

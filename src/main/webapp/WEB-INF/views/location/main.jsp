@@ -241,7 +241,7 @@
 		<div class="portfolioContainer">
 
 			<c:forEach items="${mList}" var="mlist">
-				<div class="Portfolio-box" data-mcode="${mlist.mcode}">
+				<div class="Portfolio-box" data-mcode="${mlist.mcode}" data-mtitle="${mlist.mtitle}">
 					<a href="#"><img
 						src="<c:url value="/resources/images/movieimg/${mlist.mimg}" />"
 						alt=""></a>
@@ -640,14 +640,6 @@
 			var prefix = "region_";
 			var zcode = parseInt(str.substring(prefix.length));
 
-			// 			$.ajax({
-			// 				url : "/location/main",
-			// 				type : "GET",
-			// 				data : {
-			// 					"zcode" : zcode
-			// 				}
-			// 			});
-
 			location.href = '/location/main?zcode=' + zcode;
 		});
 
@@ -662,6 +654,10 @@
 		// // 				marker.setImage(overImage);
 		// // 			}
 		// 		});
+		
+		$(".portfolioContainer").on("click", "div", function () {
+			location.href = '/movie/list?search=' + $(this).attr("data-mtitle");
+		});
 	</script>
 
 </body>

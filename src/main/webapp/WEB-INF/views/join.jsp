@@ -145,6 +145,7 @@
 	min-height: 700px;
 	min-width: 100%;
 }
+
 </style>
 
 	<div id="login">
@@ -158,17 +159,21 @@
 					<p>
 						<input class="btn btn-lg" name="id" id="id" type="text"
 							placeholder="아이디를 입력해주세요" required></p>
-							<div id="idCheck"></div>
+							<p>
+							<div id="idCheck"></div></p>
 							<p>
 						<input class="btn btn-lg" name="pw" id="pw" type="password"
 							placeholder="비밀번호를 입력해주세요" required>
 							<p>
-						<!-- <input class="btn btn-lg" name="pwcheck" id="pwcheck" type="password"
+						<input class="btn btn-lg" name="pwCheck" id="pwCheck" type="password"
 							placeholder="비밀번호를 다시 입력해주세요" required>
-							<p> -->
+							<p>
+							<div id="pwCheckDiv"></div></p>
+							<p>
 						<input class="btn btn-lg" name="nick" id="nick" type="text"
 							placeholder="닉네임을 입력해주세요" required>
-							<div id="nickCheck"></div>
+							<p>
+							<div id="nickCheck"></div></p>
 							<p>
 						<input class="btn btn-lg" name="email" id="email" type="email"
 							placeholder="이메일을 입력해주세요" required>
@@ -247,17 +252,76 @@
 		var $joinForm = $("#joinForm");
 	
 		$("#joinBtn").click(function() {
+			event.preventDefault();
 			
-			$joinForm.submit();
+			var $id = $("#id").val();
+			var $pw = $("#pw").val();
+			var $pwCheck = $("#pwCheck").val();
+			var $nick = $("#nick").val();
+			var $email = $("#email").val();
 			
+			var $idCheck = $("#idCheck").text();
+			var $nickCheck = $("#nickCheck").text();
+			
+			if($id == "") {
+				alert("아이디를 입력해주세요");
+				$("#id").focus();
+				return ;
+			} else if($pw == ""){
+				alert("비밀번호를 입력해주세요");
+				$("#pw").focus();
+				return ;
+			} else if($pwCheck == ""){
+				alert("비밀번호확인을 입력해주세요");
+				$("#pwCheck").focus();
+				return ;
+			} else if($nick == ""){
+				alert("닉네임을 입력해주세요");
+				$("#nick").focus();
+				return ;
+			} else if($email == ""){
+				alert("이메일을 입력해주세요");
+				$("#email").focus();
+				return ;
+			}
+			
+			if($idCheck != "사용 가능한 아이디 입니다."){
+				alert("사용 불가능 아이디");
+				return ;
+			} else if($pw != $pwCheck){
+				alert("비밀번호 불일치");
+				return ;
+			} else if( $nickCheck != "사용 가능한 닉네임 입니다."){
+				alert("사용 불가능 닉네임");
+				return ;
+			}
+			
+			alert("회원가입 성공!");
+// 			$joinForm.submit();
 		});
 		
 		var msg = "";
 		var value = "";
 		
+		$("#pwCheck").on("keyup", function () {
+			var $pw = $("#pw").val();
+			var $pwCheck = $("#pwCheck").val();
+			
+			if($pw != $pwCheck){
+				$("#pwCheckDiv").html("비밀번호와 불일치");
+				$("#pwCheckDiv").css("color","red");
+			} else {
+				$("#pwCheckDiv").html("비밀번호와 일치");
+				$("#pwCheckDiv").css("color","green");
+			}
+			
+			if($pwCheck == "") {
+				$("#pwCheckDiv").html("");
+			}
+		});
+		
 		$("#id").on("keyup", function() {
 			value = $(this).val();
-			console.log("id 키업");
 			$.ajax({
 				url : "/dup",
 				data : {"id": value, "type":1},
@@ -265,10 +329,12 @@
 			}).done(function(result) {
 				if(result) {
 					$("#idCheck").html("사용할 수 없는 아이디 입니다.");
+					$("#idCheck").css("color","red");
 					return;
 				}
 				
 				$("#idCheck").html("사용 가능한 아이디 입니다.");
+				$("#idCheck").css("color","green");
 				
 				if(value == "") {
 					$("#idCheck").html("");
@@ -280,7 +346,6 @@
 		
 		$("#nick").on("keyup", function() {
 			value = $(this).val();
-			console.log("nick 키업");
 			$.ajax({
 				url : "/dup",
 				data : {"nick": value, "type":2},
@@ -288,10 +353,12 @@
 			}).done(function(result) {
 				if(result) {
 					$("#nickCheck").html("사용할 수 없는 닉네임 입니다.");
+					$("#nickCheck").css("color","red");
 					return;
 				}
 				
 				$("#nickCheck").html("사용 가능한 닉네임 입니다.");
+				$("#nickCheck").css("color","green");
 				
 				if(value == "") {
 					$("#nickCheck").html("");
@@ -299,8 +366,6 @@
 				
 			});
 		});
-		
-		
 		
 	</script>
 </body>
