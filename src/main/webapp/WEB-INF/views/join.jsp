@@ -165,6 +165,8 @@
 						<input class="btn btn-lg" name="pw" id="pw" type="password"
 							placeholder="비밀번호를 입력해주세요" required>
 							<p>
+							<div id="pwDiv"></div></p>
+							<p>
 						<input class="btn btn-lg" name="pwCheck" id="pwCheck" type="password"
 							placeholder="비밀번호를 다시 입력해주세요" required>
 							<p>
@@ -177,6 +179,8 @@
 							<p>
 						<input class="btn btn-lg" name="email" id="email" type="email"
 							placeholder="이메일을 입력해주세요" required>
+							<p>
+							<div id="emailCheck"></div></p>
 							<p>
 						<button class="btn btn-info btn-lg" type="button" id="joinBtn">가입</button>
 					</div>
@@ -260,38 +264,35 @@
 			var $nick = $("#nick").val();
 			var $email = $("#email").val();
 			
-			var $idCheck = $("#idCheck").text();
-			var $nickCheck = $("#nickCheck").text();
-			
 			if($id == "") {
-				alert("아이디를 입력해주세요");
+				$("#idCheck").html("아이디를 입력해주세요");
 				$("#id").focus();
 				return ;
 			} else if($pw == ""){
-				alert("비밀번호를 입력해주세요");
+				$("#pwDiv").html("비밀번호를 입력해주세요");
 				$("#pw").focus();
 				return ;
 			} else if($pwCheck == ""){
-				alert("비밀번호확인을 입력해주세요");
+				$("#pwCheckDiv").html("비밀번호확인을 입력해주세요");
 				$("#pwCheck").focus();
 				return ;
 			} else if($nick == ""){
-				alert("닉네임을 입력해주세요");
+				$("#nickCheck").html("닉네임을 입력해주세요");
 				$("#nick").focus();
 				return ;
 			} else if($email == ""){
-				alert("이메일을 입력해주세요");
+				$("#emailCheck").html("이메일을 입력해주세요");
 				$("#email").focus();
 				return ;
 			}
 			
-			if($idCheck != "사용 가능한 아이디 입니다."){
+			if($("#idCheck").attr("data-chk") == "false"){
 				alert("사용 불가능 아이디");
 				return ;
 			} else if($pw != $pwCheck){
 				alert("비밀번호 불일치");
 				return ;
-			} else if( $nickCheck != "사용 가능한 닉네임 입니다."){
+			} else if($("#nickCheck").attr("data-chk") == "false"){
 				alert("사용 불가능 닉네임");
 				return ;
 			}
@@ -330,14 +331,17 @@
 				if(result) {
 					$("#idCheck").html("사용할 수 없는 아이디 입니다.");
 					$("#idCheck").css("color","red");
+					$("#idCheck").attr("data-chk", "false");
 					return;
 				}
 				
 				$("#idCheck").html("사용 가능한 아이디 입니다.");
 				$("#idCheck").css("color","green");
+				$("#idCheck").attr("data-chk", "true");
 				
 				if(value == "") {
 					$("#idCheck").html("");
+					$("#idCheck").attr("data-chk", "false");
 				}
 				
 			});
@@ -354,14 +358,17 @@
 				if(result) {
 					$("#nickCheck").html("사용할 수 없는 닉네임 입니다.");
 					$("#nickCheck").css("color","red");
+					$("#nickCheck").attr("data-chk", "false");
 					return;
 				}
 				
 				$("#nickCheck").html("사용 가능한 닉네임 입니다.");
 				$("#nickCheck").css("color","green");
+				$("#nickCheck").attr("data-chk", "true");
 				
 				if(value == "") {
 					$("#nickCheck").html("");
+					$("#nickCheck").attr("data-chk", "false");
 				}
 				
 			});
