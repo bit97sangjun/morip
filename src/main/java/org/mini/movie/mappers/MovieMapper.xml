@@ -28,12 +28,12 @@
 <select id="getList" resultType="reportlist">
 	
 	<choose>
-		<when test="searchkeyword != ''">
+		<when test="search != ''">
 			select rimg, r.*
 				from
 				(select rno, rtitle, rcontent  
 						from 
-		  						(select mcode from tb_movie where mtitle like "%'#{searchkeyword}'%" ) movie left outer join tb_report report on movie.mcode = report.mcode
+		  						(select mcode from tb_movie where mtitle like concat('%', #{search}, '%') ) movie left outer join tb_report report on movie.mcode = report.mcode
 				) r inner join tb_reportimg img on r.rno = img.rno group by img.rno
 		</when>
 		<otherwise>
@@ -48,12 +48,13 @@
 
 <select id="getTotal" resultType="int">
 	select count(rno)
+	from
 	<choose>
-		<when test="searchkeyword != ''">
-			(select mcode from tb_movie where mtitle like CONCAT('%', #{searchkeyword}, '%') ) movie left outer join tb_report report on movie.mcode = report.mcode;
+		<when test="search != ''">
+			(select mcode from tb_movie where mtitle like concat('%', #{search}, '%') ) movie left outer join tb_report report on movie.mcode = report.mcode
 		</when>
 		<otherwise>
-			from tb_report;
+			tb_report
 		</otherwise>
 	</choose>
 </select>

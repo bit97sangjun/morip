@@ -13,10 +13,10 @@ import org.mini.dto.Criteria;
 public interface MovieMapper extends CRUDMapper<Report, Integer> {
 
 	//@Select("select * from tb_report order by rno desc limit #{skip}, #{size}")
-	public List<ReportList> getList(@Param("cri")Criteria cri, @Param("searchkeyword")String searchKeyword);
+	public List<ReportList> getList(@Param("cri")Criteria cri, @Param("search")String search);
 	
 	//@Select("select count(rno) from tb_report")
-	public int getTotal(@Param("cri")Criteria cri, @Param("searchkeyword")String searchKeyword);
+	public int getTotal(@Param("cri")Criteria cri, @Param("search")String search);
 
 	@Select("select * from tb_report")
 	public List<Report> getAllData();

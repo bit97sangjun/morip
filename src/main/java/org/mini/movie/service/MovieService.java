@@ -14,8 +14,8 @@ public interface MovieService {
 	public void modify(Report report);
 	public void remove(int rno);
 	
-	public List<ReportList> getList(Criteria cri, String str);
-	public int getCount(Criteria cri, String str);
+	public List<ReportList> getList(Criteria cri, String search);
+	public int getCount(Criteria cri, String search);
 	public List<Movie> getMovieread(String keyword);
 	
 	//test ---------------------------------

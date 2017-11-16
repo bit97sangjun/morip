@@ -36,6 +36,7 @@ public class MovieController {
 		log.info("keyword : " + search);
 		log.info("list : " + service.getList(cri, search));
 		log.info("count : " + service.getCount(cri, search));
+		
 		model.addAttribute("list", service.getList(cri, search));
 		model.addAttribute("total", service.getCount(cri, search));
 		model.addAttribute("skeyword", search);

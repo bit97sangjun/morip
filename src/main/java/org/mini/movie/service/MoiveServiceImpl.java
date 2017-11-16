@@ -44,16 +44,16 @@ public class MoiveServiceImpl implements MovieService {
 	}
 	
 	@Override
-	public List<ReportList> getList(Criteria cri, String str) {
+	public List<ReportList> getList(Criteria cri, String search) {
 		// TODO Auto-generated method stub
-		log.info("service str : " + str);
-		return mapper.getList(cri, str);
+		log.info("service str : " + search);
+		return mapper.getList(cri, search);
 	}
 
 	@Override
-	public int getCount(Criteria cri, String str) {
+	public int getCount(Criteria cri, String search) {
 		// TODO Auto-generated method stub
-		return mapper.getTotal(cri, str);
+		return mapper.getTotal(cri, search);
 	}
 
 	@Override
