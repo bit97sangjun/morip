@@ -39,6 +39,8 @@
         #menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
         #menu_wrap .option{text-align: center;}
         #menu_wrap .option p {margin:10px 0;}
+        #menu_wrap {width:0%}
+        #menu_wrap {height:0%}
         #menu_wrap .option button {margin-left:5px;}
         #placesList li {list-style: none;}
         #placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
@@ -222,11 +224,15 @@ overflow:hidden;
 white-space:nowrap;
 
 }
-
-
+.inputList{
+	border: 1px solid black;
+}
+.containerr{
+margin: 0;
+}
 </style>
 <div id="contact">
-          <div class="container">
+          <div class="containerr">
              <p>
               <h2>글등록 페이지</h2>
              </p>
@@ -252,6 +258,8 @@ white-space:nowrap;
          <button type="button" id="menuBtn">>></button>
          <div id="map"
             style="width: 65%; height: 100%; position: relative; overflow: hidden;"></div>
+            
+            <div id="inputList"></div>
 
 		<!-- 지도 키워드 검색  -->
          <div id="menu_wrap" class="bg_white">
@@ -302,8 +310,8 @@ white-space:nowrap;
    
    
    <script>
- 	
-   
+   var content ="";
+   var movie =[];
          var check = false;
         $("#menuBtn").on("click", function () {
             //console.log("엥?");
@@ -483,51 +491,64 @@ white-space:nowrap;
             // 검색결과 항목들을 검색결과 목록 Elemnet에 추가합니다
             listEl.appendChild(fragment);
             menuEl.scrollTop = 0;
+            map.setBounds(bounds);
 
             // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-            map.setBounds(bounds);
         }
+         geocoder = new daum.maps.services.Geocoder();
 
-        daum.maps.event.addListener(map, 'click', function(e) {
-            searchDetailAddrFromCoords(e.latLng, function(result, status) {
-                    var count = 0;
-                    var marker = addMarker(e.latLng, 0, false);
-              
-                 marker.setMap(map);
+        marker = new daum.maps.Marker(), // 클릭한 위치를 표시할 마커입니다
+        infowindow = new daum.maps.InfoWindow({zindex:1}); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
+
+        daum.maps.event.addListener(map, 'click', function(mouseEvent) {
+            searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
+                
+            	  if (status === daum.maps.services.Status.OK) {
+            		/*   var detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + result[0].road_address.address_name + '</div>' : '';  */
+                      var detailAddr = '<div id="location">지번 주소 : ' + result[0].address.address_name + '</div>'; 
+                     
+                      
+                      content = detailAddr ;
+
+                      // 마커를 클릭한 위치에 표시합니다 
+                      marker.setPosition(mouseEvent.latLng);
+                      marker.setMap(map);
               
               // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
+              
                  infowindow.setContent(content);
                  infowindow.open(map, marker);
-                /* if(testStr.length <= 0){
-                    testStr.push(title);
-                    addrStr.push(address);
-                    //console.log("testStr[0] : " + testStr[0]);
-                }
-                for(var i = 0; i < testStr.length; i++){
-                    //console.log("추가된 목록 : " + testStr[i]);
-                    if(testStr[i] === title){
-                        count++;
-                    }
-                }
-                if(count == 0){
-                    testStr.push(title);
-                    addrStr.push(address);
-                    //console.log(title);
-                } */
                 
-                console.log(e.latLng.address_name);
+                console.log(mouseEvent.latLng.address_name);
+            	  }
             });
                 
          });
-
-         /* daum.maps.event.addListener(marker, 'mouseover', function() {
-             displayInfowindow(marker, title);
-         });
-
-         daum.maps.event.addListener(marker, 'mouseout', function() {
-             infowindow.close();
-         }); */
-       
+        daum.maps.event.addListener(marker , 'click' , function(){
+  		  
+			movie.push(content) ;
+			$("#inputList").html(movie);
+			
+			console.log( "movie :" +movie);
+			
+			$("#inputList div").on("click" ,function(){
+	        	
+	        	for(var i=0; i < movie.length ; i++){
+	        		
+	        		var mTitle = movie[i];
+	        		var val = document.getElementById('location').innerHTML ;
+	        		mTitle = document.getElementById('location').innerHTML ;
+	        		
+	        		console.log("val :" +val);
+	        		console.log("mTitle :" + mTitle);
+	        		if(mTitle == val){
+	        			markers.pop(mTitle);
+	        			$(this).remove("div");
+	        			movie.pop(movie);
+	        		}
+	        	}
+	        });
+      });
 
          function searchDetailAddrFromCoords(coords, callback) {
              // 좌표로 법정동 상세 주소 정보를 요청합니다
@@ -597,12 +618,6 @@ white-space:nowrap;
 
             return marker;
         }
-        /* daum.maps.event.addListner(marker,'click',function(){
-        	 var marker = new daum.maps.Marker({
-        		 position:markerPosion
-        	 });
-        });
- */
  
  // 지도 위에 표시되고 있는 마커를 모두 제거합니다
  function removeMarker() {
@@ -650,7 +665,6 @@ white-space:nowrap;
 
             infowindow.setContent(content);
             infowindow.open(map, marker);
-            console.log(content);
             console.log(title);
         }
         
@@ -696,7 +710,7 @@ white-space:nowrap;
         function hideMarkers() {
             setMarkers(null);
         }
-        
+       
         $("#keywordBtn").on("click" ,function(){
        		$.ajax({ 
        			type:'POST' ,
