@@ -13,7 +13,6 @@ public interface MovieService {
 
 	public void register(Report report);
 	
-	
 	public Report get(int rno);
 	
 	public void modify(Report report);
@@ -26,6 +25,11 @@ public interface MovieService {
 	
 	public List<Movie> getMovieread(String keyword);
 	
+
+	
+	
+	//test ---------------------------------
+	public List<Report> getAllData();
 
 	void register(Report report, String[] files, Long rno, String fileName);
 }
