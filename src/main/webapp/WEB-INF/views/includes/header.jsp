@@ -7,6 +7,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<!-- Profile Upload CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+
 <!-- Navigation -->
 <nav class="navbar navbar-default navbar-fixed-top shrink"
 	role="navigation">
@@ -72,7 +75,8 @@
 				      +'<img id="profilePreview"/>'
 				      +'</div>'
 				      +'<form id="profileForm" enctype="multipart/form-data" method="post">'
-				      + '<div><input id="profileFile" type="file" accept="image/*" /></div>'
+				      + '<input id="profileFile" type="file" accept="image/*" />'
+				      + '<button id="fileBtn" type="button"><i class="fa fa-upload"></i>파일 선택</button>'
 				      + '<button id="resetBtn" type="button">기본 이미지로 변경</button>'
 				      + '<button id="updateBtn" type="button">프로필 이미지로 설정</button>'
 				      +'</form>'

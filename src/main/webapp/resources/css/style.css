@@ -88,6 +88,28 @@ body {
 	border-radius: 50%;	
 }
 
+#profileFile {
+	display: none;
+}
+
+#fileBtn {
+  background-color: #4CAF50;
+  border: 1px solid #4CAF50;
+  padding: 5px;
+  color: #fff;
+  cursor: pointer;
+  transition: all .3s ease-in-out;
+  border-radius: 3px;	
+}
+
+#fileBtn:hover {
+  background-color: #66BB6A
+}
+
+#fileBtn:active {
+  background-color: #388E3C
+}
+
 #loginBtn {
 	background: #42a5f6;
 	font-size: 20px;
