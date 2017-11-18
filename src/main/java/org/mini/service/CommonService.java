@@ -12,4 +12,8 @@ public interface CommonService {
 	
 	public Boolean loginTest(String id, String pw);
 	
+	public void setProfile(String id, String fileName);
+	
+	public String getProfile(String id);
+	
 }

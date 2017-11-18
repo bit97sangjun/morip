@@ -1,7 +1,9 @@
 package org.mini.mappers;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.mini.domain.Member;
 
 public interface CommonMapper {
@@ -17,4 +19,11 @@ public interface CommonMapper {
 	
 	@Select("select pw from tb_member where id = #{id}")
 	public String loginTest(String id);
+	
+	@Update("update tb_member set userimg = #{userimg} where id = #{id}")
+	public void setProfile(@Param(value="id")String id, @Param(value="userimg")String userimg);
+	
+	@Select("select userimg from tb_member where id = #{id}")
+	public String getProfile(String id);
+	
 }

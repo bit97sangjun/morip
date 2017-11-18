@@ -51,4 +51,15 @@ public class CommonServiceImpl implements CommonService {
 		return false;
 	}
 
+	@Override
+	public void setProfile(String id, String fileName) {
+		mapper.setProfile(id, fileName);
+		
+	}
+
+	@Override
+	public String getProfile(String id) {
+		return mapper.getProfile(id);
+	}
+
 }

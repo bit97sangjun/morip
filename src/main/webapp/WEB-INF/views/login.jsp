@@ -250,7 +250,7 @@
 
 			$.ajax({
 				url : "/ismember",
-				type : "post",
+				type : "POST",
 				data : {
 					"id" : $("#loginId").val(),
 					"pw" : $("#loginPw").val(),
