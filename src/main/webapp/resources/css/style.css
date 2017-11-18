@@ -580,8 +580,9 @@ img {
 
 /******** login Section ********/
 #login {
-	padding-top: 40px;
+	padding-top: 180px;
 	padding-bottom: 40px;
+	height: 838px;
 }
 
 #login h2 {
