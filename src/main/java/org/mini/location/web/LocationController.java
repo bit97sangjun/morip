@@ -45,13 +45,6 @@ public class LocationController {
 		model.addAttribute("marker", service.rMarker(rno));
 	}
 	
-	@PostMapping("/detail")
-	public void commentInsert(Comment comment){
-		
-		service.rCreate(comment);
-		
-	}
-	
 }
 
 

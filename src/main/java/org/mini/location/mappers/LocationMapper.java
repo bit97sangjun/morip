@@ -2,9 +2,11 @@ package org.mini.location.mappers;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.mini.domain.Comment;
 import org.mini.domain.Location;
 import org.mini.domain.Movie;
@@ -39,6 +41,13 @@ public interface LocationMapper {
 	@Insert("insert into tb_comment(score, rno, ccontent, id) values (#{score}, #{rno}, #{ccontent}, 'aaa')")
 	public void rCreate(Comment comment);
 	
-	@Select("select * from tb_comment where rno = #{rno}")
+	@Select("select cno, score, ccontent, id, cregdate from tb_comment where rno = #{rno} order by cno desc")
 	public List<Comment> rList(int rno);
+	
+	@Update("update tb_comment set ccontent = #{ccontent}, cupdate = now() where cno = #{cno}")
+	public void rUpdate(Comment comment);
+	
+	@Delete("delete from tb_comment where cno = #{cno}")
+	public void rDelete(int cno);
+	
 }

@@ -63,4 +63,14 @@ public class LocationServiceImpl implements LocationService {
 		return mapper.rList(rno);
 	}
 
+	@Override
+	public void rUpdate(Comment comment) {
+		mapper.rUpdate(comment);
+	}
+
+	@Override
+	public void rDelete(int cno) {
+		mapper.rDelete(cno);
+	}
+
 }

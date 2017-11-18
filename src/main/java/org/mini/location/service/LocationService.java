@@ -26,4 +26,8 @@ public interface LocationService {
 	public void rCreate(Comment comment);
 	
 	public List<Comment> rList(int rno);
+	
+	public void rUpdate(Comment comment);
+	
+	public void rDelete(int cno);
 }

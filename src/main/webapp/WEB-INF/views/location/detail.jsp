@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 
 <html>
@@ -155,21 +157,21 @@
     
     <div id="blog">
     	<div class="container">
-    		<h2>댓글</h2>
 	   		<form id="commentForm" method="post">
 	   		<input type="hidden" name="rno" value="1" id="rno">
-    			평점
-    			<select id="score" name="score">
-    				<option value="1">1</option>
-    				<option value="2">2</option>
-    				<option value="3">3</option>
-    				<option value="4">4</option>
+    			평점<select id="score" name="score">
     				<option value="5">5</option>
+    				<option value="4">4</option>
+    				<option value="3">3</option>
+    				<option value="2">2</option>
+    				<option value="1">1</option>
     			</select><br>
-    			<textarea rows="5" cols="100" name="ccontent" id="ccontent"></textarea>
-    			<button id="commentInsertBtn">등록</button>
+    			<textarea class="btn btn-lg" rows="5" cols="100" name="ccontent" id="ccontent" style="text-align: left;"></textarea>
+    			<button class="btn btn-info btn-lg" id="commentInsertBtn" type="button" style="height: 138px;">등록</button>
     		</form>
+    		<hr>
     		<div id="commentList">
+    			<ul></ul>
     		</div>
     	</div>
     </div>
@@ -186,7 +188,6 @@
     
     <script src="/resources/js/jquery.scrollUp.min.js"></script>
     
-
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=43ebc80896d6b92c30a7a86d976b01f3&libraries=services"></script>
 	<script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -233,30 +234,89 @@
 
 	<script type="text/javascript">
 	
+	getAllList();
+	
 	$("#commentInsertBtn").on("click", function () {
-
+		
 		$.ajax({
-			url : "/comment/commentList",
-			type : "GET",
+			url : "/comment/register",
+			type : "POST",
 			data : {
 				"rno" : $("#rno").val(),
+				"score" : $("#score").val(),
+				"ccontent" : $("#ccontent").val()
 			}
 		}).done(function (result) {
-			var str = "";
-			$()
-			$(".commentList").html(str);
+			console.log(result);
+			getAllList();
 		});
-		
 	});
+	
+	function getAllList() {
+		$.ajax({
+			url : "/comment/list",
+			type : "GET",
+			data : {"rno" : 1}
+		}).done(function (result) {
+			console.dir(result);
+			var html = "";
+			for(var index in result){
+				var comment = result[index];
+				
+				console.log(new Date(result[index].cregdate));
+				
+				html += "<li id="+ comment.cno +"><span>" + comment.ccontent 
+				+ "</span><button type='button' name='update'>수정</button>"
+				+ "<button type='button' name='delete' data-del="+ comment.cno +">삭제</button></li>";
+			}
+			$("#commentList ul").html(html);
+		});
+	}
 	
 	$("#movieTitle").html("${movie.mtitle}");
 	
 	$(".movieImg").html("<img src='/resources/images/movieimg/" + '${movie.mimg}' + "'/>");
 	
+	
+	
+	$("ul").on("click", "button[name=update]", function () {
+		$("li[id='"+$(this)[0].id+"']").html("<textarea rows='5' cols='100'>"+ $("li[id='"+$(this)[0].id+"'] span").text() 
+				+ "</textarea><button data-cno='"+ $(this)[0].id +"' type='button'>수정</button>");
+	});
+	
+	$("ul").on("click", "button[data-cno]", function () {
+		console.log($(this).prev().val());
+		
+		$.ajax({
+			url : "/comment/update",
+			type : "PUT",
+			contentType: "application/json",
+			data : JSON.stringify({
+					cno : $(this).attr("data-cno"),
+					ccontent : $(this).prev().val()
+					})
+		}).done(function (result) {
+			getAllList();
+		});
+	});
+	
+	$("ul").on("click", "button[data-del]", function () {
+		console.log(1);
+		
+		$.ajax({
+			url : "/comment/delete/" + $(this).attr("data-del"),
+			type : "delete"
+		}).done(function (result) {
+			getAllList();
+		});
+	});
+	
+	
     </script>
         
     <!-- Scroll To Top Settings -->
     <script>
+    
     $(function () {
   		$.scrollUp({
     		scrollName: 'scrollUp', // Element ID

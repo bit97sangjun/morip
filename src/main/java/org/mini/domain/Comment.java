@@ -1,5 +1,6 @@
 package org.mini.domain;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 import lombok.Data;
@@ -10,7 +11,7 @@ public class Comment {
 	private int cno ;
 	private double score ;
 	private int rno ;
-	private Date cregdate ;
+	private Timestamp cregdate ;
 	private Date cupdate ;
 	private String ccontent ;
 	private String id;
