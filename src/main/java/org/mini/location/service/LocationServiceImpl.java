@@ -2,6 +2,7 @@ package org.mini.location.service;
 
 import java.util.List;
 
+import org.mini.domain.Comment;
 import org.mini.domain.Location;
 import org.mini.domain.Movie;
 import org.mini.domain.Place;
@@ -40,6 +41,26 @@ public class LocationServiceImpl implements LocationService {
 	@Override
 	public Zone getZone(int zcode) {
 		return mapper.getZone(zcode);
+	}
+
+	@Override
+	public Movie rMovie(int rno) {
+		return mapper.rMoive(rno);
+	}
+
+	@Override
+	public List<Place> rMarker(int rno) {
+		return mapper.rMarker(rno);
+	}
+
+	@Override
+	public void rCreate(Comment comment) {
+		mapper.rCreate(comment);
+	}
+
+	@Override
+	public List<Comment> rList(int rno) {
+		return mapper.rList(rno);
 	}
 
 }

@@ -15,25 +15,16 @@
 <title>Homepage</title>
 
 <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
-<link href="<c:url value="/resources/css/largemap.css" />"
-	rel="stylesheet">
-<link href="<c:url value="/resources/css/bootstrap.min.css" />"
-	rel="stylesheet">
-<link
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"
-	rel="stylesheet">
+<link href="<c:url value="/resources/css/largemap.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 <link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
 
-<link href='https://fonts.googleapis.com/css?family=Noto+Sans'
-	rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Righteous'
-	rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=PT+Sans'
-	rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Hammersmith+One'
-	rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=NTR'
-	rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Noto+Sans' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hammersmith+One' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=NTR' rel='stylesheet' type='text/css'>
 
 </head>
 
@@ -205,9 +196,144 @@ h1 {
   color: #ffd587;
 }
 
+/* ------ 상단 버튼 css --------*/
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+.tab-group {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 40px 0;
+}
+.tab-group:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.tab-group li a {
+  display: block;
+  text-decoration: none;
+  padding: 15px;
+  background: rgba(160, 179, 176, 0.25);
+  color: #a0b3b0;
+  font-size: 20px;
+  float: left;
+  width: 30%;
+  text-align: center;
+  cursor: pointer;
+  -webkit-transition: .5s ease;
+  transition: .5s ease;
+}
+.tab-group li a:hover {
+  background: #025091;
+  color: #ffffff;
+}
+.tab-group .active a {
+  background: #42a5f6;
+  color: #ffffff;
+}
+
+.tab-content > div:last-child {
+  display: none;
+}
+
+h1 {
+  text-align: center;
+  color: #ffffff;
+  font-weight: 300;
+  margin: 0 0 40px;
+}
+
+label {
+  position: absolute;
+  -webkit-transform: translateY(6px);
+          transform: translateY(6px);
+  left: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  -webkit-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+  -webkit-backface-visibility: hidden;
+  pointer-events: none;
+  font-size: 22px;
+}
+label .req {
+  margin: 2px;
+  color: #1ab188;
+}
+
+label.active {
+  -webkit-transform: translateY(50px);
+          transform: translateY(50px);
+  left: 2px;
+  font-size: 14px;
+}
+label.active .req {
+  opacity: 0;
+}
+
+label.highlight {
+  color: #ffffff;
+}
+
+input, textarea {
+  font-size: 22px;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 5px 10px;
+  background: none;
+  background-image: none;
+  border: 1px solid #a0b3b0;
+  color: #ffffff;
+  border-radius: 0;
+  -webkit-transition: border-color .25s ease, box-shadow .25s ease;
+  transition: border-color .25s ease, box-shadow .25s ease;
+}
+input:focus, textarea:focus {
+  outline: 0;
+  border-color: #1ab188;
+}
+
+textarea {
+  border: 2px solid #a0b3b0;
+  resize: vertical;
+}
+
+.field-wrap {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.top-row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.top-row > div {
+  float: left;
+  width: 48%;
+  margin-right: 4%;
+}
+.top-row > div:last-child {
+  margin: 0;
+}
+
+.topBtn {
+	padding-left: 28%;
+}
+
 </style>
 	<div id="about">
 		<div class="container">
+			<div class="topBtn">
+				<ul class="tab-group">
+					<li class="tab movieBtn" ><a href="#signup" style="border-radius:15px 0px 0px 15px;">Moive</a></li>
+					<li class="tab active locationBtn" ><a href="#login" style="border-radius:0px 15px 15px 0px;">Location</a></li>
+				</ul>
+			</div>
+			
 			<section class="zoneName">
 			  <h1>
 			    <span class="title">${zone.zname}</span>
@@ -343,7 +469,7 @@ h1 {
 	<!-- Large Map -->
 	<script src="<c:url value="/resources/js/largemap.js" />"></script>
 	
-	<!--  -->
+	<!-- 상단에 지역명 뜨는거 관련  -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/lettering.js/0.7.0/jquery.lettering.min.js"></script>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
@@ -753,6 +879,60 @@ h1 {
 			}, 0.05);
 
 		}
+	</script>
+	
+	<script>
+
+		$('.form').find('input, textarea').on('keyup blur focus', function(e) {
+
+			var $this = $(this), label = $this.prev('label');
+
+			if (e.type === 'keyup') {
+				if ($this.val() === '') {
+					label.removeClass('active highlight');
+				} else {
+					label.addClass('active highlight');
+				}
+			} else if (e.type === 'blur') {
+				if ($this.val() === '') {
+					label.removeClass('active highlight');
+				} else {
+					label.removeClass('highlight');
+				}
+			} else if (e.type === 'focus') {
+
+				if ($this.val() === '') {
+					label.removeClass('highlight');
+				} else if ($this.val() !== '') {
+					label.addClass('highlight');
+				}
+			}
+
+		});
+
+		$('.tab a').on('click', function(e) {
+			e.preventDefault();
+
+			$(this).parent().addClass('active');
+			$(this).parent().siblings().removeClass('active');
+
+			target = $(this).attr('href');
+
+			$('.tab-content > div').not(target).hide();
+
+			$(target).fadeIn(600);
+
+		});
+		
+		$(".movieBtn").on("click", function () {
+			location.href='/movie/list';
+		});
+		
+		$(".locationBtn").on("click", function () {
+			location.href='/location/main';
+		});
+
+		
 	</script>
 </body>
 

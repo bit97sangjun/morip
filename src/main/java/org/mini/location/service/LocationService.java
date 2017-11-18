@@ -2,6 +2,7 @@ package org.mini.location.service;
 
 import java.util.List;
 
+import org.mini.domain.Comment;
 import org.mini.domain.Location;
 import org.mini.domain.Movie;
 import org.mini.domain.Place;
@@ -17,4 +18,12 @@ public interface LocationService {
 	public List<Location> getLocation();
 	
 	public Zone getZone(int zcode);
+	
+	public Movie rMovie(int rno);
+	
+	public List<Place> rMarker(int rno);
+	
+	public void rCreate(Comment comment);
+	
+	public List<Comment> rList(int rno);
 }

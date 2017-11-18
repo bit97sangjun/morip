@@ -1,16 +1,19 @@
 package org.mini.location.web;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.mini.domain.Movie;
-import org.mini.domain.Place;
+import org.mini.domain.Comment;
 import org.mini.location.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.java.Log;
 
@@ -36,4 +39,23 @@ public class LocationController {
 		
 	}
 	
+	@GetMapping("/detail")
+	public void detail(Model model, @RequestParam(value="rno", defaultValue="1") int rno) {
+		model.addAttribute("movie", service.rMovie(rno));
+		model.addAttribute("marker", service.rMarker(rno));
+	}
+	
+	@PostMapping("/detail")
+	public void commentInsert(Comment comment){
+		
+		service.rCreate(comment);
+		
+	}
+	
 }
+
+
+
+
+
+

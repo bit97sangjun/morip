@@ -2,8 +2,10 @@ package org.mini.location.mappers;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.mini.domain.Comment;
 import org.mini.domain.Location;
 import org.mini.domain.Movie;
 import org.mini.domain.Place;
@@ -28,4 +30,15 @@ public interface LocationMapper {
 	@Select("select zcode, zname from tb_zone where zcode = #{zcode}")
 	public Zone getZone(int zcode);
 	
+	@Select("select mtitle, mimg from tb_movie where mcode = (select mcode from tb_report where rno = #{rno})")
+	public Movie rMoive(int rno);
+	
+	@Select("select addr from tb_place where pno in ( select pno from tb_markers where rno = #{rno})")
+	public List<Place> rMarker(int rno);
+	
+	@Insert("insert into tb_comment(score, rno, ccontent, id) values (#{score}, #{rno}, #{ccontent}, 'aaa')")
+	public void rCreate(Comment comment);
+	
+	@Select("select * from tb_comment where rno = #{rno}")
+	public List<Comment> rList(int rno);
 }

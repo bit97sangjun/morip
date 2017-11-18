@@ -343,9 +343,7 @@
 					$("#idCheck").html("");
 					$("#idCheck").attr("data-chk", "false");
 				}
-				
 			});
-			
 		});
 		
 		$("#nick").on("keyup", function() {
