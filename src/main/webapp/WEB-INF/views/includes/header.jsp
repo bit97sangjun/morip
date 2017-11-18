@@ -107,7 +107,7 @@
 		} else {
 			
 		$("#buttonBox")
-				.html('<img title="프로필" data-placement="bottom" data-toggle="popover" id="mypage" src="/resources/images/profileimg/profileimg.png" style="width:40px; height:40px"/>');
+				.html('<img title="프로필" data-placement="bottom" data-toggle="popover" id="mypage" src="/resources/images/profileimg/profileimg.png" style="width:40px; height:40px; border-radius: 50%"/>');
 		}
 	}
 

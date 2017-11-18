@@ -297,8 +297,7 @@
 				return ;
 			}
 			
-			alert("회원가입 성공!");
-// 			$joinForm.submit();
+ 			$joinForm.submit();
 		});
 		
 		var msg = "";
