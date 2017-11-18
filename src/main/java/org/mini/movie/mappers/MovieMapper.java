@@ -29,6 +29,6 @@ public interface MovieMapper extends CRUDMapper<Report, Integer> {
 	@Insert("insert into tb_report(rtitle , rcontent) value(#{rtitle},#{rcontent})")
 	public void report(Report report);
 	
-	@Select("select mimg ,mtitle from tb_movie where mtitle like CONCAT('%', #{keyword}, '%')")
+	@Select("select mimg ,mtitle, mcode from tb_movie where mtitle like CONCAT('%', #{keyword}, '%')")
 	public List<Movie> getMovieread(String keyword);
 }

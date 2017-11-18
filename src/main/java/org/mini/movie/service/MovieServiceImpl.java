@@ -79,6 +79,6 @@ public void register(Report report, String[] files, Long rno, String fileName) {
 @Override
 public List<Report> getAllData() {
 	// TODO Auto-generated method stub
-	return null;
+	return mapper.getAllData();
 }
 }
