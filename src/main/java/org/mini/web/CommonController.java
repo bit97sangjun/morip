@@ -164,8 +164,7 @@ public class CommonController {
 	public byte[] display(String fileName) {
 
 		try {
-//			FileInputStream in = new FileInputStream("C:\\movietrip\\userprofile" + File.separator + fileName);
-			FileInputStream in = new FileInputStream("/resources/images/profileimg" + File.separator + fileName);
+			FileInputStream in = new FileInputStream("C:\\movietrip\\userprofile" + File.separator + fileName);
 
 			ByteArrayOutputStream bas = new ByteArrayOutputStream();
 
