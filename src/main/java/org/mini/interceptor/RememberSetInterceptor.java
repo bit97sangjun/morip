@@ -41,8 +41,11 @@ public class RememberSetInterceptor extends HandlerInterceptorAdapter {
 					// 로그인 유지가 체크 된 경우 -> 쿠키 생성
 					if(remember) {
 						Cookie loginCookie = new Cookie("login", obj.toString());
+						Cookie userImgCookie = new Cookie("userimg", service.getProfile(request.getSession().getAttribute("login").toString()));
 						loginCookie.setMaxAge(60 * 60 * 24 * 7);
+						userImgCookie.setMaxAge(60 * 60 * 24 * 7);
 						response.addCookie(loginCookie);
+						response.addCookie(userImgCookie);
 						log.info("체크됨");
 					}
 				} catch(Exception e) {

@@ -200,27 +200,32 @@
 	$('#loginBtn').click(function() {
 		location.href = '/login';
 	});
-	
-	console.log("쿠키? "+$.cookie('login'));
-	console.log("세션? " + "${login}");
-	
-	if ("${login}" != '' || typeof($.cookie('login')) != 'undefined') {
-		console.log("로그인한경우?");
-			console.log("프사?? "+"${userimg}");
-		if("${userimg}" != "") {
-			console.log("프사?? "+"${userimg}");
-		$("#buttonBox")
-				.html('<img title="프로필" data-placement="bottom" data-toggle="popover" id="mypage" src="/userimg?fileName=${userimg}" style="width:40px; height:40px; border-radius: 50%"/>');
-			
+
+	if ("${login}" != '' || typeof ($.cookie('login')) != 'undefined') {
+		var userimg = "${userimg}";
+		if (typeof ($.cookie('userimg')) != 'undefined') {
+			userimg = $.cookie('userimg');
+		}
+		if (userimg != "") {
+			$("#buttonBox")
+					.html(
+							'<img title="프로필" data-placement="bottom" data-toggle="popover" id="mypage" src="/userimg?fileName='
+									+ userimg
+									+ '" style="width:40px; height:40px; border-radius: 50%"/>');
+
 		} else {
-			
-		$("#buttonBox")
-				.html('<img title="프로필" data-placement="bottom" data-toggle="popover" id="mypage" src="/resources/images/profileimg/profileimg.png" style="width:40px; height:40px; border-radius: 50%"/>');
+
+			$("#buttonBox")
+					.html(
+							'<img title="프로필" data-placement="bottom" data-toggle="popover" id="mypage" src="/resources/images/profileimg/profileimg.png" style="width:40px; height:40px; border-radius: 50%"/>');
 		}
 	}
 
 	$('#buttonBox')
-			.on("click", "*", function(e) {
+			.on(
+					"click",
+					"*",
+					function(e) {
 
 						switch ($(this)[0].id) {
 						case "loginBtn":
@@ -235,8 +240,9 @@
 							console.log("로그아웃눌림");
 							location.href = '/logout';
 							$("#buttonBox")
-									.html('<button id="loginBtn" class="btn btn-hero btn-lg" role="button">로그인</button>');
-							
+									.html(
+											'<button id="loginBtn" class="btn btn-hero btn-lg" role="button">로그인</button>');
+
 							break;
 						case "fileBtn":
 							console.log("아이콘눌림");
@@ -250,33 +256,33 @@
 							break;
 						case "updateBtn":
 							console.log("업데이트");
-							
-							
+
 							var fileData = $("#profileFile")[0].files[0];
-							
+
 							console.dir(fileData);
 							console.log(fileData.type);
-							if(!fileData.type.startsWith("image")) {
+							if (!fileData.type.startsWith("image")) {
 								alert("이미지 파일만 프로필로 설정할 수 있습니다.");
 								break;
 							}
-							
+
 							var fd = new FormData();
-							fd.append("file", fileData );
-							
-							
+							fd.append("file", fileData);
+
 							$.ajax({
-								url: "/profile",
-								type: "POST",
-								data: fd,
-								dataType: 'text',
-								processData: false,
-								contentType: false
-							}).done(function(result) {
-								console.log("done?? : " + result);
-								$("#mypage").attr("src", "/userimg?fileName="+result)
-								
-							}); 
+								url : "/profile",
+								type : "POST",
+								data : fd,
+								dataType : 'text',
+								processData : false,
+								contentType : false
+							}).done(
+									function(result) {
+										console.log("done?? : " + result);
+										$("#mypage").attr("src",
+												"/userimg?fileName=" + result)
+
+									});
 							break;
 						}
 
@@ -300,5 +306,4 @@
 			reader.readAsDataURL(input.files[0]);
 		}
 	}
-	
 </script>

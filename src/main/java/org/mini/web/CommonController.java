@@ -118,14 +118,21 @@ public class CommonController {
 
 		}
 		
-		Cookie cookie = WebUtils.getCookie(request, "login");
-		System.out.println("쿠키? " + cookie);
-		if (cookie != null) {
-			System.out.println("설마.. " + cookie.getMaxAge());
-			cookie.setPath("/");
-			cookie.setMaxAge(0);
-			response.addCookie(cookie);
+		Cookie loginCookie = WebUtils.getCookie(request, "login");
+		Cookie userImgCookie = WebUtils.getCookie(request, "userimg");
+		
+		if (loginCookie != null) {
+			loginCookie.setPath("/");
+			loginCookie.setMaxAge(0);
+			response.addCookie(loginCookie);
 		}
+		
+		if (userImgCookie != null) {
+			userImgCookie.setPath("/");
+			userImgCookie.setMaxAge(0);
+			response.addCookie(userImgCookie);
+		}
+		
 		
 		return "redirect:/home";
 	}
