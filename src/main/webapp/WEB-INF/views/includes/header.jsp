@@ -154,6 +154,8 @@
 
 <script src="/resources/js/jquery.scrollUp.min.js"></script>
 
+<script src="/resources/js/jquery.cookie.js"></script>
+
 <script type="text/javascript">
 	$(document)
 			.ready(
@@ -198,9 +200,12 @@
 	$('#loginBtn').click(function() {
 		location.href = '/login';
 	});
-
-	if ("${login}" != "") {
-		console.log("로그인한경우");
+	
+	console.log("쿠키? "+$.cookie('login'));
+	console.log("세션? " + "${login}");
+	
+	if ("${login}" != '' || typeof($.cookie('login')) != 'undefined') {
+		console.log("로그인한경우?");
 		if("${userimg}" != "") {
 			console.log("${userimg}");
 		$("#buttonBox")
@@ -230,6 +235,7 @@
 							location.href = '/logout';
 							$("#buttonBox")
 									.html('<button id="loginBtn" class="btn btn-hero btn-lg" role="button">로그인</button>');
+							
 							break;
 						case "fileBtn":
 							console.log("아이콘눌림");

@@ -16,15 +16,12 @@ public class RememberSetInterceptor extends HandlerInterceptorAdapter {
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		
-		// 로그인 유지
-		
-				// 사용자가 정상적으로 로그인 했다면  model에 member이름으로 값이 있겠지~~
+				// 사용자가 정상적으로 로그인 했다면  model에 id 존재 
 				Object obj = modelAndView.getModel().get("id");
 				
 				// 로그인 안 된 사람
 				if(obj == null) {
 					response.sendRedirect("/login");
-//					response.sendRedirect("/login?msg=fail");
 					return;
 				}
 				

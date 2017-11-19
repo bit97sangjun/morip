@@ -107,19 +107,26 @@ public class CommonController {
 	public String logout(HttpServletRequest request, HttpServletResponse response, HttpSession session)
 			throws Exception {
 
-		Object obj = session.getAttribute("login");
-
+		Object obj = request.getSession().getAttribute("login");
+		System.out.println("띠용");
+		
+		System.out.println("세샨? " + obj);
+		
 		if (obj != null) {
 			session.removeAttribute("login");
 			session.invalidate();
 
-			Cookie cookie = WebUtils.getCookie(request, "login");
-
-			if (cookie != null) {
-				cookie.setPath("/");
-				cookie.setMaxAge(0);
-			}
 		}
+		
+		Cookie cookie = WebUtils.getCookie(request, "login");
+		System.out.println("쿠키? " + cookie);
+		if (cookie != null) {
+			System.out.println("설마.. " + cookie.getMaxAge());
+			cookie.setPath("/");
+			cookie.setMaxAge(0);
+			response.addCookie(cookie);
+		}
+		
 		return "redirect:/home";
 	}
 
