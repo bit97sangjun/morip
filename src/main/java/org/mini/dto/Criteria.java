@@ -9,7 +9,7 @@ public class Criteria {
 	private int blockSize;
 	
 	public Criteria() {
-		this(1, 2, 3);
+		this(1, 3, 3);
 	}
 
 	public Criteria(int page, int size, int blockSize) {
