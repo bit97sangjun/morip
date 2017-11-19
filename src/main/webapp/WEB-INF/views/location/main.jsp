@@ -665,7 +665,6 @@ h1 {
 			location.href='/location/main';
 		});
 
-		
 	</script>
 </body>
 

@@ -63,9 +63,9 @@
 									<h4>
 										<c:out value="${report.rtitle}"></c:out>
 									</h4>
-									<p>
-										<c:out value="${report.rcontent}"></c:out>
-									</p>
+<!-- 									<p> -->
+<%-- 										<c:out value="${report.rcontent}"></c:out> --%>
+<!-- 									</p> -->
 									<a class="btn btn-mini" href="#">Read More <i
 										class="fa fa-angle-double-right" aria-hidden="true"></i></a>
 								</div>
@@ -143,6 +143,15 @@
     </script>
 
 	<script>
+	
+	$(".movieBtn").on("click", function () {
+		location.href='/movie/list';
+	});
+	
+	$(".locationBtn").on("click", function () {
+		location.href='/location/main';
+	});
+	
     $(document).ready(function() {
     	
     	var actionForm = $("#actionForm");
