@@ -17,6 +17,7 @@
 <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/css/largemap.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/tab.css" />" rel="stylesheet">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 <link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
 
@@ -33,104 +34,6 @@
 	<c:import url="../includes/header.jsp"></c:import>
 
 	<style>
-.navbar-default {
-	background-color: transparent;
-	border-color: transparent;
-	-webkit-transition: all 0.5s ease 0s;
-	-o-transition: all 0.5s ease 0s;
-	transition: all 0.5s ease 0s;
-}
-
-.navbar-nav {
-	margin-top: 40px;
-	float: right;
-}
-
-@media screen and (max-width: 767px) {
-	.navbar-nav {
-		float: none;
-		text-align: center;
-		background: rgba(25, 33, 60, 0.5);
-	}
-}
-
-.navbar-default .navbar-brand {
-	margin-top: 40px;
-	font-size: 28px;
-	font-family: 'Righteous', cursive;
-	color: #fff;
-	letter-spacing: 1px;
-	-moz-transition: color .5s ease-in;
-	-o-transition: color .5s ease-in;
-	-webkit-transition: color .5s ease-in;
-}
-
-.navbar-default .navbar-brand span {
-	color: #42a5f6;
-	-moz-transition: color .5s ease-in;
-	-o-transition: color .5s ease-in;
-	-webkit-transition: color .5s ease-in;
-}
-
-@media screen and (max-width: 400px) {
-	.navbar-default .navbar-brand {
-		font-size: 22px;
-	}
-}
-
-.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand span:hover
-	{
-	color: #3D99B8;
-}
-
-.navbar-default .navbar-nav>li>a {
-	color: #fff;
-	font-size: 14px;
-	font-family: 'Noto Sans', sans-serif;
-	text-transform: uppercase;
-	letter-spacing: 1px;
-}
-
-.navbar-default .navbar-nav>li>a:hover {
-	color: #42a5f6;
-}
-
-.navbar-default .navbar-nav>li>a:focus {
-	color: #42a5f6;
-}
-
-.navbar-default .navbar-toggle {
-	margin-top: 40px;
-	border: none;
-}
-
-.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover
-	{
-	background: none;
-}
-
-.navbar-default .navbar-toggle .icon-bar {
-	height: 4px;
-	width: 28px;
-	background: #42a5f6;
-}
-
-.navbar-default.shrink {
-	background: rgba(25, 33, 60, 0.8)
-}
-
-.navbar-default.shrink .navbar-nav {
-	margin-top: 20px;
-	margin-bottom: 10px;
-}
-
-.navbar-default.shrink .navbar-brand {
-	margin-top: 20px;
-}
-
-.navbar-default.shrink .navbar-toggle {
-	margin-top: 25px;
-}
 
 .detailMap {
 	min-height: 500px;
@@ -196,140 +99,12 @@ h1 {
   color: #ffd587;
 }
 
-/* ------ 상단 버튼 css --------*/
-
-*, *:before, *:after {
-  box-sizing: border-box;
-}
-
-.tab-group {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 40px 0;
-}
-.tab-group:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-.tab-group li a {
-  display: block;
-  text-decoration: none;
-  padding: 15px;
-  background: rgba(160, 179, 176, 0.25);
-  color: #a0b3b0;
-  font-size: 20px;
-  float: left;
-  width: 30%;
-  text-align: center;
-  cursor: pointer;
-  -webkit-transition: .5s ease;
-  transition: .5s ease;
-}
-.tab-group li a:hover {
-  background: #025091;
-  color: #ffffff;
-}
-.tab-group .active a {
-  background: #42a5f6;
-  color: #ffffff;
-}
-
-.tab-content > div:last-child {
-  display: none;
-}
-
-h1 {
-  text-align: center;
-  color: #ffffff;
-  font-weight: 300;
-  margin: 0 0 40px;
-}
-
-label {
-  position: absolute;
-  -webkit-transform: translateY(6px);
-          transform: translateY(6px);
-  left: 13px;
-  color: rgba(255, 255, 255, 0.5);
-  -webkit-transition: all 0.25s ease;
-  transition: all 0.25s ease;
-  -webkit-backface-visibility: hidden;
-  pointer-events: none;
-  font-size: 22px;
-}
-label .req {
-  margin: 2px;
-  color: #1ab188;
-}
-
-label.active {
-  -webkit-transform: translateY(50px);
-          transform: translateY(50px);
-  left: 2px;
-  font-size: 14px;
-}
-label.active .req {
-  opacity: 0;
-}
-
-label.highlight {
-  color: #ffffff;
-}
-
-input, textarea {
-  font-size: 22px;
-  display: block;
-  width: 100%;
-  height: 100%;
-  padding: 5px 10px;
-  background: none;
-  background-image: none;
-  border: 1px solid #a0b3b0;
-  color: #ffffff;
-  border-radius: 0;
-  -webkit-transition: border-color .25s ease, box-shadow .25s ease;
-  transition: border-color .25s ease, box-shadow .25s ease;
-}
-input:focus, textarea:focus {
-  outline: 0;
-  border-color: #1ab188;
-}
-
-textarea {
-  border: 2px solid #a0b3b0;
-  resize: vertical;
-}
-
-.field-wrap {
-  position: relative;
-  margin-bottom: 40px;
-}
-
-.top-row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-.top-row > div {
-  float: left;
-  width: 48%;
-  margin-right: 4%;
-}
-.top-row > div:last-child {
-  margin: 0;
-}
-
-.topBtn {
-	padding-left: 28%;
-}
-
 </style>
 	<div id="about">
 		<div class="container">
 			<div class="topBtn">
 				<ul class="tab-group">
-					<li class="tab movieBtn" ><a href="#signup" style="border-radius:15px 0px 0px 15px;">Moive</a></li>
+					<li class="tab movieBtn" ><a href="#signup" style="border-radius:15px 0px 0px 15px;">Movie</a></li>
 					<li class="tab active locationBtn" ><a href="#login" style="border-radius:0px 15px 15px 0px;">Location</a></li>
 				</ul>
 			</div>
@@ -489,8 +264,6 @@ textarea {
 	<!-- Portfolio Isotope Settings -->
 	<script type="text/javascript">
 		$("#region_${zone.zcode}").css("fill","#005bba");
-		
-// 		var zcode = '#region_' + '${param.zcode}';
 
 		$(window)
 				.load(
@@ -697,50 +470,21 @@ textarea {
 
 		</c:forEach>
 
-		// 지도 위에 마커를 표시합니다
-		// 		for (var i = 0, len = ${pList.size()}; i < len; i++) {
-		// 			var gapX = (MARKER_WIDTH + SPRITE_GAP), // 스프라이트 이미지에서 마커로 사용할 이미지 X좌표 간격 값
-		// 			originY = (MARKER_HEIGHT + SPRITE_GAP) * i, // 스프라이트 이미지에서 기본, 클릭 마커로 사용할 Y좌표 값
-		// 			overOriginY = (OVER_MARKER_HEIGHT + SPRITE_GAP) * i, // 스프라이트 이미지에서 오버 마커로 사용할 Y좌표 값
-		// 			normalOrigin = new daum.maps.Point(0, originY), // 스프라이트 이미지에서 기본 마커로 사용할 영역의 좌상단 좌표
-		// 			clickOrigin = new daum.maps.Point(gapX, originY), // 스프라이트 이미지에서 마우스오버 마커로 사용할 영역의 좌상단 좌표
-		// 			overOrigin = new daum.maps.Point(gapX * 2, overOriginY); // 스프라이트 이미지에서 클릭 마커로 사용할 영역의 좌상단 좌표
-
-		// 			// 마커를 생성하고 지도위에 표시합니다
-		// 			addMarker(positions[i], normalOrigin, overOrigin, clickOrigin);
-		// 		}
 
 		// 마커를 생성하고 지도 위에 표시하고, 마커에 mouseover, mouseout, click 이벤트를 등록하는 함수입니다
 		function addMarker(position, normalOrigin, overOrigin, clickOrigin, pno, marker, normalImage) {
 			
-// 			var imageSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png';
 			var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
-// 		    var imageSize = new daum.maps.Size(44, 45), // 마커이미지의 크기입니다
 		    var imageSize = new daum.maps.Size(24, 35); 
-// 		    imageOprion = {offset: new daum.maps.Point(20, 45)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 		    imageOprion = {offset: new daum.maps.Point(10, 40)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 
 			// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
 			var clickImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOprion);
 
-			// 마커를 생성하고 이미지는 기본 마커 이미지를 사용합니다
-// 			var marker = new daum.maps.Marker({
-// 				map : map,
-// 				position : position,
-// 				image : normalImage
-// 			});
 
 			// 마커 객체에 마커아이디와 마커의 기본 이미지를 추가합니다
 			marker.normalImage = normalImage;
 
-			// 마커에 mouseover 이벤트를 등록합니다
-// 			daum.maps.event.addListener(marker, 'mouseover', function() {
-// 				// 클릭된 마커가 없고, mouseover된 마커가 클릭된 마커가 아니면
-// 				// 마커의 이미지를 오버 이미지로 변경합니다
-// 				if (!selectedMarker || selectedMarker !== marker) {
-// 					marker.setImage(overImage);
-// 				}
-// 			});
 
 			// 마커에 mouseout 이벤트를 등록합니다
 			daum.maps.event.addListener(marker, 'mouseout', function() {
@@ -834,17 +578,6 @@ textarea {
 			location.href = '/location/main?zcode=' + zcode;
 		});
 
-		// 		$("marker").addListener("mouseover",function() {
-		// 			console.log("1");
-		// 		});
-		// 		daum.maps.event.addListener(marker, 'mouseover', function() {
-
-		// 			// 클릭된 마커가 없고, mouseover된 마커가 클릭된 마커가 아니면
-		// 			// 마커의 이미지를 오버 이미지로 변경합니다
-		// // 			if (!selectedMarker || selectedMarker !== marker) {
-		// // 				marker.setImage(overImage);
-		// // 			}
-		// 		});
 		
 		$(".portfolioContainer").on("click", "div", function () {
 			location.href = '/movie/list?search=' + $(this).attr("data-mtitle");

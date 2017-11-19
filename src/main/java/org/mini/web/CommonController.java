@@ -109,31 +109,30 @@ public class CommonController {
 
 		Object obj = request.getSession().getAttribute("login");
 		System.out.println("띠용");
-		
+
 		System.out.println("세샨? " + obj);
-		
+
 		if (obj != null) {
 			session.removeAttribute("login");
 			session.invalidate();
 
 		}
-		
+
 		Cookie loginCookie = WebUtils.getCookie(request, "login");
 		Cookie userImgCookie = WebUtils.getCookie(request, "userimg");
-		
+
 		if (loginCookie != null) {
 			loginCookie.setPath("/");
 			loginCookie.setMaxAge(0);
 			response.addCookie(loginCookie);
 		}
-		
+
 		if (userImgCookie != null) {
 			userImgCookie.setPath("/");
 			userImgCookie.setMaxAge(0);
 			response.addCookie(userImgCookie);
 		}
-		
-		
+
 		return "redirect:/home";
 	}
 

@@ -16,6 +16,7 @@
 	<link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/resources/css/style.css" rel="stylesheet">
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<c:url value="/resources/css/tab.css" />" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
     <link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
     
@@ -29,122 +30,28 @@
 
 <body>
     <c:import url="../includes/header.jsp"></c:import>
-    <style>
     
-    	.navbar-default {
-    		background-color: transparent;
-    		border-color: transparent;
-    		-webkit-transition: all 0.5s ease 0s;
-  			-o-transition: all 0.5s ease 0s;
-  			transition: all 0.5s ease 0s;
-    	}
-    	
-    	.navbar-nav { 
-    		margin-top: 40px;
-    		float: right;
-    	}
-    	
-    	@media screen and (max-width: 767px) {
-    	.navbar-nav {
-    		float: none;
-    		text-align: center;
-    		background: rgba(25, 33, 60, 0.5);
-    	}
-    	}
-    	
-    	.navbar-default .navbar-brand {
-    		margin-top: 40px;
-    		font-size: 28px;
-    		font-family: 'Righteous', cursive;
-    		color: #fff;
-    		letter-spacing: 1px;
-    		-moz-transition:color .5s ease-in;
-   			-o-transition:color .5s ease-in;
-    		-webkit-transition:color .5s ease-in;
-    	}
-    	
-    	.navbar-default .navbar-brand span {
-    		color: #42a5f6;
-    		-moz-transition:color .5s ease-in;
-   			-o-transition:color .5s ease-in;
-    		-webkit-transition:color .5s ease-in;
-    	}
-    	
-    	@media screen and (max-width: 400px) {
-    	.navbar-default .navbar-brand {
-    		font-size: 22px;
-    	}
-    	}
-    	
-    	.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand span:hover {
-    		color: #3D99B8;
-    	}
-    	
-    	.navbar-default .navbar-nav>li>a {
-    		color: #fff;
-    		font-size: 14px;
-    		font-family: 'Noto Sans', sans-serif;
-    		text-transform: uppercase;
-    		letter-spacing: 1px;
-    	}
-    	
-    	.navbar-default .navbar-nav>li>a:hover {
-    		color: #42a5f6;
-    	}
-    	
-    	.navbar-default .navbar-nav>li>a:focus {
-    		color: #42a5f6;
-    	}
-    	
-    	.navbar-default .navbar-toggle {
-    		margin-top: 40px;
-    		border: none;
-    	}
-    	
-		.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
-			background: none;
-		}
-    	
-    	.navbar-default .navbar-toggle .icon-bar {
-    		height: 4px;
-    		width: 28px;
-    		background: #42a5f6;
-		}
-    	
-    	.navbar-default.shrink {
-    		background:rgba(25, 33, 60, 0.8)
-		}
-		
-		.navbar-default.shrink .navbar-nav {
-			margin-top: 20px;
-			margin-bottom: 10px;
-		}
-		
-		.navbar-default.shrink .navbar-brand {
-			margin-top: 20px;
-		}
-		
-		.navbar-default.shrink .navbar-toggle {
-			margin-top: 25px;
-		}
-
-    </style>
-    
-    <div id="blog">
-    	<div class="container" style="border: 1px solid black">
-    		<h2>Latest <span>Blog</span> Posts</h2>
-    		<hr>
-    		<div class="col-sm-6">
-    			<a href="/movie/insert">글쓰기</a>
-    		</div>
-    		<div class="col-sm-6" align="right">
-    			<form id=searchForm method="get" action='/movie/list'>
-    				<input type="text" name="search" <c:if test="${!empty skeyword}">value="${skeyword}"</c:if>>
-    				
-    				<button id="sBtn">검색</button>
-    			</form>
-    		</div>
-    		<div>
+    <div id="report">
+    	<div class="container" style="text-align: center">
+			<div class="topBtn">
+				<ul class="tab-group">
+					<li class="tab active movieBtn" ><a href="#signup" style="border-radius:15px 0px 0px 15px;">Movie</a></li>
+					<li class="tab locationBtn" ><a href="#login" style="border-radius:0px 15px 15px 0px;">Location</a></li>
+				</ul>
+			</div>
+			
+    		
+    		<div class="col-md-8 col-md-offset-2" id="listDiv">
+             	<form id="searchForm" method="get" action='/movie/list'>
+              		<div class="input-group">
+                 		<input class="btn btn-lg" type="text" name="search" <c:if test="${!empty skeyword}"> required value="${skeyword}"</c:if>>
+                 		<button class="btn btn-info btn-lg" type="submit" id="sBtn">검색</button>
+             		 </div>
+            	</form>
+			</div> 
+			<a href="/movie/insert"><button class="btn btn-info btn-lg" type="button" id="registerBtn">글쓰기</button></a>
+    		
+    		<div id="reportBox">
     			<ul class="thumbnails">
 					<c:forEach items="${list}" var="report">
 						<li class="col-sm-4">
@@ -168,13 +75,8 @@
 				</ul>
     		</div>
 
-	   		<nav>
-				<ul class="control-box pager">
-					<!-- <li><a data-slide="prev" href="#myCarousel" class=""><i class="fa fa-chevron-left" aria-hidden="true"></i></a></li>
-					<li><a data-slide="next" href="#myCarousel" class=""><i class="fa fa-chevron-right" aria-hidden="true"></i></a></li> -->
-				</ul>
-				 <div class="well">
-					 <ul class="pagination mypage">
+				 <div id="reportPage">
+					 <ul class="pagination mypage" style="margin: 0 auto;">
 					    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
 					    <li class="page-item"><a class="page-link" href="#">1</a></li>
 					    <li class="page-item"><a class="page-link" href="#">2</a></li>
@@ -182,10 +84,7 @@
 					    <li class="page-item"><a class="page-link" href="#">Next</a></li>
 					  </ul>
 				</div>    
-			</nav>
-	   		<!-- /.control-box -->   
                               
-   	 		<!-- </div>/#myCarousel -->
     	</div>
     	<!-- <button id="testBtn">test</button> -->
     </div>
@@ -226,26 +125,6 @@
 	</script>
     
     
-    <!-- Navbar Change on Scroll -->
-	<script type="text/javascript">
-		$(function(){
- 		var shrinkHeader = 100;
-  		$(window).scroll(function() {
-    		var scroll = getCurrentScroll();
-      		if ( scroll >= shrinkHeader ) {
-           		$('.navbar-default').addClass('shrink');
-        	}
-       		else {
-            	$('.navbar-default').removeClass('shrink');
-        	}
-  		});
-		function getCurrentScroll() {
-    		return window.pageYOffset || document.documentElement.scrollTop;
-    	}
-	});
-
-	</script>    
-	
 	<!-- Scroll To Top Settings -->
     <script type="text/javascript">
     
