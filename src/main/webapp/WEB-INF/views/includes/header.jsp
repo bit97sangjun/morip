@@ -206,8 +206,9 @@
 	
 	if ("${login}" != '' || typeof($.cookie('login')) != 'undefined') {
 		console.log("로그인한경우?");
+			console.log("프사?? "+"${userimg}");
 		if("${userimg}" != "") {
-			console.log("${userimg}");
+			console.log("프사?? "+"${userimg}");
 		$("#buttonBox")
 				.html('<img title="프로필" data-placement="bottom" data-toggle="popover" id="mypage" src="/userimg?fileName=${userimg}" style="width:40px; height:40px; border-radius: 50%"/>');
 			

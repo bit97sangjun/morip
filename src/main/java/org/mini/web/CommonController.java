@@ -39,7 +39,7 @@ public class CommonController {
 		if (session.getAttribute("login") != null) {
 			System.out.println("들어왔음");
 			System.out.println(session.getAttribute("login"));
-			model.addAttribute("userimg", service.getProfile(session.getAttribute("login").toString()));
+			session.setAttribute("userimg", service.getProfile(session.getAttribute("login").toString()));
 		}
 	}
 
