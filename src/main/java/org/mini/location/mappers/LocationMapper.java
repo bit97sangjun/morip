@@ -41,7 +41,10 @@ public interface LocationMapper {
 	@Insert("insert into tb_comment(score, rno, ccontent, id) values (#{score}, #{rno}, #{ccontent}, 'aaa')")
 	public void rCreate(Comment comment);
 	
-	@Select("select cno, score, ccontent, id, cregdate from tb_comment where rno = #{rno} order by cno desc")
+//	@Select("select cno, score, ccontent, id, cregdate from tb_comment where rno = #{rno} order by cno desc")
+//	public List<Comment> rList(int rno);
+	
+	@Select("select c.cno, c.score, c.ccontent, c.id, c.cregdate, m.userimg from tb_comment c inner join tb_member m on c.id = m.id where c.rno = 1 order by cno desc")
 	public List<Comment> rList(int rno);
 	
 	@Update("update tb_comment set ccontent = #{ccontent}, cupdate = now() where cno = #{cno}")

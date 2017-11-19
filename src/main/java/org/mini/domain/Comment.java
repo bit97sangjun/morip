@@ -15,5 +15,6 @@ public class Comment {
 	private Date cupdate ;
 	private String ccontent ;
 	private String id;
+	private String userimg;
 	
 }

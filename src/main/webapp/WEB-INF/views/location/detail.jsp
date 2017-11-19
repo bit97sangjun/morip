@@ -146,6 +146,58 @@
 	text-decoration: none;
 	
 }
+
+/* 스코어 별 css */
+.star-rating {
+  font-family: 'FontAwesome';
+/*   margin: 50px auto; */
+}
+.star-rating > fieldset {
+  border: none;
+  display: inline-block;
+}
+.star-rating > fieldset:not(:checked) > input {
+  position: absolute;
+  top: -9999px;
+  clip: rect(0, 0, 0, 0);
+}
+.star-rating > fieldset:not(:checked) > label {
+  float: right;
+  width: 1em;
+  padding: 0 .05em;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 200%;
+  color: #ff89c0;
+}
+.star-rating > fieldset:not(:checked) > label:before {
+  content: '\f006  ';
+}
+.star-rating > fieldset:not(:checked) > label:hover,
+.star-rating > fieldset:not(:checked) > label:hover ~ label {
+  color: #ff7070;
+  text-shadow: 0 0 1px #ef2b2b;
+}
+.star-rating > fieldset:not(:checked) > label:hover:before,
+.star-rating > fieldset:not(:checked) > label:hover ~ label:before {
+  content: '\f005  ';
+}
+.star-rating > fieldset > input:checked ~ label:before {
+  content: '\f005  ';
+}
+.star-rating > fieldset > label:active {
+  position: relative;
+  top: 2px;
+}
+/* 별 css 끝 */
+.profileImg {
+	width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+}
+
 </style>
 
 	<div id="about">
@@ -162,25 +214,27 @@
     	</div>
     </div>
     
-    <div id="blog">
+    <div id="blog" style="background-color: #f2fcff;">
     	<div class="container">
 	   		<form id="commentForm" method="post">
 	   		<input type="hidden" name="rno" value="1" id="rno">
-    			평점<select id="score" name="score">
-    				<option value="5">5</option>
-    				<option value="4">4</option>
-    				<option value="3">3</option>
-    				<option value="2">2</option>
-    				<option value="1">1</option>
-    			</select><br>
-    			<textarea class="btn btn-lg" rows="5" cols="100" name="ccontent" id="ccontent" style="text-align: left;"></textarea>
-    			<button class="btn btn-info btn-lg" id="commentInsertBtn" type="button" style="height: 138px;">등록</button>
+    			<div class="star-rating">
+				  <fieldset>
+				    <input type="radio" id="star5" name="score" value="5" /><label for="star5" title="Outstanding">5 stars</label>
+				    <input type="radio" id="star4" name="score" value="4" /><label for="star4" title="Very Good">4 stars</label>
+				    <input type="radio" id="star3" name="score" value="3" /><label for="star3" title="Good">3 stars</label>
+				    <input type="radio" id="star2" name="score" value="2" /><label for="star2" title="Poor">2 stars</label>
+				    <input type="radio" id="star1" name="score" value="1" checked="checked" /><label for="star1" title="Very Poor">1 star</label>
+				  </fieldset>
+				</div>
+    			<textarea class="btn btn-lg" rows="3" cols="70" name="ccontent" id="ccontent" style="text-align: left;"></textarea>
+    			<button class="btn btn-info btn-lg" id="commentInsertBtn" type="button" style="height: 95px;">등록</button>
     		</form>
     		<hr>
     		<table class="table table-hover" style="width: 700px;">
     			<thaed>
     				<tr>
-    					<th width="20px;">#</th><th>content</th><th>score</th><th></th>
+    					<th width="100px;"></th><th width="30px;">#</th><th width="300px;">content</th><th width="60px;">score</th><th width="150px;"></th>
     				</tr>
     			</thaed>
     			<tbody id="commentList">
@@ -246,12 +300,14 @@
 	</script>
 
 	<script type="text/javascript">
-	
+
 	$("#movieTitle").html("${movie.mtitle}");
 	
 	$(".movieImg").html("<img src='/resources/images/movieimg/" + '${movie.mimg}' + "'/>");
 	
 	getAllList();
+	
+	console.log("${login}");
 	
 	function getAllList() {
 		$.ajax({
@@ -263,19 +319,22 @@
 			for(var index in result){
 				var comment = result[index];
 				
-				console.log(new Date(result[index].cregdate));
-				
-				html += "<tr id="+ comment.cno +"><td>"+comment.cno+"</td><td id='content'>"+comment.ccontent+"</td><td>"+comment.score+"</td><td>" 
-				+ "<button type='button' name='update' id="+ comment.cno +" class='btn btn-warning'>수정</button>"
-				+ "<button type='button' name='delete' data-del="+ comment.cno +" class='btn btn-danger'>삭제</button></td></tr>";
+				html += "<tr id="+ comment.cno +"><td><img class='profileImg' src='/resources/images/profileimg/"+comment.userimg+"'/>"+"　"+comment.id
+				+ "</td><td>"+comment.cno+"</td><td id='content'>"+comment.ccontent+"</td><td>"
+				+ "<img src='/resources/images/scoreimg/score_"+comment.score+".png'/></td><td>";
+				if("${login}" == comment.id){
+					html += "<button type='button' name='update' id="+ comment.cno +" class='btn btn-info'>수정</button>"
+					+ "<button type='button' name='delete' data-del="+ comment.cno +" class='btn btn-danger'>삭제</button></td></tr>";
+				}
 			}
 			$("#commentList").html(html);
 		});
 	}
 	
 	$("tbody").on("click", "button[name=update]", function () {
-		$("tr[id='"+$(this)[0].id+"']").html("<textarea class='btn btn-lg' rows='5' cols='100' style='text-align: left;'>"+ $("tr[id='"+$(this)[0].id+"'] #content").text() 
-				+ "</textarea><button data-cno='"+ $(this)[0].id +"' type='button' class='btn btn-warning'>수정</button>");
+		$("tr[id='"+$(this)[0].id+"']").html("<td></td><td>"+ $(this)[0].id +"</td><td><textarea class='btn btn-lg' rows='3' cols='50' style='text-align: left;'>"+ $("tr[id='"+$(this)[0].id+"'] #content").text() 
+				+ "</textarea></td><td><button data-cno='"+ $(this)[0].id +"' type='button' class='btn btn-info'>수정</button>"
+				+ "<button class='btn btn-danger' id='backBtn'>취소</button></td>");
 	});
 	
 	$("tbody").on("click", "button[data-cno]", function () {
@@ -311,12 +370,16 @@
 			type : "POST",
 			data : {
 				"rno" : $("#rno").val(),
-				"score" : $("#score").val(),
+				"score" : $(":input:radio[name=score]:checked").val(),
 				"ccontent" : $("#ccontent").val()
 			}
 		}).done(function (result) {
 			getAllList();
 		});
+	});
+	
+	$("tbody").on("click", "button[id=backBtn]",function () {
+		getAllList();
 	});
 	
     </script>
