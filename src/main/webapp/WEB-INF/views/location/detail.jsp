@@ -139,6 +139,13 @@
 	width: 250px;
 	height: 350px;
 }
+
+.comment {
+	background: #42a5f6;
+	color: #fff;
+	text-decoration: none;
+	
+}
 </style>
 
 	<div id="about">
@@ -170,9 +177,15 @@
     			<button class="btn btn-info btn-lg" id="commentInsertBtn" type="button" style="height: 138px;">등록</button>
     		</form>
     		<hr>
-    		<div id="commentList">
-    			<ul></ul>
-    		</div>
+    		<table class="table table-hover" style="width: 700px;">
+    			<thaed>
+    				<tr>
+    					<th width="20px;">#</th><th>content</th><th>score</th><th></th>
+    				</tr>
+    			</thaed>
+    			<tbody id="commentList">
+    			</tbody>
+    		</table>
     	</div>
     </div>
 
@@ -234,23 +247,11 @@
 
 	<script type="text/javascript">
 	
-	getAllList();
+	$("#movieTitle").html("${movie.mtitle}");
 	
-	$("#commentInsertBtn").on("click", function () {
-		
-		$.ajax({
-			url : "/comment/register",
-			type : "POST",
-			data : {
-				"rno" : $("#rno").val(),
-				"score" : $("#score").val(),
-				"ccontent" : $("#ccontent").val()
-			}
-		}).done(function (result) {
-			console.log(result);
-			getAllList();
-		});
-	});
+	$(".movieImg").html("<img src='/resources/images/movieimg/" + '${movie.mimg}' + "'/>");
+	
+	getAllList();
 	
 	function getAllList() {
 		$.ajax({
@@ -258,33 +259,26 @@
 			type : "GET",
 			data : {"rno" : 1}
 		}).done(function (result) {
-			console.dir(result);
 			var html = "";
 			for(var index in result){
 				var comment = result[index];
 				
 				console.log(new Date(result[index].cregdate));
 				
-				html += "<li id="+ comment.cno +"><span>" + comment.ccontent 
-				+ "</span><button type='button' name='update'>수정</button>"
-				+ "<button type='button' name='delete' data-del="+ comment.cno +">삭제</button></li>";
+				html += "<tr id="+ comment.cno +"><td>"+comment.cno+"</td><td id='content'>"+comment.ccontent+"</td><td>"+comment.score+"</td><td>" 
+				+ "<button type='button' name='update' id="+ comment.cno +" class='btn btn-warning'>수정</button>"
+				+ "<button type='button' name='delete' data-del="+ comment.cno +" class='btn btn-danger'>삭제</button></td></tr>";
 			}
-			$("#commentList ul").html(html);
+			$("#commentList").html(html);
 		});
 	}
 	
-	$("#movieTitle").html("${movie.mtitle}");
-	
-	$(".movieImg").html("<img src='/resources/images/movieimg/" + '${movie.mimg}' + "'/>");
-	
-	
-	
-	$("ul").on("click", "button[name=update]", function () {
-		$("li[id='"+$(this)[0].id+"']").html("<textarea rows='5' cols='100'>"+ $("li[id='"+$(this)[0].id+"'] span").text() 
-				+ "</textarea><button data-cno='"+ $(this)[0].id +"' type='button'>수정</button>");
+	$("tbody").on("click", "button[name=update]", function () {
+		$("tr[id='"+$(this)[0].id+"']").html("<textarea class='btn btn-lg' rows='5' cols='100' style='text-align: left;'>"+ $("tr[id='"+$(this)[0].id+"'] #content").text() 
+				+ "</textarea><button data-cno='"+ $(this)[0].id +"' type='button' class='btn btn-warning'>수정</button>");
 	});
 	
-	$("ul").on("click", "button[data-cno]", function () {
+	$("tbody").on("click", "button[data-cno]", function () {
 		console.log($(this).prev().val());
 		
 		$.ajax({
@@ -300,8 +294,7 @@
 		});
 	});
 	
-	$("ul").on("click", "button[data-del]", function () {
-		console.log(1);
+	$("tbody").on("click", "button[data-del]", function () {
 		
 		$.ajax({
 			url : "/comment/delete/" + $(this).attr("data-del"),
@@ -311,6 +304,20 @@
 		});
 	});
 	
+	$("#commentInsertBtn").on("click", function () {
+		
+		$.ajax({
+			url : "/comment/register",
+			type : "POST",
+			data : {
+				"rno" : $("#rno").val(),
+				"score" : $("#score").val(),
+				"ccontent" : $("#ccontent").val()
+			}
+		}).done(function (result) {
+			getAllList();
+		});
+	});
 	
     </script>
         
