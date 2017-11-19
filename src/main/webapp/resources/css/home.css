@@ -31,7 +31,7 @@ section a {
 }
 
 section.p3 {
-  background-image: url(/resources/images/slide3.jpg);
+  background-image: url(/resources/images/slide2.jpg);
 }
 section.p3 a {
   width: 634px;
@@ -352,7 +352,8 @@ section.p3 a:hover:after {
 }
 
 section.p8 {
-  background-image: url(//caraujo_pens.surge.sh/images/Z0I8N1E.jpg);
+/*   background-image: url(//caraujo_pens.surge.sh/images/Z0I8N1E.jpg); */
+  background-image: url(/resources/images/movie.jpg);
 }
 section.p8 a {
   width: 389px;
