@@ -41,6 +41,8 @@ public class LocationController {
 	
 	@GetMapping("/detail")
 	public void detail(Model model, @RequestParam(value="rno", defaultValue="1") int rno) {
+		
+		model.addAttribute("report", service.getReport(rno));
 		model.addAttribute("movie", service.rMovie(rno));
 		model.addAttribute("marker", service.rMarker(rno));
 	}

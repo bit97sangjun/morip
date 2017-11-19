@@ -11,6 +11,7 @@ import org.mini.domain.Comment;
 import org.mini.domain.Location;
 import org.mini.domain.Movie;
 import org.mini.domain.Place;
+import org.mini.domain.Report;
 import org.mini.domain.Zone;
 
 public interface LocationMapper {
@@ -38,11 +39,8 @@ public interface LocationMapper {
 	@Select("select addr from tb_place where pno in ( select pno from tb_markers where rno = #{rno})")
 	public List<Place> rMarker(int rno);
 	
-	@Insert("insert into tb_comment(score, rno, ccontent, id) values (#{score}, #{rno}, #{ccontent}, 'aaa')")
+	@Insert("insert into tb_comment(score, rno, ccontent, id) values (#{score}, #{rno}, #{ccontent}, #{id})")
 	public void rCreate(Comment comment);
-	
-//	@Select("select cno, score, ccontent, id, cregdate from tb_comment where rno = #{rno} order by cno desc")
-//	public List<Comment> rList(int rno);
 	
 	@Select("select c.cno, c.score, c.ccontent, c.id, c.cregdate, m.userimg from tb_comment c inner join tb_member m on c.id = m.id where c.rno = 1 order by cno desc")
 	public List<Comment> rList(int rno);
@@ -52,5 +50,8 @@ public interface LocationMapper {
 	
 	@Delete("delete from tb_comment where cno = #{cno}")
 	public void rDelete(int cno);
+	
+	@Select("select * from tb_report where rno = #{rno}")
+	public Report getReport(int rno);
 	
 }

@@ -136,7 +136,7 @@
 }
 
 .movieImg {
-	width: 250px;
+	width: 200px;
 	height: 350px;
 }
 
@@ -144,7 +144,6 @@
 	background: #42a5f6;
 	color: #fff;
 	text-decoration: none;
-	
 }
 
 /* 스코어 별 css */
@@ -196,21 +195,32 @@
     height: 40px;
     border-radius: 50%;
 }
+
+#rcontent {
+	color: white;
+	font-size: medium;
 }
 
 </style>
 
-	<div id="about">
+	<div id="about" style="padding: 0px;">
 		<div class="container">
-			<h2 id="movieTitle"></h2>
-			<div class="movieImg" style="float: left; margin-right: 100px;"></div>
-			<div id="map" style="width:700px; height:350px; float: left;"></div>
+			<div>
+			<h3 id="movieTitle">${movie.mtitle}</h3>
+				<div class="movieImg" style="float: left; margin-right: 100px;">
+					<img src='/resources/images/movieimg/${movie.mimg}'/></div>
+				<div id="map" style="width:400px; height:290px; float: left;"></div>
+			</div>
 		</div>
 	</div>
     
-    <div id="portfolio">
+    <div id="portfolio" style="padding-top: 0px;">
     	<div class="container">
-    		<h2>내용</h2>
+    		<h2 id="rtitle">${report.rtitle}</h2>
+ 
+    		<div id="rcontent">
+    			${report.rcontent}
+    		</div>
     	</div>
     </div>
     
@@ -301,9 +311,8 @@
 
 	<script type="text/javascript">
 
-	$("#movieTitle").html("${movie.mtitle}");
-	
-	$(".movieImg").html("<img src='/resources/images/movieimg/" + '${movie.mimg}' + "'/>");
+// 	$("#movieTitle").html("${movie.mtitle}");
+// 	$(".movieImg").html("<img src='/resources/images/movieimg/" + '${movie.mimg}' + "'/>");
 	
 	getAllList();
 	
@@ -365,17 +374,23 @@
 	
 	$("#commentInsertBtn").on("click", function () {
 		
-		$.ajax({
-			url : "/comment/register",
-			type : "POST",
-			data : {
-				"rno" : $("#rno").val(),
-				"score" : $(":input:radio[name=score]:checked").val(),
-				"ccontent" : $("#ccontent").val()
-			}
-		}).done(function (result) {
-			getAllList();
-		});
+		if(!"${login}"){
+			alert("로그인을 하시고 사용해주세요");
+			location.href='/login';
+		} else {
+			$.ajax({
+				url : "/comment/register",
+				type : "POST",
+				data : {
+					"rno" : $("#rno").val(),
+					"score" : $(":input:radio[name=score]:checked").val(),
+					"ccontent" : $("#ccontent").val(),
+					"id" : "${login}"
+				}
+			}).done(function (result) {
+				getAllList();
+			});
+		}
 	});
 	
 	$("tbody").on("click", "button[id=backBtn]",function () {

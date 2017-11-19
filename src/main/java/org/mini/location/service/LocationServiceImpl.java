@@ -6,6 +6,7 @@ import org.mini.domain.Comment;
 import org.mini.domain.Location;
 import org.mini.domain.Movie;
 import org.mini.domain.Place;
+import org.mini.domain.Report;
 import org.mini.domain.Zone;
 import org.mini.location.mappers.LocationMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +72,11 @@ public class LocationServiceImpl implements LocationService {
 	@Override
 	public void rDelete(int cno) {
 		mapper.rDelete(cno);
+	}
+
+	@Override
+	public Report getReport(int rno) {
+		return mapper.getReport(rno);
 	}
 
 }

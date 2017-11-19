@@ -6,6 +6,7 @@ import org.mini.domain.Comment;
 import org.mini.domain.Location;
 import org.mini.domain.Movie;
 import org.mini.domain.Place;
+import org.mini.domain.Report;
 import org.mini.domain.Zone;
 
 public interface LocationService {
@@ -30,4 +31,6 @@ public interface LocationService {
 	public void rUpdate(Comment comment);
 	
 	public void rDelete(int cno);
+	
+	public Report getReport(int rno);
 }
