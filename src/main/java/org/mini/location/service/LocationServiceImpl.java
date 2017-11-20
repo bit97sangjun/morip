@@ -11,8 +11,12 @@ import org.mini.domain.Zone;
 import org.mini.location.mappers.LocationMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import lombok.extern.java.Log;
 
 @Service
+@Log
 public class LocationServiceImpl implements LocationService {
 
 	@Autowired
