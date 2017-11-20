@@ -21,6 +21,10 @@
 	
 </select>
 
+<select id="test" resultType="report">
+	select * from report
+</select>
+
 <insert id="place">
 	insert into tb_report(pname , addr) value(#{pname},#{addr})
 </insert>
@@ -29,7 +33,7 @@
 	
 	<choose>
 		<when test="search != ''">
-			select rimg, r.*
+			select rimg, rpath, r.*
 				from
 				(select rno, rtitle, rcontent  
 						from 
@@ -37,7 +41,7 @@
 				) r inner join tb_reportimg img on r.rno = img.rno group by img.rno
 		</when>
 		<otherwise>
-			select r.* , ri.rimg
+			select r.* , ri.rimg, ri.rpath
 				from tb_report r , tb_reportimg ri
 			where r.rno = ri.rno
 			group by ri.rno
@@ -58,6 +62,92 @@
 		</otherwise>
 	</choose>
 </select>
+
+<insert id="insertReport">
+	insert into tb_report(rtitle, rcontent, id, mcode)
+	values(#{title}, #{content}, 'test', #{mcode})
+</insert>
+
+<insert id="insertReportImg">
+     <selectKey keyProperty="rno" resultType="int" order="BEFORE">
+          select ifnull(max(rno),0) from tb_report
+     </selectKey>
+     		insert into tb_reportimg
+          (rno , rimg , rpath)
+        values
+          (#{rno}, #{rimg}, #{rpath})    
+</insert>
+   
+<select id="selectZone" resultType="int">
+	select zcode 
+		from tb_zone
+	 where zname = #{zname}
+</select>
+<!-- <insert id="insertZoneCode">
+     <selectKey keyProperty="zcode" resultType="int" order="BEFORE">
+          select zone.zcode
+         from zone , place
+         where place.addr like #{keword} = zone.zname
+     </selectKey>
+     
+     insert into tb_place
+       (zcode, adder, pname)
+     values
+       (#{zcode} , #{addr} , #{pname} })
+</insert>
+
+
+
+<select id="selectAddr" resultType="String">
+	select  addr
+		from tb_place
+	 where zcode = #{zcode} 
+	 	  and addr = #{addr}
+</select>
+
+<insert id="insertPlace">
+	insert into tb_place(pname, addr, zcode)
+	values(#{pname}, #{addr}, #{zcode})
+</insert> 
+
+<insert id="insertMarkersNone">
+	<selectKey keyProperty="rno" resultType="int" order="BEFORE">
+		select ifnull(max(rno),0) from tb_report
+	</selectKey>
+	insert into tb_markers(pno, rno)
+	values (#{lastIndex}, rno)
+			
+</insert>
+
+
+
+<insert id="insertMarkers">
+	<selectKey keyProperty="rno" resultType="int" order="BEFORE">
+		select ifnull(max(rno),0) from tb_report
+	</selectKey>
+	insert into tb_markers(pno, rno)
+	values ((select pno from tb_place), rno)
+</insert>-->
+
+
+
+<select id="isExist" resultType="Integer">
+   select pno
+     from tb_place
+    where addr = #{addr}
+</select>
+
+<!-- pno == null -->
+<insert id="putPlace">
+insert into tb_place (pname, addr, zcode)
+              values (#{pname}, #{addr}, #{zcode})
+</insert>
+
+
+<insert id="putMarkers">
+    insert into tb_markers (pno, rno)
+        values (#{lastPno}, #{rno})
+</insert>
 
 </mapper>
   

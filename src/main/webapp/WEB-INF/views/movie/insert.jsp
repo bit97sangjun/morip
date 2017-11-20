@@ -230,6 +230,17 @@ white-space:nowrap;
 .containerr{
 margin: 0;
 }
+.fileDrop{
+	width: 100%;
+	height: 200px;
+	border: 1px dotted blue;
+}
+
+small {
+	margin-left: 3px;
+	font-weight: bold;
+	color: gray;
+}
 </style>
 	<div id="contact">
 		<div class="containerr">
@@ -240,7 +251,7 @@ margin: 0;
 			<!--영화 검색  에 대한 이미지.-->
 			<form id="movieselect" method="post">
 				<span class='green_window'> <input type='text' name="keyword"
-					class='input_text' id='input_keyword' />
+					class='input_text' id='input_keyword'/>
 				</span> <span id="response"></span>
 				<button type="button" class='sch_smit' id="keywordBtn">검색</button>
 			</form>
@@ -250,6 +261,12 @@ margin: 0;
 		</div>
 		<br>
 		<br>
+		<div class="row">
+			<h3>파일 업로드</h3>
+			<div class="fileDrop"></div>
+			
+			<div class="uploadedList"></div>
+		</div>
 
 
 		<iframe width="40%;" height="300" frameborder="0" scrolling="no"
@@ -280,17 +297,28 @@ margin: 0;
 				<ul id="placesList"></ul>
 				<div id="pagination"></div>
 			</div>
+			<button id="testSubmit">주소 보내기</button>
 		</div>
 		<div class="col-lg-6">
 			<form>
-				<textarea id="addrList" style="resize: none;width: 100%; height:500px;" >
-				zxczxczxczxc
-			</textarea>
+				<textarea id="addrList" style="resize: none;width: 100%; height:500px;" readonly ></textarea>
 			</form>
 		</div>
 		</div>
 			
-		
+		<div class="row">
+             <div class="contact-form">
+               <form action="#" method="post" id="contact-form">
+                  <input type="text" id="title" name="title" required="required">
+                  <textarea id="content" name="content" rows="5" required="required">
+        			</textarea>
+                  <br>
+                  <!-- <input type="submit"> -->
+                  <button name="submit" id="submit" >Send Message</button>
+               </form>
+            </div>  
+         </div>   
+       </div>
 	</div>
 	
 
@@ -308,6 +336,13 @@ margin: 0;
          파일 업로드
          <input type="file" id="file">
        </div>    -->
+       
+       <form action="/movie/insert" id="totalForm" method="post">
+       		<input type="hidden" name="mcode">
+       		<input type="hidden" name="title" >
+
+       		<input type="hidden" name="content">
+       </form>
         	
    <!-- footer  -->
    
@@ -327,6 +362,50 @@ margin: 0;
    
    
    <script>
+   var submitForm = $("#totalForm");
+   
+   var totalPath = [];
+   
+   //var testForm = $("#contact-form");
+   
+   $("#submit").on("click", function(e) {
+	   e.preventDefault();
+	   
+	   submitForm.find("input[name='mcode']").val(id);
+
+	   
+	   for(var i = 0; i < dateArr.length; i++) {
+			//submitForm.append("<input type='hidden' name='imgUp[" + i + "]'>");
+			//submitForm.append("<input type='hidden' name='pathUp[" + i + "]'>");
+
+			submitForm.append("<input type='hidden' name='imgUp'>");
+			submitForm.append("<input type='hidden' name='pathUp'>");
+			
+			//submitForm.find("input[name='imgUp[" + i + "]']").val(dateArr[i]);
+			//submitForm.find("input[name='pathUp[" + i + "]']").val(fileNameArr[i]);
+			
+			submitForm.find("input[name='imgUp']:eq(" + i + ")" ).val(dateArr[i]);
+			submitForm.find("input[name='pathUp']:eq(" + i + ")").val(fileNameArr[i]);
+	   }
+	   
+	   for(var i = 0; i < placesStr.length; i++) {
+			submitForm.append("<input type='hidden' name='place'>");
+			submitForm.append("<input type='hidden' name='address'>");
+			
+			submitForm.find("input[name='place']:eq(" + i + ")" ).val(placesStr[i]);
+			submitForm.find("input[name='address']:eq(" + i + ")").val(addrStr[i]);
+	   }
+	   
+	   submitForm.find("input[name='title']").val($("#title").val());
+	   submitForm.find("input[name='content']").val($("#content").val());
+	   
+	   //var formTest = submitForm.find("input[name='imgUp']");
+	   submitForm.submit();
+	   
+	   // test
+	   //testForm.submit();
+   }) ;
+   
    var content ="";
    var movie =[];
          var check = false;
@@ -455,7 +534,7 @@ margin: 0;
                             testMarkers.push(addMarker(marker.getPosition(), 0, false));
                             title != undefined ? placesStr.push(title) : placesStr.push(address);
                             addrStr.push(address);
-
+                            showClickList();
                         });
 
                         daum.maps.event.addListener(marker, 'mouseover', function() {
@@ -520,7 +599,7 @@ margin: 0;
                             testMarkers.push(addMarker(e.latLng, 0, false));
                             placesStr.push(result[0].address.address_name);
                             addrStr.push(result[0].address.address_name);
-
+                            showClickList();
                         }
                     });
                 }
@@ -588,7 +667,9 @@ margin: 0;
           function addMarker(position, idx, check, marker) {
 
               if(check) {
+            	  
                   console.log("check : " + check);
+                  
                   var imageSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
                       imageSize = new daum.maps.Size(36, 37),  // 마커 이미지의 크기
                       imgOptions =  {
@@ -605,7 +686,9 @@ margin: 0;
                       marker.setMap(map); // 지도 위에 마커를 표출합니다
                       markers.push(marker);  // 배열에 생성된 마커를 추가합니다
               }else {
+            	  
                   console.log("check : " + check);
+                  
                   var imageSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
                       imageSize = new daum.maps.Size(24, 35),  // 마커 이미지의 크기
                       markerImage = new daum.maps.MarkerImage(imageSrc, imageSize);
@@ -620,7 +703,7 @@ margin: 0;
                   marker.setMap(map); // 지도 위에 마커를 표출합니다
                   markers.push(marker);
                   //testMarkers.push(marker);  // 배열에 생성된 마커를 추가합니다
-
+				
                   daum.maps.event.addListener(marker, 'click', function() {
                       //console.log(testMarkers);
                       //console.log(marker);
@@ -631,7 +714,7 @@ margin: 0;
                           console.log("marker : ");
                           console.log(marker);
                       }
-
+                     
                       for(var i = 0; i < testMarkers.length; i++) {
                           //console.log(i);
                           console.log(testMarkers[i] === marker);
@@ -643,23 +726,35 @@ margin: 0;
                               placesStr.splice(i, 1);
                               addrStr.splice(i, 1);
                               marker.setMap(null);
+                              showClickList();
                           }
                       }
 
 
-                  });
-              }
-
-              return marker;
+                  	});
+              	}
+              	
+				return marker;
           }
+       
+		function showClickList() {
+			console.log("찍히나?");
+			$("#addrList").html("");
+			var addrText = "";
+			
+			for(var i = 0; i < testMarkers.length; i++) {
+				addrText += addrStr[i] + "\n";
+			}
+			$("#addrList").html(addrText);
+		}
  
- // 지도 위에 표시되고 있는 마커를 모두 제거합니다
- function removeMarker() {
-     for ( var i = 0; i < markers.length; i++ ) {
-         markers[i].setMap(null);
-     }
-     markers = [];
- }
+		// 지도 위에 표시되고 있는 마커를 모두 제거합니다
+		function removeMarker() {
+		    for ( var i = 0; i < markers.length; i++ ) {
+		        markers[i].setMap(null);
+		    }
+		    markers = [];
+		}
  
         // 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
         function displayPagination(pagination) {
@@ -708,7 +803,21 @@ margin: 0;
                 el.removeChild (el.lastChild);
             }
         }
+        
+        $("#testSubmit").on("click", function() {
+        	$.ajax({
+        		 url: "/movie/test2",
+                 type:"POST",
+                 data: {"places":placesStr, "addr":addrStr},
+                 dataType: "json",
+                 success: function (data) {
+                	 console.log("된다!!");
+                 }
+        	});
+        });
 
+        var id;
+        
         $("#keywordBtn").on("click", function() {
             $.ajax({
                url: "/movie/movieread",
@@ -718,15 +827,19 @@ margin: 0;
                success: function (data) {
                   if(data){
                      $(".movieList").html("");
+                     
                      for(var i = 0; i < data.length; i++){
                      /*    console.log(data[i].mimg); */
+                    
+                     /* 영화 코드 가져오기.  */
                         $(".movieList")
                           .append("<span data-index=" + i + "   id='" + data[i].mtitle + "'>" + data[i].mtitle + "</span><br>")
                           .on("click" ,"#" + data[i].mtitle, function() {
-                            /*  $(this).attr("data-index"); */
-                              console.dir(data); 
-                               $(".movieImg").html("<img width='650' height='300' src='/resources/images/movieimg/"+data[$(this).attr("data-index")].mimg+"'>" ) ;
-                            
+                               $(".movieImg").html("<img id="+data[$(this).attr("data-index")].mcode+" width='650' height='300' src='/resources/images/movieimg/"+data[$(this).attr("data-index")].mimg+"'>" )
+                               .on("click" ,function(){
+                                  id = $("img").attr("id");
+                                  console.dir(id);
+                               }) ;
                          });
                        }
                   }
@@ -734,26 +847,97 @@ margin: 0;
             });
          });
         
-        var mtitle= ${"mtitle"};
-        var mimg = ${"mimg"};
         
-        parent.show({mtitle : mtitle , mimg:mimg});
-        
-        function show(data){
-           $(".movieImg").on("click",function(){
-              var mtitle = $(".movieList");
-              var mimg = $(".movieImg");
-                 for(var i=0 ; i<data.length ; i++){
-                    console.dir(data[i]);
-                    $(".movieList").html("<div data-index=" + i + ">"+ data[i].mtitle+"</div>");
-                    $(".movieImg").html("<img width='650' height='300' src='/resources/images/movieimg/"+data[$(this).attr("data-index")].mimg+"'>" )
-                 
-              }
-           });
-        }
-        
+     <!-- 업로드 -->
+     var dateArr = [];
+     var fileNameArr = [];
      
-    
+     $(".fileDrop").on("dragenter dragover", function(event){
+			event.preventDefault();
+		});
+		
+		$(".fileDrop").on("drop", function(event){
+			event.preventDefault();
+			
+			var files = event.originalEvent.dataTransfer.files;
+			consoel.log(files);
+			console.log(files.length);
+			for(var i=0 ; i < files.length; i++){
+			var formData = new FormData();
+			
+			
+			formData.append("file", files[i]);
+			$.ajax({
+				url: '/movie/uploadAjax',
+				data: formData,
+				dataType: 'text',
+				processData: false,
+				contentType: false,
+				type: 'POST',
+				success: function(data){
+					  var str ="";
+					  var date = data.substring(0, data.indexOf("s"));
+					  var fileName = data.substring(data.indexOf("s") + 2);
+					  
+					  dateArr.push(date);
+					  fileNameArr.push(fileName);
+					  
+					  //console.log(date);
+					  //console.log(fileName);
+					  //console.log(data);
+					  //console.log(checkImageType(data));
+					  totalPath.push(checkImageType(data));
+					  if(checkImageType(data)){
+						  str ="<span>" +"<img style= 'margin :5px' src='displayFile?fileName="+data+"'/>"+"<small data-src="+data+">X</small></span>";
+					  }else{
+						  str = "<sapn>"+data+"<small data-src="+data+">X</small></sapn>";
+					  }
+					  
+					  $(".uploadedList").append(str);
+					  
+				}
+			});
+			}
+		});
+		function checkImageType(fileName){
+			
+			var pattern = /jpg|gif|png|jpeg/i;
+			
+			return fileName.match(pattern);
+			
+		}
+		
+		$(".uploadedList").on("click", "small", function(event){
+			
+			 //var date = data.substring(0, data.indexOf("s"));
+			 //var fileName = data.substring(data.indexOf("s") + 2);
+			 var that = $(this);
+			 var date = $(this).attr("data-src").substring(0, $(this).attr("data-src").indexOf("s"));
+			 var fileName = $(this).attr("data-src").substring($(this).attr("data-src").indexOf("s") + 2);
+			 //console.log(date);
+			 //console.log(fileName);
+			for(var i = 0; i < dateArr.length; i++) {
+				 if(dateArr[i] == date){
+					 dateArr.splice(i, 1);
+					 fileNameArr.splice(i, 1);
+				 }
+			 } 
+		
+		   $.ajax({
+			   url:"/movie/deleteFile",
+			   type:"post",
+			   data: {fileName:$(this).attr("data-src")},
+			   dataType:"text",
+			   success:function(result){
+				   //console.log(result);
+				   //console.log(date);
+				   if(result == 'deleted'){
+					   
+					   that.parent("span").remove();
+				   }
+			   }
+		   });
+	});
     </script>
   </body>
 </html>

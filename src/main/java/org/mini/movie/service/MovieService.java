@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.mini.domain.Movie;
 import org.mini.domain.Report;
+import org.mini.domain.ReportImg;
 import org.mini.domain.ReportList;
 import org.mini.dto.Criteria;
 
@@ -11,7 +12,9 @@ public interface MovieService {
 
 
 
-	public void register(Report report);
+	public void register(int mcode, String[] rImg, String[] rPath, 
+										String[] pName, String[] addr, 
+										String title, String content);
 	
 	public Report get(int rno);
 	
@@ -25,8 +28,7 @@ public interface MovieService {
 	
 	public List<Movie> getMovieread(String keyword);
 	
-
-	
+	public void putMarkers(String pname, String addr, int zcode, int rno);
 	
 	//test ---------------------------------
 	public List<Report> getAllData();
