@@ -344,7 +344,7 @@ h1 {
 			mapOption = {center : new daum.maps.LatLng(37.598872, 127.206039), level : 11};
 			break;
 		case 8:
-			mapOption = {center : new daum.maps.LatLng(37.715426, 128.305328), level : 12};
+			mapOption = {center : new daum.maps.LatLng(37.715426, 128.305328), level : 11};
 			break;
 		case 9:
 			mapOption = {center : new daum.maps.LatLng(36.799013, 127.703117), level : 10};
