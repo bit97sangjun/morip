@@ -860,7 +860,7 @@ small {
 			event.preventDefault();
 			
 			var files = event.originalEvent.dataTransfer.files;
-			consoel.log(files);
+			console.log(files);
 			console.log(files.length);
 			for(var i=0 ; i < files.length; i++){
 			var formData = new FormData();

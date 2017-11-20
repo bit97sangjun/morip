@@ -9,7 +9,6 @@ import javax.annotation.Resource;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.output.ByteArrayOutputStream;
-import org.mini.domain.InsertReportImg;
 import org.mini.domain.Movie;
 import org.mini.domain.Report;
 import org.mini.dto.Criteria;

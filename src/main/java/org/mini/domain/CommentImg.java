@@ -3,7 +3,7 @@ package org.mini.domain;
 import lombok.Data;
 
 @Data
-public class Commentimg {
+public class CommentImg {
 
 	private int cimgno;
 	private String cimg;

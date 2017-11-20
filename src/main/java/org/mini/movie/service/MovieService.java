@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.mini.domain.Movie;
 import org.mini.domain.Report;
-import org.mini.domain.ReportImg;
 import org.mini.domain.ReportList;
 import org.mini.dto.Criteria;
 

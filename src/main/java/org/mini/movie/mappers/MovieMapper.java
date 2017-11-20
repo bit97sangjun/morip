@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.mini.domain.Movie;
 import org.mini.domain.Report;
-import org.mini.domain.ReportImg;
 import org.mini.domain.ReportList;
 import org.mini.dto.Criteria;
 
@@ -49,7 +48,6 @@ public interface MovieMapper extends CRUDMapper<Report, Integer> {
 	public void putMarkers(@Param(value="lastPno") int lastPno, @Param(value="rno") int rno);
 	//--------------------------------------------------------------------
 	
-	public List<ReportImg> getReportImg(int rno);
 	
 	@Select("select * from tb_report")
 	public List<Report> getAllData();
