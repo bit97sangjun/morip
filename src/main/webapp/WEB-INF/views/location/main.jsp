@@ -220,9 +220,6 @@ h1 {
 
 	<div id="blog">
 		<div class="container">
-			<h2>
-				<span>상세지도</span> 나오는곳
-			</h2>
 			<div class="detailMap"></div>
 		</div>
 	</div>

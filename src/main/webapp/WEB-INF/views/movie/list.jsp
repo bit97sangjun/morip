@@ -66,7 +66,7 @@
 <!-- 									<p> -->
 <%-- 										<c:out value="${report.rcontent}"></c:out> --%>
 <!-- 									</p> -->
-									<a class="btn btn-mini" href="#">Read More <i
+									<a class="btn btn-mini" href="/location/detail">Read More <i
 										class="fa fa-angle-double-right" aria-hidden="true"></i></a>
 								</div>
 							</div>

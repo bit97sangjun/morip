@@ -328,7 +328,7 @@
 			for(var index in result){
 				var comment = result[index];
 				
-				html += "<tr id="+ comment.cno +"><td><img class='profileImg' src='/resources/images/profileimg/"+comment.userimg+"'/>"+"　"+comment.id
+				html += "<tr id="+ comment.cno +"><td><img class='profileImg' src='/userimg?fileName="+comment.userimg+"'/>"+"　"+comment.id
 				+ "</td><td>"+comment.cno+"</td><td id='content'>"+comment.ccontent+"</td><td>"
 				+ "<img src='/resources/images/scoreimg/score_"+comment.score+".png'/></td><td>";
 				if("${login}" == comment.id){
@@ -341,7 +341,7 @@
 	}
 	
 	$("tbody").on("click", "button[name=update]", function () {
-		$("tr[id='"+$(this)[0].id+"']").html("<td></td><td>"+ $(this)[0].id +"</td><td><textarea class='btn btn-lg' rows='3' cols='50' style='text-align: left;'>"+ $("tr[id='"+$(this)[0].id+"'] #content").text() 
+		$("tr[id='"+$(this)[0].id+"']").html("<td></td><td>"+ $(this)[0].id +"</td><td><textarea id='reply' class='btn btn-lg' rows='3' cols='50' style='text-align: left;'>"+ $("tr[id='"+$(this)[0].id+"'] #content").text() 
 				+ "</textarea></td><td><button data-cno='"+ $(this)[0].id +"' type='button' class='btn btn-info'>수정</button>"
 				+ "<button class='btn btn-danger' id='backBtn'>취소</button></td>");
 	});
@@ -355,7 +355,7 @@
 			contentType: "application/json",
 			data : JSON.stringify({
 					cno : $(this).attr("data-cno"),
-					ccontent : $(this).prev().val()
+					ccontent : $("#reply").val()
 					})
 		}).done(function (result) {
 			getAllList();

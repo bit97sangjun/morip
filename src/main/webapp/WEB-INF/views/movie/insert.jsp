@@ -835,9 +835,9 @@ small {
                         $(".movieList")
                           .append("<span data-index=" + i + "   id='" + data[i].mtitle + "'>" + data[i].mtitle + "</span><br>")
                           .on("click" ,"#" + data[i].mtitle, function() {
-                               $(".movieImg").html("<img id="+data[$(this).attr("data-index")].mcode+" width='650' height='300' src='/resources/images/movieimg/"+data[$(this).attr("data-index")].mimg+"'>" )
+                               $(".movieImg").html("<img data-poster='poster' id="+data[$(this).attr("data-index")].mcode+" width='650' height='300' src='/resources/images/movieimg/"+data[$(this).attr("data-index")].mimg+"'>" )
                                .on("click" ,function(){
-                                  id = $("img").attr("id");
+                                  id = $("img[data-poster]").attr("id");
                                   console.dir(id);
                                }) ;
                          });

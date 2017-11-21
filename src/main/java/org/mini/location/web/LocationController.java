@@ -40,7 +40,7 @@ public class LocationController {
 	}
 	
 	@GetMapping("/detail")
-	public void detail(Model model, @RequestParam(value="rno", defaultValue="1") int rno) {
+	public void detail(Model model, @RequestParam(value="rno", defaultValue="24") int rno) {
 		
 		model.addAttribute("report", service.getReport(rno));
 		model.addAttribute("movie", service.rMovie(rno));
