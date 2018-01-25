@@ -57,7 +57,7 @@
 						<li class="col-sm-4">
 							<div class="fff">
 								<div class="thumbnail">
-									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+									<a href="#"><img id="listImg" src="displayFile?fileName=${report.rpath}${report.rimg}" alt=""></a>
 								</div>
 								<div class="caption">
 									<h4>
